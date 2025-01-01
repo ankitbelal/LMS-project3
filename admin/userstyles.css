@@ -1,0 +1,37 @@
+/* User Table Styles */
+main .user-table {
+    margin-top: 2rem;
+}
+
+main .user-table h2 {
+    margin-bottom: 0.8rem;
+}
+
+main .user-table table {
+    background: var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+}
+
+main .user-table table:hover {
+    box-shadow: none;   
+}
+
+main .user-table table thead th {
+    font-weight: bold;
+    color: var(--color-dark);
+}
+
+main .user-table table tbody td {
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+}
+
+main .user-table table tbody tr:last-child td {
+    border: none;
+}
