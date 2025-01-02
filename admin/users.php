@@ -23,6 +23,7 @@
                 <th>Email</th>
                 <th>Contact</th>
                 <th>Address</th>
+                <th>Role
                 <th>Edit | Delete</th>
               </tr>
             </thead>
@@ -34,6 +35,7 @@
                 <td>johndoe@example.com</td>
                 <td>1234567890</td>
                 <td>123 Main Street</td>
+                <td>Admin</td>
                 <td>
                   <a href="#">Edit</a>
                   |
