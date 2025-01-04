@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Input</title>
+    <style>
+        .otp-input {
+            width: 30px;
+            height: 20px;
+            margin: 5px;
+            font-size: 24px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="otp-container">
+        <input type="text" maxlength="1" class="otp-input" id="otp1" oninput="moveToNext(this, 'otp2')" onkeydown="moveToPrev(event, 'otp1', '')">
+        <input type="text" maxlength="1" class="otp-input" id="otp2" oninput="moveToNext(this, 'otp3')" onkeydown="moveToPrev(event, 'otp2', 'otp1')">
+        <input type="text" maxlength="1" class="otp-input" id="otp3" oninput="moveToNext(this, 'otp4')" onkeydown="moveToPrev(event, 'otp3', 'otp2')">
+        <input type="text" maxlength="1" class="otp-input" id="otp4" oninput="moveToNext(this, 'otp5')" onkeydown="moveToPrev(event, 'otp4', 'otp3')">
+        <input type="text" maxlength="1" class="otp-input" id="otp5" oninput="moveToNext(this, 'otp6')" onkeydown="moveToPrev(event, 'otp5', 'otp4')">
+        <input type="text" maxlength="1" class="otp-input" id="otp6" oninput="moveToNext(this, '')" onkeydown="moveToPrev(event, 'otp6', 'otp5')">
+    </div>
+
+    <script>
+        function moveToNext(current, nextFieldID) {
+            if (current.value.length >= 1) {
+                if (nextFieldID) {
+                    document.getElementById(nextFieldID).focus();
+                } else {
+                    current.blur();
+                }
+            }
+        }
+
+        function moveToPrev(event, currentFieldID, prevFieldID) {
+            if (event.key === 'Backspace' && !event.target.value) {
+                if (prevFieldID) {
+                    document.getElementById(prevFieldID).focus();
+                }
+            }
+        }
+    </script>
+</body>
+</html>
