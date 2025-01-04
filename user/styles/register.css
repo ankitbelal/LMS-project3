@@ -1,0 +1,119 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "poppins", sans-serif;
+
+}
+body{
+    display: flex  ;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url("") no-repeat fixed;
+    /* background-size: cover; */
+    /* background-position: center; */
+    overflow: hidden;
+    user-select: none;
+}
+.wrapper{
+    width: 750px;
+  background: #fff;
+    border-radius: 10px;
+    color: black;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    backdrop-filter: blur(0px);
+    border: solid 2px rgba(199, 170, 170, 0.5); 
+    padding: 45px 35px 55px;
+    margin: 0 10px;
+
+}
+wrapper h1{
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.wrapper .input-box{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background: stategray;
+
+}
+.input-box .input-field{
+    position: relative;
+    width: 48%;
+    background: rgb(255, 255, 255);
+    margin: 13px 0;
+    
+
+}
+
+.input-box .input-field input{
+    width: 100%;
+  height: 100%;
+  background: transparent   ;   
+  border: 2px solid rgba(255,255,255 .2)    ;
+    outline: none;
+    color: black;
+    font-size: 16px;
+    border-radius: 6px;
+padding: 15px 15px 15px 40px;
+
+}
+.input-box .input-field input::placeholder{
+    color: black;
+}
+
+.input-box .input-field i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+    font-size: 20px;
+}
+.wrapper label{
+
+    display: inline-block;
+    font-size: 14.5px;
+    margin : 10px 0 23px;
+}
+.wrapper .btn{
+    width: 100%;
+    height: 45px;
+    border: none;
+    background: transparent;
+    outline: none;
+    border-radius: 6px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+font-size: 16px;
+color: black;
+font-weight: 600;
+
+}
+
+
+.wrapper label input{
+    accent-color: white;
+    margin-right: 5px;
+   
+
+}
+
+@media (max-width: 575px){
+    .input-box .input-field{
+       margin: 10px 0;
+        width: 100%;
+    }
+}
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* For Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
