@@ -13,7 +13,7 @@ body{
    
     background-size: cover;
     background-position: center;
-    overflow: hidden;
+    /* overflow: hidden; */
     user-select: none;
     
 
@@ -122,7 +122,7 @@ transition: .5s;
 
     position: relative;
     
-    margin: 12px auto;
+    margin-top: 50px;
     width: 400px;
     height: 440px;
     background: transparent;
@@ -146,7 +146,9 @@ transition: .5s;
 
 
 .wrapper.active{
-    height: 490px;
+    height: 470px;
+    width: 470px;
+
 }
 .wrapper.activepop{
     transform: scale(1);
@@ -168,18 +170,19 @@ transition: .5s;
 }
 .wrapper.active .formbox.login{
  transition: none;
-    transform: translateX(-400px);
+    transform: translateX(-650px);
     
 }
 
-.wrapper.active .formbox.register{
+.wrapper.active .reg{
     transition:12px;
     transform: translateX(0);
 }
-.wrapper .formbox.register {
+.wrapper .reg {
 position: absolute;
+
 transition: transform .18s ease;
-transform: translateX(400px);
+transform: translateX(600px);
 
 
 }
@@ -337,3 +340,109 @@ transform: translateX(400px);
 .login-register a:hover{
     text-decoration: underline;
 }
+
+
+
+.reg h1{
+    font-size: 36px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.reg .input-box{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    background: stategray;
+    width: 400px;
+    margin: 0 auto;
+
+}
+.input-box .input-field{
+    position: relative;
+    width: 48%;
+    background: rgb(255, 255, 255);
+    margin: 13px 0;
+    
+
+}
+
+.input-box .input-field input{
+    width: 100%;
+  height: 100%;
+  background: transparent   ;   
+  border: 2px solid rgba(255,255,255 .2)    ;
+    outline: none;
+    color: black;
+    font-size: 1em;
+    border-radius: 6px;
+padding: 15px 15px 15px 40px;
+
+}
+.input-box .input-field input::placeholder{
+    color: black;
+}
+
+.input-box .input-field i{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+    font-size: 1em;
+}
+.reg label{
+
+    display: inline-block;
+    font-size: 14.5px;
+    margin : 10px 0 23px;
+}
+
+.reg label input{
+    accent-color: white;
+    margin-right: 5px;
+   
+
+}
+
+
+.reg input[type=number]::-webkit-inner-spin-button, 
+.reg input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* For Firefox */
+.reg input[type=number] {
+    -moz-appearance: textfield;
+}
+
+.reg p{
+   text-align: center;
+    font-size: 15px;
+    padding-bottom: 10px;;
+}
+.reg p a{
+    color: #162938;
+    text-decoration: none;
+    font-weight: 600;
+    
+
+}
+.reg p a:hover{
+    text-decoration: underline;
+}
+
+.reg .check{
+    margin-top: 2px;
+    
+}
+
+.wrapper .btn:hover{
+   box-shadow: 0 0 10px 0 #162938;
+   
+}       
+
+.reg{
+    padding: 100px;
+    
+}
+
