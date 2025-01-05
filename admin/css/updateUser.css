@@ -1,0 +1,102 @@
+/* Update Form Styles */
+:root{
+    --color-primary:#7380ec;
+    --color-danger:#ff7782;
+    --color-success:#41f1b6;
+    --color-warning:#ffbb55;
+    --color-white:#fff;
+    --color-info-dark:#7d8da1;
+    --color-info-light:#dce1eb;
+    --color-dark:#363949;
+    --color-light: rgba(132,139,200,0.18);
+    --color-primary-variant:#111e88;
+    --color-dark-variant:#677483;
+    --color-background:#f6f6f9;
+
+
+    --card-border-radius:2rem;
+    --border-radius-1:0.4rem;
+    --border-radius-2:0.8rem;
+    --border-radius-3:1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1:1.2rem;
+
+    --box-shadow:0 2rem 3rem var(--color-light);
+}
+.update-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-background);
+  }
+  
+  .update-form {
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Box shadow for the form */
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .update-form:hover {
+    box-shadow:none;
+  }
+  .update-form h2 {
+    font-size: 1.8rem;
+    color: var(--color-dark);
+    margin-bottom: 1.5rem;
+  }
+  
+  /* Input Field Styling */
+  .update-form .input-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    background: var(--color-light);
+    padding: 0.8rem 1rem;
+    border: 1px solid var(--color-dark-variant);
+    border-radius: var(--border-radius-2);
+    transition: all 0.3s ease;
+  }
+  
+  .update-form .input-field:hover {
+    border-color: var(--color-primary);
+  }
+  
+  .update-form .input-field span {
+    margin-right: 0.8rem;
+    color: var(--color-primary);
+  }
+  
+  .update-form .input-field input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1rem;
+    color: var(--color-dark);
+  }
+  
+  /* Button Styling */
+  .update-form .btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius-2);
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-white);
+    background: var(--color-primary);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .update-form .btn:hover {
+    background: var(--color-primary-variant);
+  }
+  
