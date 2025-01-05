@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/index.css">
+    
         
     <title>login</title>
 </head>
@@ -33,7 +34,7 @@
     <div class="formbox login">
         <h2>Login</h2>
         <form action="login.php" method="post">
-        <span class="icon"><ion-icon name="mail"></ion-icon></span>
+            <span class="icon"><ion-icon name="mail"></ion-icon></span>
             <div class="inputbox">
               
                 <input type="Email" placeholder="" required>
@@ -58,6 +59,7 @@
                 <p>Don't have an account? <a href="#" class="register-link" >Register</a></p>
 
             </div>
+            </form>
     </div>
     
 
@@ -65,47 +67,74 @@
 
 
 
+    <div class="reg">
+      <form action="">
+        <h1>Registration</h1>
+        <div class="input-box">
 
 
-
-    <div class="formbox register">
-        <h2>Registration</h2>
-        <form action="login.php" method="post">
-        <span class="icon"><ion-icon name="person"></ion-icon></span>
-            <div class="inputbox">
-              
-                <input type="text" placeholder="" required>
-                <label>Username</label>
-            </div>
-
-
-            <span class="icon"><ion-icon name="mail"></span>
-            <div class="inputbox">
-              
-                <input type="Email" placeholder="" required>
-                <label>Email</label>
-            </div>
-
-            <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-            <div class="inputbox">
-              
-                <input type="password" placeholder="" required >
-                <label >Password</label>
-            </div>
-
-            <div class="remember-forgot">
-                <label><input type="checkbox">I agree with terms and conditions</label>
+            <div class="input-field">
+                <input type="text" placeholder="Full Name" required>
+                <i class='bx bxs-user'></i>
                 
+               
+      </div>
+      
 
 
+           
+            <div class="input-field">
+                <input type="text" placeholder="Username" required>
+                <i class='bx bxs-user'></i>
+                
             </div>
-            <button  class="btn" type="button">Register</button>
+         </div>
 
-            <div class="login-register">
-                <p>Already have an account? <a href="#" class="login-link" >Login</a></p>
-
+            <div class="input-box">
+            <div class="input-field">
+                <input type="email" placeholder="Email" required>
+                <i class='bx bxs-envelope'></i>
+                
             </div>
-    </div>
+
+            <div class="input-field">
+                <input type="Number" placeholder="Phone Number"  maxlength="10" required>
+                <i class='bx bxs-phone'></i>
+                
+            </div>
+            
+        </div>
+
+
+
+        <div class="input-box">
+            <div class="input-field">
+                <input type="password" placeholder="Password" required>
+                <i class='bx bxs-lock'></i>
+                
+            </div>
+
+            <div class="input-field">
+                <input type="password" placeholder="Confirm Password" required>
+                <i class='bx bxs-lock'></i> 
+                
+            </div>
+            
+        </div>
+
+        <label> <input type="checkbox" name="" class="check" id="">I Here by declare that the above information 
+        provided is true and correct</label>
+        <button type="submit" class ="btn">Register</button>
+        <p>Already have an account? <a href="#" class="login-link" >Login</a></p>
+        
+        </form>
+</div>
+   
+
+           
+
+           
+    
 </div>
 
 
