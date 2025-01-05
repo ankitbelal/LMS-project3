@@ -63,10 +63,10 @@
             
         </div>
 
-        <label> <input type="checkbox" name="" id="">i hereby declare that the above information 
+        <label> <input type="checkbox" name="" id="">I, here by declare that the above information 
     provided is true and correct</label>
         <button type="submit" class ="btn">Register</button>
-        <!-- <p>Already have an account? <a href="login.php">Login</a></p> -->
+        <p>Already have an account? <a href="login.php">Login</a></p>
         
     </form>
 
