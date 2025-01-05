@@ -1,0 +1,113 @@
+/* Login Page Styles */
+:root{
+    --color-primary:#7380ec;
+    --color-danger:#ff7782;
+    --color-success:#41f1b6;
+    --color-warning:#ffbb55;
+    --color-white:#fff;
+    --color-info-dark:#7d8da1;
+    --color-info-light:#dce1eb;
+    --color-dark:#363949;
+    --color-light: rgba(132,139,200,0.18);
+    --color-primary-variant:#111e88;
+    --color-dark-variant:#677483;
+    --color-background:#f6f6f9;
+
+
+    --card-border-radius:2rem;
+    --border-radius-1:0.4rem;
+    --border-radius-2:0.8rem;
+    --border-radius-3:1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1:1.2rem;
+
+    --box-shadow:0 2rem 3rem var(--color-light);
+}
+
+.login-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-background);
+  }
+  
+  .login-form {
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+
+  .login-form:hover{
+    box-shadow: 0 2rem 3rem var(--color-light-variant);
+  }
+  
+  .login-form h2 {
+    font-size: 1.8rem;
+    color: var(--color-dark);
+    margin-bottom: 1.5rem;
+  }
+  
+  .input-field {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    background: var(--color-light);
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius-2);
+  }
+  
+  .input-field span {
+    margin-right: 0.8rem;
+    color: var(--color-primary);
+  }
+  
+  .input-field input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 1rem;
+    color: var(--color-dark);
+  }
+  
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius-2);
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-white);
+    background: var(--color-primary);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .btn:hover {
+    background: var(--color-primary-variant);
+  }
+
+  /* Forgot Password Link Styling */
+.login-form .forgot-password {
+    display: block;
+    margin: 1rem 0; /* Space between input fields and button */
+    font-size: 0.9rem; /* Slightly smaller text */
+    color: var(--color-primary); /* Match theme primary color */
+    text-decoration: none; /* Remove underline */
+    transition: color 0.3s ease;
+  }
+  
+  .login-form .forgot-password:hover {
+    color: var(--color-primary-variant); /* Subtle hover effect */
+  }
+  
+  
