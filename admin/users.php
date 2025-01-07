@@ -37,7 +37,7 @@
                 <td>123 Main Street</td>
                 <td>Admin</td>
                 <td>
-                  <a href="#">Edit</a>
+                  <a href="./updateUser.php">Edit</a>
                   |
                   <a href="#">Delete</a>
                 </td>
