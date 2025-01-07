@@ -24,6 +24,7 @@
                 <th>Contact</th>
                 <th>Address</th>
                 <th>Role
+                <th>Created_at</th>
                 <th>Edit | Delete</th>
               </tr>
             </thead>
@@ -36,6 +37,7 @@
                 <td>1234567890</td>
                 <td>123 Main Street</td>
                 <td>Admin</td>
+                <td>2021-09-01</td>
                 <td>
                   <a href="./updateUser.php">Edit</a>
                   |
