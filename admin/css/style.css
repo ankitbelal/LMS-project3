@@ -344,15 +344,15 @@ main .insights small{
 
 /*=======RECENT==============*/
 
-main .recent-orders{
+main .recents{
     margin-top:2rem;
 }
 
-main .recent-orders h2{
+main .recents h2{
     margin-bottom: 0.8rem;
 }
 
-main .recent-orders table{
+main .recents table{
     background:var(--color-white);
     width: 100%;
     border-radius: var(--card-border-radius);
@@ -362,7 +362,7 @@ main .recent-orders table{
     transition: all 0.3s ease;
 }
 
-main .recent-orders table:hover{
+main .recents table:hover{
     box-shadow: none;   
 }
 
@@ -376,7 +376,7 @@ main table tbody tr:last-child td{
     border: none;
 }
 
-main .recent-orders a{
+main .recents a{
     text-align: center;
     display:block;
     color:var(--color-primary);
@@ -545,7 +545,7 @@ main .recent-orders a{
         padding:0 1rem;
     }
 
-    main .recent-orders{
+    main .recents{
         position:relative;
         margin:3rem 0 0 0;
         width:100%;

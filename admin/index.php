@@ -85,7 +85,7 @@
         </div>
         <!--End of insights-->
 
-        <div class="recent-orders">
+        <div class="recents">
           <h2>Recent updates</h2>
           <table>
             <thead>
