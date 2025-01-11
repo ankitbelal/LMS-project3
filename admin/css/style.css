@@ -48,28 +48,44 @@
     box-sizing: border-box;
 }
 
-html{
-    font-size:14px;
-}
+
 
 body{
     width:100vw;
     height:100vh;
     font-family:poppins,sans-serif;
-    font-size: 0.88rem;
+    font-size: 1rem;
     background:var(--color-background);
     user-select: none;
     overflow-x:hidden;
     color: var(--color-dark);
+
 }
 
 .container{
     display:grid;
     width:96%;
     margin: 0 auto;
-    gap:1,8rem;
-    grid-template-columns: 14rem auto 23rem;
+    gap:1.8rem;
+    grid-template-columns: 14rem auto;
+    /* height: 100vh; */
+    overflow: hidden;
 }
+
+.main-section{
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+    height: 100vh;
+    overflow-y:auto;/* Make main-section scrollable */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    scroll-behavior: smooth; /* Add smooth scrolling */
+}
+
+/* Hide scrollbar for Chrome, Safari, and Edge */
+.main-section::-webkit-scrollbar {
+    display: none;
+}   
 
 a{
     color:var(--color-dark);
@@ -83,11 +99,11 @@ img{
 
 h1{
     font-weight: 800;
-    font-size: 1.8rem;
+    font-size: 1.5rem;
 }
 
 h2{
-    font-size:1.4rem;
+    font-size:1.2rem;
 }
 
 h3{
@@ -95,15 +111,15 @@ h3{
 }
 
 h4{
-    font-size:0.8rem;
+    font-size:0.7rem;
 }
 
 h5{
-    font-size:0.75rem;
+    font-size:0.65rem;
 }
 
 small{
-    font-size:0.75rem;
+    font-size:0.65rem;
 }
 
 .profile-photo{
@@ -186,16 +202,16 @@ aside h3{
 aside .sidebar a{
     display:flex;
     color:var(--color-info-dark);
-    margin-left:2rem;
+    margin-left:1.5rem;
     gap:1rem;
     align-items: center;
     position: relative;
-    height: 3.7rem;
+    height: 3rem;
     transition:all 0.3s ease;
 }
 
 aside .sidebar a span{
-    font-size:1.6rem;
+    font-size:1.3rem;
     transition: all 0.3s ease;
 }
 
@@ -245,7 +261,11 @@ aside .sidebar .message-count{
 
 main{
     margin-top:1.4rem;
-    margin:0 1.5rem;
+    margin-left: 1rem;
+    width: calc(100% - 1rem);
+    grid-row: span 2;
+    padding-bottom: 2rem;
+
 }
 
 main .date{
@@ -253,7 +273,7 @@ main .date{
     background: var(--color-light);
     border-radius: var(--border-radius-1);
     margin-top:1rem;
-    padding: 0.5rem 1.6rem;
+    padding: 0.3rem 1rem;
 }
 
 main .date input[type="date"]{
@@ -265,13 +285,15 @@ main .insights{
     display:grid;
     grid-template-columns:repeat(3, 1fr);  
     gap: 1.6rem;
+    width: 100%;
 }
 
 main .insights>div{
     background:var(--color-white);
-    padding:var(--card-padding);
+    padding:1rem;
     border-radius:var(--card-border-radius);
-    margin-top:1rem;
+    margin: 0.7 rem;
+    margin-top: 1rem;
     box-shadow:var(--box-shadow);
     transition: all 0.3s ease;
 }
@@ -282,10 +304,10 @@ main .insights>div:hover{
 
 main .insights>div span{
     background: var(--color-primary);
-    padding: 0.5rem;
+    padding: 0.3rem;
     border-radius:50%;
     color:var(--color-white);
-    font-size:2rem;
+    font-size:1.5rem;
 }
 
 main .insights>div.income span{
@@ -305,8 +327,8 @@ main .insights h3{
 
 main .insights .progress{
     position: relative;
-    width: 92px;
-    height: 92px;
+    width: 80px;
+    height: 80px;
     border-radius:50%;
 }
 
@@ -344,15 +366,15 @@ main .insights small{
 
 /*=======RECENT==============*/
 
-main .recent-orders{
+main .recents{
     margin-top:2rem;
 }
 
-main .recent-orders h2{
+main .recents h2{
     margin-bottom: 0.8rem;
 }
 
-main .recent-orders table{
+main .recents table{
     background:var(--color-white);
     width: 100%;
     border-radius: var(--card-border-radius);
@@ -362,7 +384,7 @@ main .recent-orders table{
     transition: all 0.3s ease;
 }
 
-main .recent-orders table:hover{
+main .recents table:hover{
     box-shadow: none;   
 }
 
@@ -376,7 +398,7 @@ main table tbody tr:last-child td{
     border: none;
 }
 
-main .recent-orders a{
+main .recents a{
     text-align: center;
     display:block;
     color:var(--color-primary);
@@ -387,12 +409,31 @@ main .recent-orders a{
 /*==========================RIGHT================*/
 .right{
     margin-top: 1.4rem;
+    position: sticky; /* Keep the right section fixed at the top */
+    top: 0;
+    background: var(--color-background); /* Match the background color */
+    z-index: 1; /* Ensure it stays above the main content */    
+
+    
 }
 
 .right .top{
     display: flex;
-    justify-content: end;
-    gap: 2rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.right h1{
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin:0;
+    margin-left: 6rem;
+}
+/* Right elements (menu button, theme toggler, and profile) */
+.right .right-elements {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* Space between elements */
 }
 
 .right .top button{
@@ -404,14 +445,14 @@ main .recent-orders a{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 1.6rem;
-    width: 4.2rem;
+    height: 1.4rem;
+    width: 3.8rem;
     cursor: pointer;
     border-radius:var(--border-radius-1);
 }
 
 .right .theme-toggler span{
-    font-size: 1.2rem;
+    font-size: 1rem;
     width: 50%;
     height: 100%;
     display: flex;
@@ -427,37 +468,27 @@ main .recent-orders a{
 
 .right .top .profile{
     display: flex;
-    gap: 2rem;
-    text-align:right;
-}
-
-/*========RECENT UPDATES=========*/
-.right .recent-updates{
-    margin-top: 1rem;
-
-}
-.right .recent-updates h2{
-    margin-bottom: 0.8rem;
-}
-
-.right .recent-updates .updates{
-    background:var(--color-white);
-    padding: var(--card-padding);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    transition: all 0.3s ease;
-}
-
-.right .recent-updates .updates:hover{
-    box-shadow: none;
-}
-
-.right .recent-updates .updates .update{
-    display: grid;
-    grid-template-columns: 2.6rem auto;
     gap: 1rem;
-    margin-bottom: 1rem;
+    text-align:right;
+    align-items: center;
+   
 }
+
+.right .profile .info p{
+    margin:0;
+}
+
+.right .profile .info small{
+    color:var(--color-info-dark);
+}
+
+.right .profile-photo{
+    width: 2.2rem;
+    height:2.2rem;
+    overflow:hidden;
+}
+
+
 
 
 /*=================MEDIA QUERY=================*/
@@ -465,7 +496,7 @@ main .recent-orders a{
   
 .container{
     width: 94%;
-    grid-template-columns: 7rem auto 23rem;
+    grid-template-columns: 7rem auto;
 }
     aside .logo h2{
         display: none;
@@ -545,7 +576,7 @@ main .recent-orders a{
         padding:0 1rem;
     }
 
-    main .recent-orders{
+    main .recents{
         position:relative;
         margin:3rem 0 0 0;
         width:100%;

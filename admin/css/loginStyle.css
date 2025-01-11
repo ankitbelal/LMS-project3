@@ -63,7 +63,10 @@
     padding: 0.8rem 1rem;
     border-radius: var(--border-radius-2);
   }
-  
+  .fa-eye{
+    cursor: pointer;
+    color: var(--color-primary);
+  }
   .input-field span {
     margin-right: 0.8rem;
     color: var(--color-primary);

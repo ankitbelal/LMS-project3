@@ -1,8 +1,10 @@
-/* Update Form Styles */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/*--------------Root Vairables-----------------*/
 :root{
     --color-primary:#7380ec;
     --color-danger:#ff7782;
-    --color-success:#41f1b6;
+  --color-success: #10dc98;
     --color-warning:#ffbb55;
     --color-white:#fff;
     --color-info-dark:#7d8da1;
@@ -24,65 +26,309 @@
 
     --box-shadow:0 2rem 3rem var(--color-light);
 }
-.update-container {
+
+/*-----------------Dark Theme variables-----------------*/
+.dark-theme-variables{
+    --color-background:#181a1e;
+    --color-white:#202528;
+    --color-dark:#edeffd;
+    --color-dark-variant:#a3bdcc;
+    --color-light:rgba(0,0,0,0.4);
+    --box-shadow:0 2rem 3rem var(var(--color-light));
+
+}
+*{
+    margin:0;
+    padding:0;
+    outline:0;
+    appearance: none;
+    border:0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+
+
+body{
+    width:100vw;
+    height:100vh;
+    font-family:poppins,sans-serif;
+    font-size: 0.88rem;
+    background:var(--color-background);
+    user-select: none;
+    overflow-x:hidden;
+    color: var(--color-dark);
+
+}
+
+.container{
+    display:grid;
+    width:96%;
+    margin: 0 auto;
+    gap:1.8rem;
+    grid-template-columns: 14rem auto;
+    /* height: 100vh; */
+    overflow: hidden;
+}
+
+.main-section{
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
     height: 100vh;
+    overflow-y:auto;/* Make main-section scrollable */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    scroll-behavior: smooth; /* Add smooth scrolling */
+}
+
+/* Hide scrollbar for Chrome, Safari, and Edge */
+.main-section::-webkit-scrollbar {
+    display: none;
+}   
+
+a{
+    color:var(--color-dark);
+
+}
+
+img{
+    display:block;
+    width: 100%;
+}
+
+h1{
+    font-weight: 800;
+    font-size: 1.5rem;
+}
+
+h2{
+    font-size:1.2rem;
+}
+
+h3{
+    font-size:0.87rem;
+}
+
+h4{
+    font-size:0.7rem;
+}
+
+h5{
+    font-size:0.65rem;
+}
+
+small{
+    font-size:0.65rem;
+}
+
+.profile-photo{
+    width:2.8rem;
+    height: 2.8rem;
+    border-radius:50%;
+    overflow:hidden;
+}
+
+.text-muted{
+    color:var(--color-info-dark);
+
+}
+
+p{
+    color:var(--color-dark-variant);
+}
+
+b{
+    color:var(--color-dark);
+}
+
+.primary{
+    color:var(--color-primary);
+}
+
+.danger{
+    color:var(--color-danger);
+}
+
+.success{
+    color:var(--color-success);
+}
+
+.warning{
+    color:var(--color-warning);
+}
+
+
+aside{
+    height:100vh;
+}
+
+aside .top{
+    display:flex;
+    /* background: white; */
+    align-items:center;
+    justify-content:space-between ;
+    margin-top:1.4rem;
+}
+
+aside .logo{
+    display: flex;
+    gap:0.8rem;
+}
+
+aside .logo img{
+    width:2rem;
+    height:2rem;
+}
+aside .close{
+    display: none;
+}
+
+
+/*===============Sidebar=================*/
+aside .sidebar{
+    
+    display: flex;
+    flex-direction: column;
+    height: 86vh;
+    position: relative;
+    top:3rem;
+}
+
+aside h3{
+    font-weight: 500;
+}
+
+aside .sidebar a{
+    display:flex;
+    color:var(--color-info-dark);
+    margin-left:1.5rem;
+    gap:1rem;
+    align-items: center;
+    position: relative;
+    height: 3rem;
+    transition:all 0.3s ease;
+}
+
+aside .sidebar a span{
+    font-size:1.3rem;
+    transition: all 0.3s ease;
+}
+
+aside .sidebar a:last-child{
+    position:absolute;
+    bottom:2rem;
+    width:100%;
+}
+
+aside .sidebar a.active{
+    background:var(--color-light);
+    color: var(--color-primary);
+    margin-left: 0;
+}
+
+aside .sidebar a.active::before{
+    content:'';
+    width:6px;
+    height: 100%;
+    background: var(--color-primary);
+}
+
+aside .sidebar a.acitve span{
+    color:var(--color-primary);
+    margin-left: calc(1rem-3px);
+}
+
+aside .sidebar a:hover{
+    color:var(--color-primary);
+
+}
+
+aside .sidebar a:hover span{
+    margin-left: 1rem;
+}
+
+aside .sidebar .message-count{
+    background:var(--color-danger);
+    color:var(--color-white);
+    padding: 2px 10px;
+    font-size:11px;
+    border-radius: var(--border-radius-1);
+}
+
+
+/*=================Main=================*/
+
+main{
+    margin-top:1.4rem;
+    margin-left: 1rem;
+    width: calc(100% - 1rem);
+    grid-row: span 2;
+    padding-bottom: 2rem;
+
+}
+
+/* Update Form Container Styling */
+.update-form-container {
+    margin: 2rem auto; /* Center the form within the main section */
+    width: 100%; /* Adjust to fit within the main section */
     display: flex;
     justify-content: center;
     align-items: center;
-    background: var(--color-background);
-  }
-  
-  .update-form {
+}
+
+/* Update Form Styling */
+.update-form {
     background: var(--color-white);
     padding: var(--card-padding);
     border-radius: var(--card-border-radius);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Box shadow for the form */
+    box-shadow: var(--box-shadow);
     width: 100%;
-    max-width: 400px;
+    max-width: 900px;
     text-align: center;
-    transition: all 0.3s ease;
-  }
-  .update-form:hover {
-    box-shadow:none;
-  }
-  .update-form h2 {
-    font-size: 1.8rem;
-    color: var(--color-dark);
+    
+}
+
+/* Grouped Input Fields for Two Columns */
+.input-group {
+    display: flex;
+    gap: 1rem; /* Space between inputs */
     margin-bottom: 1.5rem;
-  }
-  
-  /* Input Field Styling */
-  .update-form .input-field {
+    margin-top: 1.5rem; 
+}
+
+/* Single Input Field Styling */
+.input-field {
+    flex: 1; /* Make fields equal width */
     display: flex;
     align-items: center;
-    margin-bottom: 1.2rem;
     background: var(--color-light);
-    padding: 0.8rem 1rem;
+    padding: 1rem 1rem;
     border: 1px solid var(--color-dark-variant);
     border-radius: var(--border-radius-2);
     transition: all 0.3s ease;
-  }
-  
-  .update-form .input-field:hover {
-    border-color: var(--color-primary);
-  }
-  
-  .update-form .input-field span {
+}
+
+.input-field:hover{
+    border-color:var(--color-primary);
+}
+
+.input-field span {
     margin-right: 0.8rem;
     color: var(--color-primary);
-  }
-  
-  .update-form .input-field input {
+}
+
+.input-field input {
     flex: 1;
     border: none;
     outline: none;
     background: transparent;
     font-size: 1rem;
     color: var(--color-dark);
-  }
-  
-  /* Button Styling */
-  .update-form .btn {
+}
+
+/* Submit Button Styling */
+.update-form .btn {
     display: block;
     width: 100%;
     padding: 0.8rem 1rem;
@@ -94,9 +340,226 @@
     border: none;
     cursor: pointer;
     transition: all 0.3s ease;
-  }
-  
-  .update-form .btn:hover {
+    }
+    
+    .update-form .btn:hover {
     background: var(--color-primary-variant);
-  }
+    }
+
+/*==========================RIGHT================*/
+.right{
+    margin-top: 1.4rem;
+    position: sticky; /* Keep the right section fixed at the top */
+    top: 0;
+    background: var(--color-background); /* Match the background color */
+    z-index: 1; /* Ensure it stays above the main content */    
+
+    
+}
+
+.right .top{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+}
+
+.right h1{
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin:0;
+    margin-left: 6rem;
+}
+/* Right elements (menu button, theme toggler, and profile) */
+.right .right-elements {
+    display: flex;
+    align-items: center;
+    gap: 2rem; /* Space between elements */
+}
+
+.right .top button{
+    display: none;
+}
+
+.right .theme-toggler{
+    background:var(--color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.4rem;
+    width: 3.8rem;
+    cursor: pointer;
+    border-radius:var(--border-radius-1);
+}
+
+.right .theme-toggler span{
+    font-size: 1rem;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.right .theme-toggler span.active{
+    background:var(--color-primary);
+    color: white;
+    border-radius: var(--border-radius-1);
+}
+
+.right .top .profile{
+    display: flex;
+    gap: 1rem;
+    text-align:right;
+    align-items: center;
+   
+}
+
+.right .profile .info p{
+    margin:0;
+}
+
+.right .profile .info small{
+    color:var(--color-info-dark);
+}
+
+.right .profile-photo{
+    width: 2.2rem;
+    height:2.2rem;
+    overflow:hidden;
+}
+
+
+
+
+/*=================MEDIA QUERY=================*/
+@media screen and (max-width: 1200px){
   
+.container{
+    width: 94%;
+    grid-template-columns: 7rem auto;
+}
+    aside .logo h2{
+        display: none;
+    }
+
+    aside .sidebar h3{
+        display:none;
+    }
+     aside .sidebar a{
+        width:5.6rem;
+     }
+
+     aside .sidebar a:last-child{
+        position: relative;
+        margin-top: 1rem;
+     }
+}
+
+/*=================MEDIA QUERY=================*/
+@media screen and (max-width:768px) { 
+    .container{
+        width:100%;
+        grid-template-columns: 1fr;
+    }
+    aside{
+        position:fixed;
+        left:-100%;
+        background:var(--color-white);
+        width:18rem;
+        z-index:3;
+        box-shadow:1rem 3rem 4rem var(--color-light);
+        height:100vh;
+        padding-right:var(--card-padding);
+        display: none;
+        animation: showMenu 400ms ease forwards;
+    }
+
+    @keyframes showMenu{
+        to{
+            left:0;
+        }
+    }
+    aside .logo{
+        margin-left: 1rem;
+    }
+
+    aside .logo h2{
+        display: inline;
+    }
+
+    aside .sidebar h3{
+        display:inline;
+    }
+
+    aside .sidebar a{
+        width:100%;
+        height:3.4rem;
+    }
+
+    aside .sidebar a:last-child{
+        bottom:5rem;
+        position:absolute;
+    }
+
+    aside .close{
+        display:inline-block;
+        cursor:pointer;
+    }
+
+    main{
+        margin-top:8rem;
+        padding:0 1rem;
+    }
+
+    main .recents{
+        position:relative;
+        margin:3rem 0 0 0;
+        width:100%;
+    }
+    main .recent-orders table{
+        width:100%;
+    }
+
+    .right{
+        width:94%;
+        margin:0 auto 4rem;
+    }
+
+    .right .top{
+        position:fixed;
+        top: 0;
+        left:0;
+        align-items:center;
+        padding:0 0.8rem;
+        background:var(--color-white);
+        height: 4.6rem;
+        width: 100%;
+        margin:0;
+        z-index:2;
+        box-shadow: 0 1rem 1rem var(--color-light);
+    }
+
+    .right .top .theme-toggler{
+        width:4.4rem;
+        position:absolute;
+        left: 66%;
+    }
+
+    .right .profile .info{
+        display:none;
+    }
+
+    .right .top button{
+        display: inline-block;
+        background:transparent;
+        cursor: pointer;
+        color:var(--color-dark);
+        position: absolute;
+        left:1rem;
+    }
+
+    .right .top button span{
+        font-size:2rem;
+    }
+}

@@ -1,25 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>admin dashboard</title>
-    <!--STYLESHEET-->
-    <link rel="stylesheet" href="./css/style.css" />
 
-    <!--MATERIAL  CDN -->
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp"
-    />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>admin dashboard</title>
+  <!--STYLESHEET-->
+  <link rel="stylesheet" href="./css/style.css" />
 
-  <body>
-    <div class="container">
-      <?php include_once('includes/sidebar.php'); ?>
+  <!--MATERIAL  CDN -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
+</head>
+
+<body>
+  <div class="container">
+    <aside>
+      <div class="top">
+        <div class="logo">
+          <img src="./images/logo.png" />
+          <h2>ANY <span class="danger">NOTES</span></h2>
+        </div>
+        <div class="close" id="close-btn">
+          <span class="material-icons-sharp"> close </span>
+        </div>
+      </div>
+      <div class="sidebar">
+        <a href="./index.php"><span class="material-icons-sharp">grid_view</span>
+          <h3>Dashboard</h3>
+        </a>
+        <a href="./users.php"><span class="material-icons-sharp"> person_outline</span>
+          <h3>Users</h3>
+        </a>
+        <a href="./studyMaterial.php">
+          <span class="material-icons-sharp">library_books</span>
+          <h3>Study Materials</h3>
+        </a>
+        <a href=""><span class="material-icons-sharp">insights</span>
+          <h3>Analytics</h3>
+        </a>
+        <a href=""><span class="material-icons-sharp">mail_outline</span>
+          <h3>Messages</h3>
+          <span class="message-count">36</span>
+        </a>
+
+        <a href=""><span class="material-icons-sharp">report_gmailerrorred</span>
+          <h3>Reports</h3>
+        </a>
+        <a href=""><span class="material-icons-sharp">settings</span>
+          <h3>setting</h3>
+        </a>
+        <!-- <a href=""
+                ><span class="material-icons-sharp">add</span>
+                <h3>Add Product</h3>
+              </a> -->
+        <a href=""><span class="material-icons-sharp">logout</span>
+          <h3>Logout</h3>
+        </a>
+      </div>
+    </aside>
+    <div class="main-section">
+      <!-- Right section at the top -->
+      <div class="right">
+        <div class="top">
+          <!-- Dashboard heading on the left -->
+          <h1>Dashboard</h1>
+
+          <!-- Menu button, theme toggler, and profile on the right -->
+          <div class="right-elements">
+            <button id="menu-btn">
+              <span class="material-icons-sharp">menu</span>
+            </button>
+            <div class="theme-toggler">
+              <span class="material-icons-sharp active">light_mode</span>
+              <span class="material-icons-sharp">dark_mode</span>
+            </div>
+            <div class="profile">
+              <div class="info">
+                <p>Hey, <b>Daniel</b></p>
+                <small class="text-muted">Admin</small>
+              </div>
+              <div class="profile-photo">
+                <span class="material-icons-sharp">
+                  account_circle
+                  </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+     
       <!--MAIN SECTION-->
       <main>
-        <h1>Dashboard</h1>
         <div class="date">
           <input type="date" />
         </div>
@@ -85,7 +156,7 @@
         </div>
         <!--End of insights-->
 
-        <div class="recent-orders">
+        <div class="recents">
           <h2>Recent updates</h2>
           <table>
             <thead>
@@ -161,69 +232,15 @@
                 <td class="warning">Pending</td>
                 <td class="primary">Details</td>
               </tr>
-              
-              
-               
+
             </tbody>
           </table>
           <a href="#">Show All</a>
         </div>
       </main>
-
-      <div class="right">
-        <div class="top">
-          <button id="menu-btn">
-            <span class="material-icons-sharp">menu</span>
-          </button>
-          <div class="theme-toggler">
-            <span class="material-icons-sharp active">light_mode</span>
-            <span class="material-icons-sharp">dark_mode</span>
-          </div>
-          <div class="profile">
-            <div class="info">
-              <p>Hey, <b>Daniel</b></p>
-              <small class="text-muted">Admin</small>
-            </div>
-            <div class="profile-photo">
-              <img src="./images/profile-1.jpg" />
-            </div>
-          </div>
-        </div>
-        <!--END OF TOP-->
-        <div class="recent-updates">
-          <h2>Recent Updates</h2>
-          <div class="updates">
-            <div class="update">
-              <div class="profile-photo">
-                <img src="./images/profile-2.jpg" />
-              </div>
-              <div class="message">
-                <p><b>Mike Tyson</b>changed his profile this afternoon</p>
-                <small class="text-muted">2 Minutes ago</small>
-              </div>
-            </div>
-            <div class="update">
-              <div class="profile-photo">
-                <img src="./images/profile-3.jpg" />
-              </div>
-              <div class="message">
-                <p><b>Mike Tyson</b>changed his profile this afternoon</p>
-                <small class="text-muted">2 Minutes ago</small>
-              </div>
-            </div>
-            <div class="update">
-              <div class="profile-photo">
-                <img src="./images/profile-4.jpg" />
-              </div>
-              <div class="message">
-                <p><b>Mike Tyson</b>changed his profile this afternoon</p>
-                <small class="text-muted">2 Minutes ago</small>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
-    <script src="./index.js"></script>
-  </body>
+  </div>
+  <script src="./index.js"></script>
+</body>
+
 </html>
