@@ -54,7 +54,7 @@ body{
     width:100vw;
     height:100vh;
     font-family:poppins,sans-serif;
-    font-size: 0.88rem;
+    font-size: 1rem;
     background:var(--color-background);
     user-select: none;
     overflow-x:hidden;
@@ -81,42 +81,6 @@ body{
     scrollbar-width: none; /* Hide scrollbar for Firefox */
     scroll-behavior: smooth; /* Add smooth scrolling */
 }
-
-/*=================Search Filter=================*/
-.search-filter{
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    align-items: center;
-    margin-left: 1.9rem;
-    justify-content: center;
-}
-
-.search-filter input,
-.search-filter select {
-    padding: 0.8rem;
-    border-radius: var(--border-radius-2);
-    border: 1px solid var(--color-light);
-    font-size: 1rem;
-    width: 100%;
-    max-width: 250px;
-}
-
-.search-filter button {
-    padding: 0.8rem 1rem;
-    border-radius: var(--border-radius-2);
-    background: var(--color-primary);
-    color: var(--color-white);
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-.search-filter button:hover {
-    background: var(--color-primary-variant);
-}
-
 
 /* Hide scrollbar for Chrome, Safari, and Edge */
 .main-section::-webkit-scrollbar {
@@ -298,11 +262,150 @@ aside .sidebar .message-count{
 main{
     margin-top:1.4rem;
     margin-left: 1rem;
-    width:100%;
+    width: calc(100% - 1rem);
     grid-row: span 2;
     padding-bottom: 2rem;
 
 }
+
+main .date{
+    display:inline-block;
+    background: var(--color-light);
+    border-radius: var(--border-radius-1);
+    margin-top:1rem;
+    padding: 0.3rem 1rem;
+}
+
+main .date input[type="date"]{
+    background:transparent;
+    color:var(--color-dark);
+}
+
+main .insights{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);  
+    gap: 1.6rem;
+    width: 100%;
+}
+
+main .insights>div{
+    background:var(--color-white);
+    padding:1rem;
+    border-radius:var(--card-border-radius);
+    margin: 0.7 rem;
+    margin-top: 1rem;
+    box-shadow:var(--box-shadow);
+    transition: all 0.3s ease;
+}
+
+main .insights>div:hover{
+    box-shadow: none; 
+}
+
+main .insights>div span{
+    background: var(--color-primary);
+    padding: 0.3rem;
+    border-radius:50%;
+    color:var(--color-white);
+    font-size:1.5rem;
+}
+
+main .insights>div.income span{
+    background: var(--color-success);
+}
+
+main .insights>div .middle{
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+}
+
+main .insights h3{
+    margin:1rem 0 0.6rem;
+    font-size:1rem;
+}
+
+main .insights .progress{
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius:50%;
+}
+
+main .insights svg{
+    width:7rem;
+    height: 7rem;
+}
+
+main .insights svg circle{
+    fill:none;
+    stroke: var(--color-primary);
+    stroke-width: 14;
+    stroke-linecap:round;
+    stroke-dasharray: 110;
+    stroke-dashoffset: 92;
+    transform: translate(5px, 5px);
+   
+}   
+
+main .insights .progress .number{
+    position: absolute;
+    top:0;
+    left:0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main .insights small{
+    margin-top: 1.6rem;
+    display:block;
+}
+
+/*=======RECENT==============*/
+
+main .recents{
+    margin-top:2rem;
+}
+
+main .recents h2{
+    margin-bottom: 0.8rem;
+}
+
+main .recents table{
+    background:var(--color-white);
+    width: 100%;
+    border-radius: var(--card-border-radius);
+    padding:var(--card-padding);
+    text-align: center;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+}
+
+main .recents table:hover{
+    box-shadow: none;   
+}
+
+main table tbody td{
+    height: 2.8rem;
+    border-bottom: 1px solid var(--color-light);
+    color: var(--color-dark-variant);
+
+}
+main table tbody tr:last-child td{
+    border: none;
+}
+
+main .recents a{
+    text-align: center;
+    display:block;
+    color:var(--color-primary);
+    margin:1rem auto;
+
+}
+
 /*==========================RIGHT================*/
 .right{
     margin-top: 1.4rem;
@@ -310,15 +413,14 @@ main{
     top: 0;
     background: var(--color-background); /* Match the background color */
     z-index: 1; /* Ensure it stays above the main content */    
-    /* padding: 0.8rem; */
+
     
 }
 
 .right .top{
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
-    gap: 1rem;
 }
 
 .right h1{
@@ -386,124 +488,8 @@ main{
     overflow:hidden;
 }
 
-/*=================User Table=================*/
-
-main .user-table {
-    margin-top: 0.5rem;
-    width: 100%;
-    padding: var(--card-padding);
-    box-sizing: border-box;
-    
-}
 
 
-main .user-table h2 {
-    font-size: 1.3rem;
-    margin-bottom: 0.6rem;
-    margin-left: 1.5rem;
-}
-
-main .user-table table {
-    background: var(--color-white);
-    width: 100%;
-    border-radius: var(--card-border-radius);
-    padding: var(--card-padding);
-    text-align: center;
-    box-shadow: var(--box-shadow);
-    overflow: hidden;
-    transition: all 0.3s ease;
-    border-collapse: collapse;
-}
-
-main .user-table table:hover {
-    box-shadow: none;   
-}
-
-main .user-table table thead th {
-    background: var(--color-primary);
-    font-weight: bold;
-    color: var(--color-white);
-    font-size: 0.8rem;
-    padding: 1rem;
-    text-align: left;
-}
-
-main .user-table table tbody tr {
-    border-bottom: 1px solid var(--color-light);
-}
-
-main .user-table table tbody td {
-    height: 2.2rem;
-    border-bottom: 1px solid var(--color-light);
-    color: var(--color-dark-variant);
-    font-size: 0.87rem;
-    padding: 0.8rem 1rem;
-    text-align: left;
-}
-
-main .user-table table tbody tr:last-child td {
-    border: none;
-}
-
-/*=================forms css=================*/
-.add-user-form {
-    margin-top: 2rem;
-    margin-left: 1.4rem;
-    padding: var(--card-padding);
-    background: var(--color-white);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow); 
-    width: 50%;
-}
-
-.add-user-form h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--color-dark);
-}
-
-.add-user-form .form-group {
-    margin-bottom: 1.5rem;
-}
-
-.add-user-form label {
-    display: block;
-    font-size: 1rem;
-    margin-bottom: 0.5rem;
-    color:black;
-}
-
-.add-user-form input,
-.add-user-form select {
-    width: 100%;
-    padding: 0.8rem;
-    border-radius: var(--border-radius-1);
-    border: 1px solid var(--color-light);
-    font-size: 1rem;
-    color: black; 
-}
-
-.add-user-form input:focus,
-.add-user-form select:focus {
-    border-color: var(--color-primary); /* Add focus effect */
-    outline: none; /* Remove default outline */
-}
-
-.add-user-form button {
-    padding: 0.8rem 1.5rem;
-    border-radius: var(--border-radius-2);
-    background: var(--color-primary);
-    color: var(--color-white);
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    transition:  0.3s ease; /* Add smooth transition */
-}
-
-.add-user-form button:hover {
-    background: var(--color-primary-variant);
-}
 
 /*=================MEDIA QUERY=================*/
 @media screen and (max-width: 1200px){
@@ -526,6 +512,11 @@ main .user-table table tbody tr:last-child td {
      aside .sidebar a:last-child{
         position: relative;
         margin-top: 1rem;
+     }
+
+     main .insights{
+        grid-template-columns:1fr;
+        gap: 0;
      }
 }
 
