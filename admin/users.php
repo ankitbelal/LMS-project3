@@ -12,7 +12,7 @@
     <div class="container">
         <?php include_once('includes/sidebar.php')?>
         <!--MAIN SECTION-->
-      <main>
+      <main class="main-container">
         <div class="user-table">
           <h2>Users</h2>
           <table>

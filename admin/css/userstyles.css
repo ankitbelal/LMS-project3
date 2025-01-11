@@ -1,6 +1,46 @@
+/*--------------Root Vairables-----------------*/
+:root{
+    --color-primary:#7380ec;
+    --color-danger:#ff7782;
+    --color-success:#41f1b6;
+    --color-warning:#ffbb55;
+    --color-white:#fff;
+    --color-info-dark:#7d8da1;
+    --color-info-light:#dce1eb;
+    --color-dark:#363949;
+    --color-light: rgba(132,139,200,0.18);
+    --color-primary-variant:#111e88;
+    --color-dark-variant:#677483;
+    --color-background:#f6f6f9;
+
+
+    --card-border-radius:2rem;
+    --border-radius-1:0.4rem;
+    --border-radius-2:0.8rem;
+    --border-radius-3:1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1:1.2rem;
+
+    --box-shadow:0 2rem 3rem var(--color-light);
+}
+
 /* User Table Styles */
+.main-container{
+    display: flex;
+    flex-direction: column; /* Adjusted for a single-column layout */
+    width: 100%; /* Occupy full width */
+    margin: 0; /* Remove any default margins */
+    padding: var(--card-padding); /* Ensure consistent padding */
+    box-sizing: border-box; /* Include padding and border in width calculations */
+}
+
 main .user-table {
     margin-top: 2rem;
+    width: 100%;
+    max-width: 100%;
+    padding: var(--card-padding); /* Maintain consistent padding */
+    box-sizing: border-box; /* Include padding in width */
 }
 
 main .user-table h2 {
@@ -14,6 +54,7 @@ main .user-table table {
     padding: var(--card-padding);
     text-align: center;
     box-shadow: var(--box-shadow);
+    overflow: hidden;
     transition: all 0.3s ease;
 }
 

@@ -1,0 +1,138 @@
+:root{
+    --color-primary:#7380ec;
+    --color-danger:#ff7782;
+    --color-success:#41f1b6;
+    --color-warning:#ffbb55;
+    --color-white:#fff;
+    --color-info-dark:#7d8da1;
+    --color-info-light:#dce1eb;
+    --color-dark:#363949;
+    --color-light: rgba(132,139,200,0.18);
+    --color-primary-variant:#111e88;
+    --color-dark-variant:#677483;
+    --color-background:#f6f6f9;
+
+
+    --card-border-radius:2rem;
+    --border-radius-1:0.4rem;
+    --border-radius-2:0.8rem;
+    --border-radius-3:1.2rem;
+
+    --card-padding: 1.8rem;
+    --padding-1:1.2rem;
+
+    --box-shadow:0 2rem 3rem var(--color-light);
+}
+/* Container Styling */
+.admin-study-material-container {
+    padding: var(--card-padding);
+    margin-top: 2.5rem;
+    width: 100%;
+  }
+  
+  /* Admin Controls */
+  .admin-controls {
+    margin-bottom: 2rem;
+    text-align: right;
+  }
+  
+  .add-material-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--color-white);
+    background: var(--color-primary);
+    border: none;
+    cursor: pointer;
+    border-radius: var(--border-radius-2);
+  }
+  
+  /* Study Material Table */
+  .study-material-table-container {
+    margin-top: 1.5rem;
+  }
+  
+  .study-material-table-container h2 {
+    margin-bottom: 1rem;
+    margin-left: 1.4rem;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-white);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--card-border-radius);
+    overflow: hidden;
+  }
+  
+  thead th {
+    background: var(--color-primary);
+    color: var(--color-white);
+    text-align: left;
+    padding: 1rem;
+  }
+  
+  tbody tr {
+    border-bottom: 1px solid var(--color-light);
+  }
+  
+  tbody td {
+    padding: 0.8rem 1rem;
+  }
+  
+  .pending {
+    color: var(--color-warning);
+    font-weight: bold;
+  }
+  
+  .approved {
+    color: var(--color-success);
+    font-weight: bold;
+  }
+  
+  tbody tr:last-child td {
+    border: none;
+  }
+  
+  /* Buttons for Actions */
+  table .btn {
+    margin-right: 0.5rem;
+  }
+  
+  /* Add Material Form */
+  .add-material-form-container {
+    margin-top: 2rem;
+    background: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    /* display: none; */
+  }
+  
+  .add-material-form-container.hidden {
+    display: none;
+  }
+  
+  .add-material-form h2 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .add-material-form .input-field {
+    margin-bottom: 1rem;
+  }
+  
+  .add-material-form .input-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-dark);
+  }
+  
+  .add-material-form .input-field input,
+  .add-material-form .input-field select {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--color-light);
+    border-radius: var(--border-radius-2);
+  }
+  

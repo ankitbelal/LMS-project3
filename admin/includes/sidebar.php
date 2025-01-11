@@ -17,7 +17,7 @@
             ><span class="material-icons-sharp"> person_outline</span>
             <h3>Users</h3>
           </a>
-          <a href="">
+          <a href="./studyMaterial.php">
           <span class="material-icons-sharp">library_books</span>
           <h3>Study Materials</h3>
           </a>
