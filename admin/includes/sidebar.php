@@ -21,7 +21,7 @@
           <span class="material-icons-sharp">library_books</span>
           <h3>Study Materials</h3>
           </a>
-          <a href=""
+          <a href="./analytics.php"
             ><span class="material-icons-sharp">insights</span>
             <h3>Analytics</h3>
           </a>

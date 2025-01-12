@@ -4,9 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-        
     <title>login</title>
 </head>
+
+
 <body>
 
 <header>
@@ -15,15 +16,11 @@
 </h2>
     
     <nav class="navigation">
-  
         <a href="dashboard.php">Home</a>
         <a href="about.php">About</a>
         <a href="services.php">Services</a>
         <a href="Contact.php">Contact</a>
         <button class="btnlogin">login</button>
-       
-
-
     </nav>
 </header>
 
@@ -35,7 +32,6 @@
         <form action="login.php" method="post">
         <span class="icon"><ion-icon name="mail"></ion-icon></span>
             <div class="inputbox">
-              
                 <input type="Email" placeholder="" required>
                 <label>Email</label>
             </div>
@@ -56,7 +52,6 @@
 
             <div class="login-register">
                 <p>Don't have an account? <a href="#" class="register-link" >Register</a></p>
-
             </div>
     </div>
     
@@ -114,7 +109,7 @@
 
     <script src="script.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
 
 

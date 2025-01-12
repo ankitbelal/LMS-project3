@@ -1,0 +1,117 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+.container{
+    min-height: 100vh;
+    width:100%;
+    background-image:url(./1669527225811.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.wrapper{
+    padding:5% 8%;
+}
+.main{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+h1{
+    color:#fff;
+    font-size: 5rem; 
+    letter-spacing: 4px;
+    color:#fff;
+    position:relative;
+}
+
+.main p{
+    font-family: sans-serif;
+    color:rgba(255,255,255,0.8);
+}
+.outer-section{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    gap:30px;
+    margin-top: 80px;
+}
+.inner-section{
+    height:350px;
+    width:370px;
+    padding: 3% 8%;
+    border:2px solid rgba(77, 82, 79, 0.2);
+    border-radius: 8px;
+    display:flex;
+    align-items:center;
+    flex-direction: column;
+    position:relative;
+    overflow:hidden;
+    backdrop-filter: blur(8px);
+    transition: transform .5s;
+   
+}
+.inner-section:after{
+    content:"";
+    position:absolute;
+    top:150%;
+    left:-200px;
+    width:120%;
+    transform:rotate(50deg);
+    background-color: #fff;
+    height:18px;
+    filter:blur(30px);
+}
+.inner-section:hover:after{
+    width:225%;
+    top:-100%;
+}
+
+.inner-section h2{
+    color:#fff;
+    text-align: justify;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+.inner-section p{
+    text-align: center;
+    text-align: justify;
+    width:100%;
+    margin:12px 0;
+    color:rgba(255,255,255,0.6);
+}
+.inner-section:hover{
+    background-color: transparent;
+    transform:translate(-8px);
+    border-color: #474d48;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+.inner-section button{
+    height:40px;
+    width:200px;
+    border-radius: 10px;
+    background-color:rgb(176, 126, 91);
+    border:none;
+    
+}
+.inner-section button:hover{
+    background-color:rgb(72, 51, 22);
+    color:#fff;
+}
+@media screen and (max-width:1200px){
+    .outer-section{
+        grid-template-columns: repeat(2,1fr);
+    }
+}
+@media screen and (max-width:900px){
+    .outer-section{
+        grid-template-columns: repeat(1,1fr);
+    }
+    h1{
+        font-size: 3.5rem;
+    }
+    .main p{
+        font-size: 12px;
+    }
+}
