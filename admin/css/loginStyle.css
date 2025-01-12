@@ -1,116 +1,242 @@
 /* Login Page Styles */
-:root{
-    --color-primary:#7380ec;
-    --color-danger:#ff7782;
-    --color-success:#41f1b6;
-    --color-warning:#ffbb55;
-    --color-white:#fff;
-    --color-info-dark:#7d8da1;
-    --color-info-light:#dce1eb;
-    --color-dark:#363949;
-    --color-light: rgba(132,139,200,0.18);
-    --color-primary-variant:#111e88;
-    --color-dark-variant:#677483;
-    --color-background:#f6f6f9;
+:root {
+  --color-primary: #7380ec;
+  --color-danger: #ff7782;
+  --color-success: #41f1b6;
+  --color-warning: #ffbb55;
+  --color-white: #fff;
+  --color-info-dark: #7d8da1;
+  --color-info-light: #dce1eb;
+  --color-dark: #363949;
+  --color-light: rgba(132, 139, 200, 0.18);
+  --color-primary-variant: #111e88;
+  --color-dark-variant: #677483;
+  --color-background: #f6f6f9;
 
+  --card-border-radius: 2rem;
+  --border-radius-1: 0.4rem;
+  --border-radius-2: 0.8rem;
+  --border-radius-3: 1.2rem;
 
-    --card-border-radius:2rem;
-    --border-radius-1:0.4rem;
-    --border-radius-2:0.8rem;
-    --border-radius-3:1.2rem;
+  --card-padding: 1.8rem;
+  --padding-1: 1.2rem;
 
-    --card-padding: 1.8rem;
-    --padding-1:1.2rem;
-
-    --box-shadow:0 2rem 3rem var(--color-light);
+  --box-shadow: 0 2rem 3rem var(--color-light);
 }
 
+/* Common Container for All Forms */
 .login-container {
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--color-background);
-  }
-  
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--color-background);
+}
+
+/* Common Styles for All Forms */
+.login-form {
+  background: var(--color-white);
+  padding: var(--card-padding);
+  border-radius: var(--card-border-radius);
+  box-shadow: var(--box-shadow);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.login-form:hover {
+  box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+.login-form h2 {
+  font-size: 1.8rem;
+  color: var(--color-dark);
+  margin-bottom: 1.5rem;
+}
+
+/* Input Field Styles */
+.input-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  background: var(--color-light);
+  padding: 0.8rem 1rem;
+  border-radius: var(--border-radius-2);
+}
+
+.input-field span {
+  margin-right: 0.8rem;
+  color: var(--color-primary);
+}
+
+/* Eye Icon for Password Fields */
+.input-field .fa-eye {
+  cursor: pointer;
+  color: var(--color-primary);
+  margin-left: 0.5rem; /* Add space between input and icon */
+}
+
+.input-field .fa-eye-slash {
+  cursor: pointer;
+  color: var(--color-primary);
+  margin-left: 0.5rem; /* Add space between input and icon */
+}
+
+.input-field input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  color: var(--color-dark);
+}
+
+/* Error Message Styling */
+.error-message {
+  color: var(--color-danger);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+/* Button Styles */
+.btn {
+  display: block;
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border-radius: var(--border-radius-2);
+  font-size: 1rem;
+  font-weight: bold;
+  color: var(--color-white);
+  background: var(--color-primary);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: var(--color-primary-variant);
+}
+
+/* Forgot Password Link Styles */
+.forgot-password {
+  display: block;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot-password:hover {
+  color: var(--color-primary-variant);
+}
+
+/* Hide Forms Initially */
+.hidden {
+  display: none;
+}
+
+/* OTP Input Boxes */
+.otp-inputs {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.otp-inputs .otp-box {
+  width: 3rem;
+  height: 3rem;
+  text-align: center;
+  font-size: 1.5rem;
+  border: 1px solid var(--color-light);
+  border-radius: var(--border-radius-2);
+  background: var(--color-light);
+  color: var(--color-dark);
+  transition: all 0.3s ease;
+}
+
+.otp-inputs .otp-box:focus {
+  border-color: var(--color-primary);
+  outline: none;
+}
+
+/* Eye Icon for Password */
+.fa-eye {
+  cursor: pointer;
+  color: var(--color-primary);
+}
+
+/* Media Queries for Mobile Responsiveness */
+@media screen and (max-width: 768px) {
+  /* Adjust Form Width and Padding */
   .login-form {
-    background: var(--color-white);
-    padding: var(--card-padding);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-    transition: all 0.3s ease;
+      padding: 1.5rem;
+      max-width: 90%; /* Make form wider on small screens */
   }
 
-
-  .login-form:hover{
-    box-shadow: 0 2rem 3rem var(--color-light-variant);
-  }
-  
+  /* Adjust Heading Font Size */
   .login-form h2 {
-    font-size: 1.8rem;
-    color: var(--color-dark);
-    margin-bottom: 1.5rem;
-  }
-  
-  .input-field {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    background: var(--color-light);
-    padding: 0.8rem 1rem;
-    border-radius: var(--border-radius-2);
-  }
-  .fa-eye{
-    cursor: pointer;
-    color: var(--color-primary);
-  }
-  .input-field span {
-    margin-right: 0.8rem;
-    color: var(--color-primary);
-  }
-  
-  .input-field input {
-    flex: 1;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-size: 1rem;
-    color: var(--color-dark);
-  }
-  
-  .btn {
-    display: block;
-    width: 100%;
-    padding: 0.8rem 1rem;
-    border-radius: var(--border-radius-2);
-    font-size: 1rem;
-    font-weight: bold;
-    color: var(--color-white);
-    background: var(--color-primary);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .btn:hover {
-    background: var(--color-primary-variant);
+      font-size: 1.5rem;
   }
 
-  /* Forgot Password Link Styling */
-.login-form .forgot-password {
-    display: block;
-    margin: 1rem 0; /* Space between input fields and button */
-    font-size: 0.9rem; /* Slightly smaller text */
-    color: var(--color-primary); /* Match theme primary color */
-    text-decoration: none; /* Remove underline */
-    transition: color 0.3s ease;
+  /* Adjust Input Field Padding */
+  .input-field {
+      padding: 0.6rem 0.8rem;
   }
-  
-  .login-form .forgot-password:hover {
-    color: var(--color-primary-variant); /* Subtle hover effect */
+
+  /* Adjust Button Font Size */
+  .btn {
+      font-size: 0.9rem;
+      padding: 0.6rem 0.8rem;
   }
-  
-  
+
+  /* Adjust OTP Input Boxes */
+  .otp-inputs .otp-box {
+      width: 2.5rem;
+      height: 2.5rem;
+      font-size: 1.2rem;
+  }
+
+  /* Adjust Forgot Password Link Font Size */
+  .forgot-password {
+      font-size: 0.8rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  /* Further Adjust Form Width */
+  .login-form {
+      max-width: 100%; /* Full width on very small screens */
+      border-radius: var(--border-radius-1); /* Smaller border radius */
+  }
+
+  /* Adjust Heading Font Size */
+  .login-form h2 {
+      font-size: 1.3rem;
+  }
+
+  /* Adjust Input Field Padding */
+  .input-field {
+      padding: 0.5rem 0.7rem;
+  }
+
+  /* Adjust Button Font Size */
+  .btn {
+      font-size: 0.8rem;
+      padding: 0.5rem 0.7rem;
+  }
+
+  /* Adjust OTP Input Boxes */
+  .otp-inputs .otp-box {
+      width: 2rem;
+      height: 2rem;
+      font-size: 1rem;
+  }
+
+  /* Adjust Forgot Password Link Font Size */
+  .forgot-password {
+      font-size: 0.7rem;
+  }
+}
