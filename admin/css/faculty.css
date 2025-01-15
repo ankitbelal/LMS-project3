@@ -48,8 +48,6 @@
     box-sizing: border-box;
 }
 
-
-
 body{
     width:100vw;
     height:100vh;
@@ -81,42 +79,6 @@ body{
     scrollbar-width: none; /* Hide scrollbar for Firefox */
     scroll-behavior: smooth; /* Add smooth scrolling */
 }
-
-/*=================Search Filter=================*/
-.search-filter{
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    align-items: center;
-    margin-left: 1.9rem;
-    justify-content: center;
-}
-
-.search-filter input,
-.search-filter select {
-    padding: 0.8rem;
-    border-radius: var(--border-radius-2);
-    border: 1px solid var(--color-light);
-    font-size: 1rem;
-    width: 100%;
-    max-width: 250px;
-}
-
-.search-filter button {
-    padding: 0.8rem 1rem;
-    border-radius: var(--border-radius-2);
-    background: var(--color-primary);
-    color: var(--color-white);
-    border: none;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-}
-
-.search-filter button:hover {
-    background: var(--color-primary-variant);
-}
-
 
 /* Hide scrollbar for Chrome, Safari, and Edge */
 .main-section::-webkit-scrollbar {
@@ -298,11 +260,14 @@ aside .sidebar .message-count{
 main{
     margin-top:1.4rem;
     margin-left: 1rem;
-    width:100%;
+    width: calc(100% - 1rem);
     grid-row: span 2;
     padding-bottom: 2rem;
 
 }
+
+
+
 /*==========================RIGHT================*/
 .right{
     margin-top: 1.4rem;
@@ -310,7 +275,7 @@ main{
     top: 0;
     background: var(--color-background); /* Match the background color */
     z-index: 1; /* Ensure it stays above the main content */    
-    /* padding: 0.8rem; */
+
     
 }
 
@@ -318,7 +283,7 @@ main{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 1rem;
+    gap:1rem;
 }
 
 .right h1{
@@ -386,110 +351,63 @@ main{
     overflow:hidden;
 }
 
-/*=================User Table=================*/
-
-main .user-table {
-    margin-top: 0.5rem;
-    width: 100%;
-    padding: var(--card-padding);
-    box-sizing: border-box;
-    
-}
-
-
-main .user-table h2 {
-    font-size: 1.3rem;
-    margin-bottom: 0.6rem;
-    margin-left: 1.5rem;
-}
-
-main .user-table table {
-    background: var(--color-white);
-    width: 100%;
-    border-radius: var(--card-border-radius);
-    padding: var(--card-padding);
-    text-align: center;
-    box-shadow: var(--box-shadow);
-    overflow: hidden;
-    transition: all 0.3s ease;
-    border-collapse: collapse;
-}
-
-main .user-table table:hover {
-    box-shadow: none;   
-}
-
-main .user-table table thead th {
-    background: var(--color-primary);
-    font-weight: bold;
-    color: var(--color-white);
-    font-size: 0.8rem;
-    padding: 1rem;
-    text-align: left;
-}
-
-main .user-table table tbody tr {
-    border-bottom: 1px solid var(--color-light);
-}
-
-main .user-table table tbody td {
-    height: 2.2rem;
-    border-bottom: 1px solid var(--color-light);
-    color: var(--color-dark-variant);
-    font-size: 0.87rem;
-    padding: 0.8rem 1rem;
-    text-align: left;
-}
-
-main .user-table table tbody tr:last-child td {
-    border: none;
-}
-
-/*=================forms css=================*/
-.add-user-form {
+/* Forms Container */
+.forms-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns for normal screens */
+    gap: 2rem; /* Space between forms */
     margin-top: 2rem;
-    margin-left: 1.4rem;
+}
+
+/* Faculty and Subject Form Styles */
+.faculty-form,
+.subject-form {
     padding: var(--card-padding);
     background: var(--color-white);
     border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow); 
-    width: 50%;
+    box-shadow: var(--box-shadow);
 }
 
-.add-user-form h2 {
+.faculty-form h2,
+.subject-form h2 {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
     color: var(--color-dark);
 }
 
-.add-user-form .form-group {
+.faculty-form .form-group,
+.subject-form .form-group {
     margin-bottom: 1.5rem;
 }
 
-.add-user-form label {
+.faculty-form label,
+.subject-form label {
     display: block;
     font-size: 1rem;
     margin-bottom: 0.5rem;
-    color:var(--color-dark            );
+    color: var(--color-dark);
 }
 
-.add-user-form input,
-.add-user-form select {
+.faculty-form input,
+.subject-form input,
+.subject-form select {
     width: 100%;
     padding: 0.8rem;
     border-radius: var(--border-radius-1);
     border: 1px solid var(--color-light);
     font-size: 1rem;
-    color: black; 
+    color: var(--color-dark);
 }
 
-.add-user-form input:focus,
-.add-user-form select:focus {
-    border-color: var(--color-primary); /* Add focus effect */
-    outline: none; /* Remove default outline */
+.faculty-form input:focus,
+.subject-form input:focus,
+.subject-form select:focus {
+    border-color: var(--color-primary);
+    outline: none;
 }
 
-.add-user-form button {
+.faculty-form button,
+.subject-form button {
     padding: 0.8rem 1.5rem;
     border-radius: var(--border-radius-2);
     background: var(--color-primary);
@@ -498,12 +416,91 @@ main .user-table table tbody tr:last-child td {
     cursor: pointer;
     font-size: 1rem;
     font-weight: bold;
-    transition:  0.3s ease; /* Add smooth transition */
+    transition: 0.3s ease;
 }
 
-.add-user-form button:hover {
+.faculty-form button:hover,
+.subject-form button:hover {
     background: var(--color-primary-variant);
 }
+
+/* Add this to the existing CSS file */
+
+/* Add this to the existing CSS file */
+
+/* Table Container with Scroll */
+.table-container {
+    margin-bottom: 2rem;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    padding: var(--card-padding);
+    overflow-x: auto; /* Enable horizontal scrolling */
+}
+
+.table-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-dark);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px; /* Ensure the table has a minimum width */
+}
+
+table th,
+table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-light);
+}
+
+table th {
+    background: var(--color-light);
+    color: var(--color-dark);
+}
+
+table tr:hover {
+    background: var(--color-light);
+}
+
+.edit-btn,
+.delete-btn {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-1);
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+}
+
+.edit-btn {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.delete-btn {
+    background: var(--color-danger);
+    color: var(--color-white);
+    margin-left: 0.5rem;
+}
+
+.edit-btn:hover {
+    background: var(--color-primary-variant);
+}
+
+.delete-btn:hover {
+    background: var(--color-danger-variant);
+}
+
+
+.forms-container input[type="number"]::-webkit-inner-spin-button,forms-container input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 
 /*=================MEDIA QUERY=================*/
 @media screen and (max-width: 1200px){
@@ -526,6 +523,11 @@ main .user-table table tbody tr:last-child td {
      aside .sidebar a:last-child{
         position: relative;
         margin-top: 1rem;
+     }
+
+     main .insights{
+        grid-template-columns:1fr;
+        gap: 0;
      }
 }
 
@@ -620,7 +622,7 @@ main .user-table table tbody tr:last-child td {
     }
 
     .right .profile .info{
-        display:none;
+       display: none;
     }
 
     .right .top button{

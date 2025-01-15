@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>admin dashboard</title>
+    <title>Admin Dashboard</title>
     <!--STYLESHEET-->
     <link rel="stylesheet" href="./css/studyMaterial.css" />
 
@@ -14,46 +14,7 @@
 
 <body>
     <div class="container">
-        <aside>
-            <div class="top">
-                <div class="logo">
-                    <img src="./images/logo.png" />
-                    <h2>ANY <span class="danger">NOTES</span></h2>
-                </div>
-                <div class="close" id="close-btn">
-                    <span class="material-icons-sharp"> close </span>
-                </div>
-            </div>
-            <div class="sidebar">
-                <a href="./index.php"><span class="material-icons-sharp">grid_view</span>
-                    <h3>Dashboard</h3>
-                </a>
-                <a href="./users.php"><span class="material-icons-sharp"> person_outline</span>
-                    <h3>Users</h3>
-                </a>
-                <a href="./studyMaterial.php">
-                    <span class="material-icons-sharp">library_books</span>
-                    <h3>Study Materials</h3>
-                </a>
-                <a href=""><span class="material-icons-sharp">insights</span>
-                    <h3>Analytics</h3>
-                </a>
-                <a href=""><span class="material-icons-sharp">mail_outline</span>
-                    <h3>Messages</h3>
-                    <span class="message-count">36</span>
-                </a>
-
-                <a href=""><span class="material-icons-sharp">report_gmailerrorred</span>
-                    <h3>Reports</h3>
-                </a>
-                <a href=""><span class="material-icons-sharp">settings</span>
-                    <h3>setting</h3>
-                </a>
-                <a href=""><span class="material-icons-sharp">logout</span>
-                    <h3>Logout</h3>
-                </a>
-            </div>
-        </aside>
+    <?php include_once('includes/sidebar.php');?>
         <div class="main-section">
             <!-- Right section at the top -->
             <div class="right">
@@ -73,9 +34,7 @@
                                 <small class="text-muted">Admin</small>
                             </div>
                             <div class="profile-photo">
-                                <span class="material-icons-sharp">
-                                    account_circle
-                                </span>
+                                <span class="material-icons-sharp">account_circle</span>
                             </div>
                         </div>
                     </div>
@@ -93,48 +52,49 @@
                     <!-- Study Material Table -->
                     <div class="study-material-table-container">
                         <h2>Study Materials</h2>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Title</th>
-                                    <th>Type</th>
-                                    <th>Faculty</th>
-                                    <th>Semester</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <!-- Example Data (Dynamically Populated in PHP) -->
-                                <tr>
-                                    <td>Data Structures Notes</td>
-                                    <td>Notes</td>
-                                    <td>BE comp</td>
-                                    <td>third</td>
-                                    <td class="pending">Pending</td>
-                                    <td>
-                                        <button class="btn success-btn approve-btn">Approve</button>
-                                        <button class="btn danger-btn reject-btn">Reject</button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Discrete Mathematics Syllabus</td>
-                                    <td>Syllabus</td>
-                                    <td>BCA</td>
-                                    <td>fourth</td>
-                                    <td class="approved">Approved</td>
-                                    <td>
-                                        <button class="btn danger-btn delete-btn">Delete</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Type</th>
+                                        <th>Faculty</th>
+                                        <th>Semester</th>
+                                        <th>Edit | Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Example Data (Dynamically Populated in PHP) -->
+                                    <tr>
+                                        <td>Data Structures Notes</td>
+                                        <td>Notes</td>
+                                        <td>BE comp</td>
+                                        <td>third</td>
+                                        <td>
+                                            <button class="btn edit-btn" data-id="1">Edit</button>
+                                            <button class="btn danger-btn delete-btn">Delete</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>Discrete Mathematics Syllabus</td>
+                                        <td>Syllabus</td>
+                                        <td>BCA</td>
+                                        <td>fourth</td>
+                                        <td>
+                                            <button class="btn edit-btn" data-id="2">Edit</button>
+                                            <button class="btn danger-btn delete-btn">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
 
                     <!-- Add Material Form -->
                     <div class="add-material-form-container hidden">
                         <form class="add-material-form">
-                            <h2>Add Study Material</h2>
+                            <h2 id="form-heading">Add Study Material</h2>
+                            <input type="hidden" id="material-id" value="" />
                             <div class="input-field">
                                 <label for="material-title">Title</label>
                                 <input type="text" id="material-title" placeholder="Material Title" required />
@@ -168,7 +128,7 @@
                                 <label for="upload-file">Upload File</label>
                                 <input type="file" id="upload-file" required />
                             </div>
-                            <button type="submit" class="btn primary-btn">Add</button>
+                            <button type="submit" class="btn primary-btn" id="form-submit-btn">Add</button>
                         </form>
                     </div>
                 </div>
@@ -178,47 +138,111 @@
     <script src="./index.js"></script>
     <script type="text/javascript">
         document.addEventListener("DOMContentLoaded", () => {
-    const addMaterialBtn = document.querySelector(".add-material-btn");
-    const addMaterialFormContainer = document.querySelector(".add-material-form-container");
-  
-    if (addMaterialBtn && addMaterialFormContainer) {
-      // Add a single event listener for the Add Material button
-      addMaterialBtn.addEventListener("click", () => {
-        console.log("Add Material button clicked!");
-        addMaterialFormContainer.classList.toggle("hidden");
-      });
-    } else {
-      console.error("Add Material button or form container not found!");
-    }
-  
-    // Approve Button Functionality
-    document.querySelectorAll(".approve-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const row = btn.closest("tr");
-        row.querySelector("td:nth-child(5)").textContent = "Approved";
-        row.querySelector("td:nth-child(5)").classList.remove("pending");
-        row.querySelector("td:nth-child(5)").classList.add("approved");
-        btn.remove(); // Remove Approve button
-      });
-    });
-  
-    // Reject Button Functionality
-    document.querySelectorAll(".reject-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const row = btn.closest("tr");
-        row.remove(); // Remove the row
-      });
-    });
-  
-    // Delete Button Functionality
-    document.querySelectorAll(".delete-btn").forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const row = btn.closest("tr");
-        row.remove(); // Remove the row
-      });
-    });
-  });
-  
+            const addMaterialBtn = document.querySelector(".add-material-btn");
+            const addMaterialFormContainer = document.querySelector(".add-material-form-container");
+            const formHeading = document.querySelector("#form-heading");
+            const formSubmitBtn = document.querySelector("#form-submit-btn");
+            const materialIdInput = document.querySelector("#material-id");
+
+            // Toggle form visibility
+            if (addMaterialBtn && addMaterialFormContainer) {
+                addMaterialBtn.addEventListener("click", () => {
+                    addMaterialFormContainer.classList.toggle("hidden");
+                    formHeading.textContent = "Add Study Material";
+                    formSubmitBtn.textContent = "Add";
+                    materialIdInput.value = ""; // Clear the material ID
+                });
+            }
+
+            // Edit Button Functionality
+            document.querySelectorAll(".edit-btn").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const row = btn.closest("tr");
+                    const cells = row.querySelectorAll("td");
+
+                    // Populate form with existing data
+                    document.querySelector("#material-title").value = cells[0].textContent;
+                    document.querySelector("#material-type").value = cells[1].textContent;
+                    document.querySelector("#faculty-name").value = cells[2].textContent;
+                    document.querySelector("#semester").value = cells[3].textContent.toLowerCase();
+
+                    // Change form heading and button text
+                    formHeading.textContent = "Update Study Material";
+                    formSubmitBtn.textContent = "Update";
+                    materialIdInput.value = btn.getAttribute("data-id"); // Set the material ID
+
+                    // Show the form
+                    addMaterialFormContainer.classList.remove("hidden");
+                });
+            });
+
+            // Delete Button Functionality
+            document.querySelectorAll(".delete-btn").forEach((btn) => {
+                btn.addEventListener("click", () => {
+                    const row = btn.closest("tr");
+                    row.remove(); // Remove the row
+                });
+            });
+
+            // Form Submission Handling
+            const form = document.querySelector(".add-material-form");
+            form.addEventListener("submit", (e) => {
+                e.preventDefault();
+
+                const materialId = materialIdInput.value;
+                const title = document.querySelector("#material-title").value;
+                const type = document.querySelector("#material-type").value;
+                const faculty = document.querySelector("#faculty-name").value;
+                const semester = document.querySelector("#semester").value;
+
+                if (materialId) {
+                    // Update existing material
+                    const row = document.querySelector(`.edit-btn[data-id="${materialId}"]`).closest("tr");
+                    row.querySelector("td:nth-child(1)").textContent = title;
+                    row.querySelector("td:nth-child(2)").textContent = type;
+                    row.querySelector("td:nth-child(3)").textContent = faculty;
+                    row.querySelector("td:nth-child(4)").textContent = semester;
+                } else {
+                    // Add new material
+                    const newRow = `
+                        <tr>
+                            <td>${title}</td>
+                            <td>${type}</td>
+                            <td>${faculty}</td>
+                            <td>${semester}</td>
+                            <td>
+                                <button class="btn edit-btn" data-id="${Date.now()}">Edit</button>
+                                <button class="btn danger-btn delete-btn">Delete</button>
+                            </td>
+                        </tr>
+                    `;
+                    document.querySelector("tbody").insertAdjacentHTML("beforeend", newRow);
+                }
+
+                // Reset the form
+                form.reset();
+                addMaterialFormContainer.classList.add("hidden");
+            });
+
+            // Toggle sidebar on mobile
+            const menuBtn = document.querySelector("#menu-btn");
+            const closeBtn = document.querySelector("#close-btn");
+            const sidebar = document.querySelector("aside");
+
+            if (menuBtn && sidebar) {
+                menuBtn.addEventListener("click", () => {
+                    sidebar.style.display = "block";
+                    sidebar.classList.add("show");
+                });
+            }
+
+            if (closeBtn && sidebar) {
+                closeBtn.addEventListener("click", () => {
+                    sidebar.classList.remove("show");
+                    sidebar.style.display = "none";
+                });
+            }
+        });
     </script>
 </body>
 
