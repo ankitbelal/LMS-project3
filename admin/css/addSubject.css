@@ -263,6 +263,9 @@ main{
     width: calc(100% - 1rem);
     grid-row: span 2;
     padding-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+
 
 }
 
@@ -353,14 +356,11 @@ main{
 
 /* Forms Container */
 .forms-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Two columns for normal screens */
-    gap: 2rem; /* Space between forms */
-    margin-top: 2rem;
+    width: 90%;
+   
 }
 
 /* Faculty and Subject Form Styles */
-.faculty-form,
 .subject-form {
     padding: var(--card-padding);
     background: var(--color-white);
@@ -368,19 +368,16 @@ main{
     box-shadow: var(--box-shadow);
 }
 
-.faculty-form h2,
 .subject-form h2 {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
     color: var(--color-dark);
 }
 
-.faculty-form .form-group,
 .subject-form .form-group {
     margin-bottom: 1.5rem;
 }
 
-.faculty-form label,
 .subject-form label {
     display: block;
     font-size: 1rem;
@@ -388,7 +385,6 @@ main{
     color: var(--color-dark);
 }
 
-.faculty-form input,
 .subject-form input,
 .subject-form select {
     width: 100%;
@@ -399,14 +395,12 @@ main{
     color: var(--color-dark);
 }
 
-.faculty-form input:focus,
 .subject-form input:focus,
 .subject-form select:focus {
     border-color: var(--color-primary);
     outline: none;
 }
 
-.faculty-form button,
 .subject-form button {
     padding: 0.8rem 1.5rem;
     border-radius: var(--border-radius-2);
@@ -419,102 +413,9 @@ main{
     transition: 0.3s ease;
 }
 
-.faculty-form button:hover,
 .subject-form button:hover {
     background: var(--color-primary-variant);
 }
-
-.table-container .table-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-.table-container .table-header button {
-    padding: 0.5rem 0.4rem;
-    border-radius: var(--border-radius-2);
-    background: var(--color-primary);
-    color: var(--color-white);
-    border: none;
-    cursor: pointer;
-    font-size: 0.88rem;
-    font-weight: bold;
-    transition: 0.3s ease;
-}
-
-/* Table Container with Scroll */
-.table-container {
-    margin-bottom: 2rem;
-    background: var(--color-white);
-    border-radius: var(--card-border-radius);
-    box-shadow: var(--box-shadow);
-    padding: var(--card-padding);
-    overflow-x: auto; /* Enable horizontal scrolling */
-}
-
-.table-container h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--color-dark);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    min-width: 600px; /* Ensure the table has a minimum width */
-}
-
-table th,
-table td {
-    padding: 1rem;
-    text-align: left;
-    border-bottom: 1px solid var(--color-light);
-}
-
-table th {
-    background: var(--color-light);
-    color: var(--color-dark);
-}
-
-table tr:hover {
-    background: var(--color-light);
-}
-
-.edit-btn,
-.delete-btn {
-    padding: 0.5rem 1rem;
-    border-radius: var(--border-radius-1);
-    border: none;
-    cursor: pointer;
-    font-size: 0.9rem;
-    transition: 0.3s ease;
-}
-
-.edit-btn {
-    background: var(--color-primary);
-    color: var(--color-white);
-}
-
-.delete-btn {
-    background: var(--color-danger);
-    color: var(--color-white);
-    margin-left: 0.5rem;
-}
-
-.edit-btn:hover {
-    background: var(--color-primary-variant);
-}
-
-.delete-btn:hover {
-    background: var(--color-danger-variant);
-}
-
-
-.forms-container input[type="number"]::-webkit-inner-spin-button,forms-container input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
 
 /*=================MEDIA QUERY=================*/
 @media screen and (max-width: 1200px){
