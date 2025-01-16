@@ -55,7 +55,7 @@
                         <option value="admin">Admin</option>
                         <option value="user">User</option>
                     </select>
-                    <button id="add-user-btn" class="btn-primary">Add User</button>
+                    <button id="add-user-btn" class="btn-primary" onclick="window.location.href='./addUser.php'">Add User</button>
                 </div>
 
                 <div class="user-table">
@@ -107,56 +107,10 @@
                         </tbody>
                     </table>
                 </div>
-
-                <!-- Add User Form (Hidden by Default) -->
-                <div id="add-user-form" class="add-user-form" style="display: none;">
-                    <h2>Add User</h2>
-                    <form>
-                        <div class="form-group">
-                            <label for="first-name">First Name</label>
-                            <input type="text" id="first-name" name="first-name" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="last-name">Last Name</label>
-                            <input type="text" id="last-name" name="last-name" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="username">Username</label>
-                            <input type="text" id="username" name="username" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="contact">Contact</label>
-                            <input type="text" id="contact" name="contact" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="address">Address</label>
-                            <input type="text" id="address" name="address" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="role">Role</label>
-                            <select id="role" name="role">
-                                <option value="admin">Admin</option>
-                                <option value="user">User</option>
-                            </select>
-                        </div>
-                        <button type="submit" class="btn-primary">Add User</button>
-                    </form>
-                </div>
             </main>
         </div>
     </div>
     <script src="./index.js"></script>
-    <script>
-        // Toggle Add User Form
-        document.getElementById('add-user-btn').addEventListener('click', function () {
-            const form = document.getElementById('add-user-form');
-            form.style.display = form.style.display === 'none' ? 'block' : 'none';
-        });
-    </script>
 </body>
 
 </html>

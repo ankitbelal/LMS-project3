@@ -1,3 +1,35 @@
+<?php
+    session_start();
+    require_once('../configs/Database.php');
+    $db = new Database();
+    $conn=$db->getConnection();
+    if($_POST){
+        $username=$_POST['username'];
+        $password=md5($_POST['password']);
+
+        $result=$conn->prepare("select * from tbl_users where username=:username and password=:password");
+
+        $result->bindParam(':username',$username);
+        $result->bindParam(':password',$password);
+        $result->execute();
+
+        $data=$result->fetch(PDO::FETCH_ASSOC);
+
+        if($result->rowCount()>0){
+            if($data['role']=='admin'){
+                $_SESSION['username']=$username;
+                $_SESSION['is_admin']=true;
+                header("Location:./index.php");
+            }else{
+                $_SESSION['username']=$username;
+                $_SESSION['is_admin']=false;
+                header("Location:./adminLogin.php");
+            }
+        }else{
+            echo "<script>alert('Invalid Username or Password');</script>";
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,15 +45,15 @@
         <!-- Common Container for All Forms -->
         <div id="form-container">
             <!-- Login Form -->
-            <form class="login-form" id="login-form">
+            <form class="login-form" id="login-form" method="POST"> 
                 <h2>Admin Login</h2>
                 <div class="input-field">
                     <span class="material-icons-sharp">person</span>
-                    <input type="text" placeholder="Username" required />
+                    <input type="text" placeholder="Username" name="username" required />
                 </div>
                 <div class="input-field">
                     <span class="material-icons-sharp">lock</span>
-                    <input type="password" id="password" placeholder="Password" required />
+                    <input type="password" id="password" placeholder="Password" name="password" required />
                     <i class="fa-solid fa-eye" id="show-password"></i>
                 </div>
                 <button type="submit" class="btn primary-btn">Login</button>
@@ -207,18 +239,18 @@
             }
         }
 
-        // Login Form Submission
-        loginForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-            const username = document.querySelector('.input-field input[type="text"]').value;
-            const password = document.querySelector('.input-field input[type="password"]').value;
-            if (username === 'admin' && password === 'password123') {
-                alert('Login Successful!');
-                window.location.href = './index.php'; // Redirect to admin dashboard
-            } else {
-                alert('Invalid Username or Password');
-            }
-        });
+        // // Login Form Submission
+        // loginForm.addEventListener('submit', function (e) {
+        //     e.preventDefault();
+        //     const username = document.querySelector('.input-field input[type="text"]').value;
+        //     const password = document.querySelector('.input-field input[type="password"]').value;
+        //     if (username === 'admin' && password === 'password123') {
+        //         alert('Login Successful!');
+        //         window.location.href = './index.php'; // Redirect to admin dashboard
+        //     } else {
+        //         alert('Invalid Username or Password');
+        //     }
+        // });
     </script>
 </body>
 </html>
