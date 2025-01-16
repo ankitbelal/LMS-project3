@@ -49,7 +49,6 @@
 }
 
 
-
 body{
     width:100vw;
     height:100vh;
@@ -80,6 +79,7 @@ body{
     overflow-y:auto;/* Make main-section scrollable */
     scrollbar-width: none; /* Hide scrollbar for Firefox */
     scroll-behavior: smooth; /* Add smooth scrolling */
+    
 }
 
 /*=================Search Filter=================*/
@@ -301,6 +301,9 @@ main{
     width:100%;
     grid-row: span 2;
     padding-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+  
 
 }
 /*==========================RIGHT================*/
@@ -386,64 +389,7 @@ main{
     overflow:hidden;
 }
 
-/*=================User Table=================*/
 
-main .user-table {
-    margin-top: 0.5rem;
-    width: 100%;
-    padding: var(--card-padding);
-    box-sizing: border-box;
-    
-}
-
-
-main .user-table h2 {
-    font-size: 1.3rem;
-    margin-bottom: 0.6rem;
-    margin-left: 1.5rem;
-}
-
-main .user-table table {
-    background: var(--color-white);
-    width: 100%;
-    border-radius: var(--card-border-radius);
-    padding: var(--card-padding);
-    text-align: center;
-    box-shadow: var(--box-shadow);
-    overflow: hidden;
-    transition: all 0.3s ease;
-    border-collapse: collapse;
-}
-
-main .user-table table:hover {
-    box-shadow: none;   
-}
-
-main .user-table table thead th {
-    background: var(--color-primary);
-    font-weight: bold;
-    color: var(--color-white);
-    font-size: 0.8rem;
-    padding: 1rem;
-    text-align: left;
-}
-
-main .user-table table tbody tr {
-    border-bottom: 1px solid var(--color-light);
-}
-
-main .user-table table tbody td {
-    height: 2.2rem;
-    border-bottom: 1px solid var(--color-light);
-    color: var(--color-dark-variant);
-    font-size: 0.87rem;
-    padding: 0.8rem 1rem;
-    text-align: left;
-}
-
-main .user-table table tbody tr:last-child td {
-    border: none;
-}
 
 /*=================forms css=================*/
 .add-user-form {
@@ -470,7 +416,7 @@ main .user-table table tbody tr:last-child td {
     display: block;
     font-size: 1rem;
     margin-bottom: 0.5rem;
-    color:var(--color-dark            );
+    color:black;
 }
 
 .add-user-form input,
@@ -501,8 +447,28 @@ main .user-table table tbody tr:last-child td {
     transition:  0.3s ease; /* Add smooth transition */
 }
 
-.add-user-form button a{
-    color: var(--color-white);
+/* Add these styles for the password input and eye button */
+.password-input-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-container input {
+    width: 100%;
+    padding-right: 2.5rem; /* Add space for the eye button */
+}
+
+.toggle-password {
+    position: absolute;
+    right: 0.8rem;
+    cursor: pointer;
+    color: var(--color-info-dark);
+    user-select: none;
+}
+
+.toggle-password:hover {
+    color: var(--color-primary);
 }
 
 .add-user-form button:hover {
