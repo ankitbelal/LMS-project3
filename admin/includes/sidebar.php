@@ -34,7 +34,7 @@
                 <a href=""><span class="material-icons-sharp">settings</span>
                     <h3>setting</h3>
                 </a>
-                <a href=""><span class="material-icons-sharp">logout</span>
+                <a href="./logout.php"><span class="material-icons-sharp">logout</span>
                     <h3>Logout</h3>
                 </a>
             </div>

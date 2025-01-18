@@ -1,0 +1,333 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background: url("") no-repeat fixed;
+    background-size: cover;
+    background-position: center;
+    user-select: none;
+    top: auto;
+    width: 100%;
+    
+}
+
+/* Ensure the header (navbar) is fixed at the top */
+header {
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 99;
+    user-select: none;
+    height: 100px; /* Fixed height */
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+     position: fixed; /*Fix the navbar at the top */
+    top: 0; /* Stick to the top */
+    left: 0; /* Align to the left */
+    font-size: 1rem;
+}
+
+/* Add padding to the body to prevent content from overlapping the navbar */
+body {
+    padding-top: 100px; /* Equal to the height of the navbar */
+}
+
+/* Logo and AnyNotes Label Container */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+/* Logo */
+.logo {
+    user-select: none;
+    height: 50px;
+    width: auto;
+    margin-right: 10px;
+}
+
+.logo img {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    user-select: none;
+}
+
+/* AnyNotes Label */
+.anynotes-label {
+    display: flex; /* Ensure it's visible by default */
+    align-items: center;
+    font-size: 1.5em; /* Fixed font size */
+    font-weight: bold;
+}
+
+.any {
+    color: black;
+}
+
+.notes {
+    color: red;
+}
+
+.anynotes-labels {
+    display: none; /* Ensure it's not visible initially when in large screen */
+    align-items: center;
+    font-size: 1.5em; /* Fixed font size */
+    font-weight: bold;
+}
+
+/* Default Layout: Logo and Links in a Row */
+.navigation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Center navigation on large screens */
+@media (min-width: 769px) {
+    .navigation {
+        position: static;
+        top: auto;
+        left: auto;
+        transform: none;
+    }
+}
+
+/* Style for navigation buttons */
+.navigation button {
+    font-size: 1.1em; /* Fixed font size */
+    color: #333333;
+    text-decoration: none;
+    position: relative;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+    background: none; /* Remove default button background */
+    border: none; /* Remove default button border */
+    cursor: pointer; /* Add pointer cursor */
+    padding: 0; /* Remove default padding */
+}
+
+.navigation button i {
+    color: #6a11cb;
+    transition: color 0.3s ease;
+}
+
+/* Hover effect for navigation buttons */
+.navigation button:hover {
+    color: #2575fc;
+}
+
+.navigation button:hover i {
+    color: #ff9f43;
+}
+
+.navigation button::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 100%;
+    height: 3px;
+    background: #2575fc;
+    border-radius: 5px;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s;
+}
+
+.navigation button:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+}
+
+/* Style for the user container */
+.user-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px; /* Space between the icon and the label */
+}
+
+/* Style for the user status label */
+.user-status {
+    font-size: 0.9em; /* Smaller font size for the status */
+    color: #333333; /* Default color for the user's name */
+    transition: color 0.3s ease; /* Smooth transition for color change */
+}
+
+/* Style for the user icon circle */
+.user-icon-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px; /* Adjust the size as needed */
+    height: 40px; /* Adjust the size as needed */
+    border: 2px solid black; /* Black outline for the circle */
+    border-radius: 50%; /* Make it circular */
+    background-color: transparent; /* Transparent background */
+    transition: border-color 0.3s ease; /* Smooth transition for the outline */
+}
+
+/* Style for the user icon inside the circle */
+.user-icon-circle i {
+    color: black; /* Black color for the user icon */
+    font-size: 1.2em; /* Adjust the icon size as needed */
+    transition: color 0.3s ease; /* Smooth transition for the icon color */
+}
+
+/* Hover effect for the user icon circle */
+.user-icon:hover .user-icon-circle i {
+    color: #2575fc; /* Change icon color on hover */
+}
+
+/* Add gap between contact and user icon */
+.navigation .user-container {
+    margin-left: 50px; /* Adjust the value as needed */
+}
+
+/* Remove the login button styles */
+.navigation .btnlogin {
+    display: none; /* Hide the login button */
+}
+
+/* Hamburger Menu (Hidden by Default) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+}
+
+.menu-toggle .bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333333;
+    margin: 4px 0;
+    transition: background-color 0.3s ease;
+}
+
+/* Close Button */
+.close-btn {
+    display: none;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+.close-btn i {
+    font-size: 24px;
+    color: #333333;
+}
+
+/* Menu Label (for small screens) */
+.menu-label {
+    display: none; /* Hidden by default */
+    font-size: 1.2em; /* Fixed font size */
+    font-weight: bold;
+    color: #333333;
+    padding: 10px 0 10px 20px;
+    width: 100%;
+}
+
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+    header {
+        padding: 20px 20px;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .logo {
+        margin-bottom: 20px;
+        align-self: center;
+    }
+
+    .menu-toggle {
+        display: flex;
+        left: 20px;
+    }
+
+    .close-btn {
+        display: block;
+    }
+
+    .nav-wrapper {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        width: 250px;
+        height: 100vh;
+        background-color: rgba(255, 255, 255, 0.95);
+        z-index: 999;
+        transition: left 0.3s ease-in-out;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-wrapper.active {
+        left: 0;
+    }
+
+    /* Show AnyNotes and Menu Labels on small screens */
+    .anynotes-label {
+        display: block;
+        text-align: center;
+        width: 100%;
+        margin-top: -20px; /* Adjust as needed */
+        margin-left: -10px; /* Adjust as needed */
+        font-size: 1.5em; /* Ensure the font size matches the design */
+    }
+
+    .anynotes-labels {
+        display: block;
+        text-align: center;
+        width: 100%;
+        margin-top: 10px; /* Adjust as needed */
+        font-size: 1.5em; /* Ensure the font size matches the design */
+    }
+
+    .menu-label {
+        display: block;
+        font-size: 1.2em; /* Fixed font size */
+        font-weight: bold;
+        color: #333333;
+        padding: 10px 0 10px 20px;
+        width: 100%;
+    }
+
+    .navigation {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 20px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .navigation button {
+        margin: 10px 0;
+    }
+
+    .navigation .btnlogin {
+        margin: 10px 0;
+    }
+}
