@@ -416,7 +416,7 @@ main{
     display: block;
     font-size: 1rem;
     margin-bottom: 0.5rem;
-    color:black;
+    color:var(--color-dark);
 }
 
 .add-user-form input,

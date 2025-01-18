@@ -393,6 +393,7 @@ main .user-table {
     width: 100%;
     padding: var(--card-padding);
     box-sizing: border-box;
+    overflow-x: auto;
     
 }
 

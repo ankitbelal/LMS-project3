@@ -9,7 +9,7 @@
                 </div>
             </div>
             <div class="sidebar">
-                <a href="./index.php"><span class="material-icons-sharp">grid_view</span>
+                <a href="./dashboard.php"><span class="material-icons-sharp">grid_view</span>
                     <h3>Dashboard</h3>
                 </a>
                 <a href="./users.php"><span class="material-icons-sharp"> person_outline</span>
