@@ -1,0 +1,184 @@
+/* Reset default styles */
+body, h1, p, a, input, button {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+/* Main Content */
+.content-section {
+    padding: 50px 20px;
+    text-align: center;
+    background: #f9f9f9;
+}
+
+.content-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.content-section p {
+    font-size: 1.2rem;
+    color: #050303;
+}
+
+/* Faculties Section */
+.faculties-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+}
+
+.faculty-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faculty-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.faculty-card i {
+    font-size: 2.5rem;
+    color: #007BFF;
+    margin-bottom: 15px;
+}
+
+.faculty-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.faculty-card p {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Footer */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+/* Social Section */
+.social-section {
+    margin-bottom: 20px; /* Space between social section and copyright */
+}
+
+.social-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between social links */
+}
+
+.social-links a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #ffdd57; /* Highlight color on hover */
+}
+
+.social-links a i {
+    font-size: 1.5rem;
+}
+
+/* Copyright Section */
+.copyright-section {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 768px) {
+    .social-links {
+        flex-direction: column; /* Stack social links vertically on small screens */
+        align-items: center; /* Center the social links horizontally */
+        justify-content: center; /* Center the social links vertically */
+        gap: 10px;
+    }
+
+    /* Responsive Design for Faculties Section */
+    .faculties-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+}
+
+/* Animated Heading */
+#animated-heading {
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #a9d83b, #b87bfe, #ff6a6a, #ffcc70, #6aa8e2);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient 5s linear infinite, blink-caret 0.75s step-end infinite;
+    display: inline-block;
+    border-right: 3px solid transparent; /* Blinking cursor effect */
+    will-change: background-position, border-color; /* Optimize for animation */
+    min-width: 200px; /* Ensure the heading container doesn't collapse */
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #6dc588; /* Cursor color */
+    }
+}
+
+/* Animated Text for <p> tag */
+#animated-text {
+    font-size: 1.4rem; /* Slightly increased from 1.2rem to 1.4rem */
+    color: #007BFF; /* Initial color */
+    animation: colorChange 5s infinite, textSlide 10s infinite;
+    will-change: color, opacity, transform; /* Optimize for animation */
+}
+
+@keyframes colorChange {
+    0% { color: #44610e; }
+    25% { color: #ff6a6a; }
+    50% { color: #6aa8e2; }
+    75% { color: #ffcc70; }
+    100% { color: #007BFF; }
+}
+
+@keyframes textSlide {
+    0% { opacity: 0; transform: translateY(-10px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(10px); }
+}

@@ -1,5 +1,6 @@
 <?php
     session_start();
+    require_once('../configs/config.php');
     require_once('../configs/Database.php');
     $db = new Database();
     $conn=$db->getConnection();
@@ -19,11 +20,11 @@
             if($data['role']=='admin'){
                 $_SESSION['username']=$username;
                 $_SESSION['is_admin']=true;
-                header("Location:./admin/dashboard.php");
+                header("Location:".BASE_PATH."/admin/dashboard.php");
             }else{
                 $_SESSION['username']=$username;
                 $_SESSION['is_admin']=false;
-                header("Location:./adminLogin.php");
+                header("Location:/adminLogin.php");
             }
         }else{
             echo "<script>alert('Invalid Username or Password');</script>";

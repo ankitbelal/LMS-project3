@@ -1,0 +1,249 @@
+/* about.css */
+
+
+.about-content {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333; /* Dark gray for the main heading */
+}
+
+.about-anynotes {
+    background: #fff; /* Solid white background */
+    border: 2px solid #0073e6; /* Blue border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 20px;
+    margin-bottom: 40px;
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for separation */
+}
+
+.about-anynotes:hover {
+    background: #f0f8ff; /* Light blue background on hover */
+    border-color: #005bb5; /* Darker blue border on hover */
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.about-anynotes .tagline {
+    font-size: 1.2rem;
+    color: #0073e6; /* Blue color for the tagline */
+    margin-bottom: 15px;
+    font-weight: 600; /* Slightly bolder text */
+}
+
+.about-anynotes p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #444; /* Darker gray for the paragraph text */
+    margin-bottom: 0;
+}
+
+.team-section {
+    margin-top: 40px;
+}
+
+.team-section h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333; /* Dark gray for the team section heading */
+}
+
+.team-members {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.team-member {
+    background: #e6f3ff; /* Very light bluish background */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.team-member:hover {
+    background: #d9e9ff; /* Slightly darker light blue on hover */
+    transform: translateY(-5px); /* Slight lift effect on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+}
+
+.member-photo {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 15px;
+    border-radius: 10px; /* Slightly rounded corners for a modern look */
+}
+
+.team-member h3 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    color: #333; /* Dark gray for team member names */
+}
+
+.team-member .member-role {
+    font-size: 1rem;
+    color: #0073e6; /* Blue color for team member roles */
+    margin-bottom: 10px;
+    font-weight: 500; /* Slightly bolder text */
+}
+
+.team-member p {
+    font-size: 1rem;
+    color: #555; /* Gray for team member descriptions */
+    margin-bottom: 15px;
+}
+
+/* Social Links in Team Member Cards */
+.team-member .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.team-member .social-links a {
+    color: #333; /* Dark gray for social media icons in team cards */
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.team-member .social-links a:hover {
+    color: #0073e6; /* Blue color on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-content h1 {
+        font-size: 2rem;
+    }
+
+    .team-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .team-members {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .member-photo {
+        width: 120px;
+        height: 120px;
+    }
+
+    .team-member h3 {
+        font-size: 1.3rem;
+    }
+
+    .team-member p {
+        font-size: 0.9rem;
+    }
+
+    /* Ensure social links in team cards are side by side in mobile view */
+    .team-member .social-links {
+        flex-direction: row; /* Keep social links side by side */
+        gap: 10px; /* Space between icons */
+    }
+}
+
+@media (max-width: 480px) {
+    .about-content {
+        padding: 20px 10px;
+    }
+
+    .about-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .team-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .team-members {
+        grid-template-columns: 1fr;
+    }
+
+    .member-photo {
+        width: 100px;
+        height: 100px;
+    }
+
+    .team-member h3 {
+        font-size: 1.2rem;
+    }
+
+    .team-member p {
+        font-size: 0.8rem;
+    }
+}
+
+/* Footer Styles (Added for Social Media and Copyright Section) */
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 20px;
+    margin-top: 50px;
+}
+
+/* Social Section */
+.social-section {
+    margin-bottom: 20px; /* Space between social section and copyright */
+}
+
+.social-section h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Space between social links */
+}
+
+.social-links a {
+    color: #fff; /* White color for social media icons in the footer */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #ffdd57; /* Highlight color on hover */
+}
+
+.social-links a i {
+    font-size: 1.5rem;
+}
+
+/* Copyright Section */
+.copyright-section {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 768px) {
+    .social-links {
+        flex-direction: column; /* Stack social links vertically on small screens */
+        align-items: center; /* Center the social links horizontally */
+        justify-content: center; /* Center the social links vertically */
+        gap: 10px;
+    }
+}
+
+
