@@ -1,2 +1,0 @@
-
-wyswyg = what you see what you get js editor

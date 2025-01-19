@@ -1,3 +1,10 @@
+<?php 
+     require_once('../configs/config.php');
+     session_start();
+     if(!isset($_SESSION['username']) && !isset($_SESSION['is_admin'])){
+         header("Location:".BASE_PATH."/admin");
+     }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
