@@ -1,3 +1,23 @@
+<?php 
+    require_once('../configs/config.php');
+    session_start();
+    if(!isset($_SESSION['username']) && !isset($_SESSION['is_admin'])){
+        header("Location:".BASE_PATH."/admin");
+    }
+
+    if(isset($_POST['name'])){
+        require './classes/User.php';
+        $createUser=new User();
+        $created=$$createUser->create($_POST);
+
+        if($created){
+            header("Location:".BASE_PATH."/admin/users.php");
+        }else{
+           echo("<script>alert('User not created')</script>");
+        }
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,10 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>admin dashboard</title>
     <!--STYLESHEET-->
-    <!-- <link rel="stylesheet" href="./ustyles.css" /> -->
     <link rel="stylesheet" href="./css/addUser.css">
-    <!-- <link rel="stylesheet" href="./userStyle.css" /> -->
-
     <!--MATERIAL  CDN -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 </head>
@@ -51,7 +68,7 @@
                 <!-- Add User Form (Hidden by Default) -->
                 <div id="add-user-form" class="add-user-form">
                     <h2>Add User</h2>
-                    <form>
+                    <form method="POST">
                         <div class="form-group">
                             <label for="first-name">First Name</label>
                             <input type="text" id="first-name" name="first-name" required />

@@ -1,6 +1,17 @@
+<?php
+     require_once('../configs/config.php');
+     session_start();
+     if(!isset($_SESSION['username']) && !isset($_SESSION['is_admin'])){
+         header("Location:".BASE_PATH."/admin");
+     }
+
+     require '../classes/User.php';
+     $getInfo= new User();
+
+     $listUser=$getInfo->list();
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -63,6 +74,7 @@
                     <table>
                         <thead>
                             <tr>
+                                <th>SN</th>
                                 <th>Name</th>
                                 <th>Username</th>
                                 <th>Email</th>
@@ -75,35 +87,26 @@
                         </thead>
                         <tbody>
                             <!-- Placeholder rows -->
-                            <tr>
-                                <td>John Doe</td>
-                                <td>j@ohndoe</td>
-                                <td>johndoe@example.com</td>
-                                <td>1234567890</td>
-                                <td>123 Main Street</td>
-                                <td>Admin</td>
-                                <td>2021-09-01</td>
-                                <td>
+                             <?php
+                             $i=1;
+                             foreach($listUser as $list){
+                            ?>
+                                <tr>
+                                    <td><?php echo $i;?></td>
+                                    <td><?php echo $list['name'];?></td>
+                                    <td><?php echo $list['username'];?></td>
+                                    <td><?php echo $list['email'];?></td>
+                                    <td><?php echo $list['contact'];?></td>
+                                    <td><?php echo $list['address'];?></td>
+                                    <td><?php echo $list['role'];?></td>
+                                    <td><?php echo $list['created_at'];?></td>
+                                    <td>
                                     <a href="./updateUser.php">Edit</a>
                                     |
                                     <a href="#">Delete</a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>John Doe</td>
-                                <td>@johndoe</td>
-                                <td>johndoe@example.com</td>
-                                <td>1234567890</td>
-                                <td>123 Main Street</td>
-                                <td>Admin</td>
-                                <td>2021-09-01</td>
-                                <td>
-                                    <a href="./updateUser.php">Edit</a>
-                                    |
-                                    <a href="#">Delete</a>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>    
+                             <?php $i++;}?>
                         </tbody>
                     </table>
                 </div>
