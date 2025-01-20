@@ -30,15 +30,15 @@
                 <!-- Faculty Table -->
                 <div class="table-container">
                     <div class="table-header">
-                        <h2>Faculty List</h2>
-                        <button class="add-btn" onclick="window.location.href='./addFaculty.php'">Add Faculty</button>
+                        <h2>Course List</h2>
+                        <button class="add-btn" onclick="window.location.href='./addCourse.php'">Add Courses</button>
                     </div>
                     <table>
                         <thead>
                             <tr>
                                 <th>Sn</th>
-                                <th>Faculty ID</th>
-                                <th>Faculty Name</th>
+                                <th>Course ID</th>
+                                <th>Course Name</th>
                                 <th>Total Semester</th>
                                 <th>Total Subject</th>
                                 <th>Actions</th>
@@ -74,7 +74,7 @@
                                 <th>Subject ID</th>
                                 <th>Subject Name</th>
                                 <th>Semester</th>
-                                <th>Faculty</th>
+                                <th>Course</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>

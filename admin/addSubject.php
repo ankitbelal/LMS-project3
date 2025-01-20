@@ -47,7 +47,7 @@
                                 <input type="number" id="semester" name="semester" required />
                             </div>
                             <div class="form-group">
-                                <label for="faculty">Faculty</label>
+                                <label for="faculty">Courses</label>
                                 <select id="faculty" name="faculty">
                                     <option value="BE Comp">BE Comp</option>
                                     <option value="BE IT">BE IT</option>
