@@ -22,7 +22,7 @@
             $password=md5($data['password']);
             $result->bindParam(':name',$name);
             $result->bindParam(':username',$data['username']);
-            $result->bindParam(':password',$password);
+            $result->bindParam(':password',$password);  
             $result->bindParam(':email',$data['email']);
             $result->bindParam(':contact',$data['contact']);
             $result->bindParam(':address',$data['address']);
