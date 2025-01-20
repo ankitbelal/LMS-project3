@@ -5,10 +5,10 @@
         header("Location:".BASE_PATH."/admin");
     }
 
-    if(isset($_POST['name'])){
-        require './classes/User.php';
+    if(isset($_POST['submit'])){
+        require '../classes/User.php';
         $createUser=new User();
-        $created=$$createUser->create($_POST);
+        $created=$createUser->create($_POST);
 
         if($created){
             header("Location:".BASE_PATH."/admin/users.php");
@@ -37,38 +37,14 @@
          <?php include_once('includes/sidebar.php'); ?>
         <div class="main-section">
             <!-- Right section at the top -->
-            <div class="right">
-                <div class="top">
-                    <!-- Menu button, theme toggler, and profile on the right -->
-                    <div class="right-elements">
-                        <button id="menu-btn">
-                            <span class="material-icons-sharp">menu</span>
-                        </button>
-                        <div class="theme-toggler">
-                            <span class="material-icons-sharp active">light_mode</span>
-                            <span class="material-icons-sharp">dark_mode</span>
-                        </div>
-                        <div class="profile">
-                            <div class="info">
-                                <p>Hey, <b>Daniel</b></p>
-                                <small class="text-muted">Admin</small>
-                            </div>
-                            <div class="profile-photo">
-                                <span class="material-icons-sharp">
-                                    account_circle
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <?php include_once('includes/right.php'); ?>
 
             <!--MAIN SECTION-->
             <main>
                 <!-- Add User Form (Hidden by Default) -->
                 <div id="add-user-form" class="add-user-form">
                     <h2>Add User</h2>
-                    <form method="POST">
+                    <form method="POST" action="">
                         <div class="form-group">
                             <label for="first-name">First Name</label>
                             <input type="text" id="first-name" name="first-name" required />
@@ -111,7 +87,7 @@
                                 <option value="user">User</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn-primary">Add User</button>
+                        <button type="submit" class="btn-primary" name="submit">Add User</button>
                     </form>
                 </div>
             </main>
