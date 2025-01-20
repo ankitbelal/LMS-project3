@@ -32,14 +32,14 @@
                 <div class="forms-container">
                     <!-- Faculty Form Section -->
                     <div class="faculty-form">
-                        <h2>Add Faculty</h2>
+                        <h2>Add Course</h2>
                         <form id="facultyForm">
                             <div class="form-group">
-                                <label for="faculty-id">Faculty ID</label>
+                                <label for="faculty-id">Course ID</label>
                                 <input type="text" id="faculty-id" name="faculty-id" required />
                             </div>
                             <div class="form-group">
-                                <label for="faculty-name">Faculty Name</label>
+                                <label for="faculty-name">Course Name</label>
                                 <input type="text" id="faculty-name" name="faculty-name" required />
                             </div>
                             <div class="form-group">
@@ -50,7 +50,7 @@
                                 <label for="total-subject">Total Subject</label>
                                 <input type="number" id="total-subject" name="total-subject" required />
                             </div>
-                            <button type="submit" class="btn-primary">Add Faculty</button>
+                            <button type="submit" class="btn-primary">Add Course</button>
                         </form>
                     </div>
                 </div>
