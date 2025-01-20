@@ -1,9 +1,18 @@
 <?php 
   session_start();
   require_once('../configs/config.php');
+  require_once('../classes/User.php');
   if(!isset($_SESSION['username']) && !isset($_SESSION['is_admin'])){
     header("Location:".BASE_PATH."/admin");
   }
+   // Create User instance and fetch data
+   $info = new User();
+   $userData = $info->getData($_SESSION['username']);
+ 
+   // Split full name into first name
+   $fullName = $userData['name'];
+   $names = explode(' ', $fullName);
+   $firstName = isset($names[0]) ? $names[0] : '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +49,7 @@
             </div>
             <div class="profile">
               <div class="info">
-                <p>Hey, <b>Daniel</b></p>
+                <p>Hey, <b><?php echo htmlspecialchars($firstName);?></b></p>
                 <small class="text-muted">Admin</small>
               </div>
               <div class="profile-photo">
