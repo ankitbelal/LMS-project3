@@ -28,5 +28,38 @@
                 return false;
             }
         }
+
+        public function list(){
+            $result=$this->conn->prepare("select * from course");
+            $result->execute();
+            return $result->fetchAll();
+        }
+
+        public function getCourseId(){
+            $result=$this->conn->prepare("select course_id from course");
+            $result->execute();
+            return $result->fetchAll();
+        }
+
+        public function addSubject($data){
+            $result=$this->conn->prepare("insert into subject (subject_id,subject_name,semester,course_id) values(:subject_id,:subject_name,:semester,:course_id)");
+            $result->bindParam(':subject_id',$data['subject-id']);
+            $result->bindParam(':subject_name',$data['subject-name']);
+            $result->bindParam(':semester',$data['semester']);
+            $result->bindParam(':course_id',$data['course-id']);
+            if($result->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function getSubject(){
+            $result=$this->conn->prepare("select * from subject");
+            $result->execute();
+            return $result->fetchAll();
+        }
+
+        
     }
 ?>

@@ -9,10 +9,8 @@
         require '../classes/courseCRUD.php';
         $createCourse=new courseCRUD();
         $created=$createCourse->createCourse($_POST);
-        
         if($created){
-            echo("<script>alert('Course created')</script>");
-            header("Location".BASE_PATH."/admin/course.php");
+            header("Location:".BASE_PATH."/admin/course.php");
         }else{
             echo("<script>alert('Course not created')</script>");
         }

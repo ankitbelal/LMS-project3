@@ -417,6 +417,13 @@ main{
     background: var(--color-primary-variant);
 }
 
+
+.forms-container input[type="number"]::-webkit-inner-spin-button,forms-container input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+
 /*=================MEDIA QUERY=================*/
 @media screen and (max-width: 1200px){
   

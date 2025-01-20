@@ -4,6 +4,10 @@
      if(!isset($_SESSION['username']) && !isset($_SESSION['is_admin'])){
          header("Location:".BASE_PATH."/admin");
      }
+     require '../classes/courseCRUD.php';
+     $getInfo=new courseCRUD();
+     $listCourse=$getInfo->list();
+     $subjects=$getInfo->getSubject();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +31,7 @@
             <?php include_once('includes/right.php'); ?>
             <!--MAIN SECTION-->
             <main>
-                <!-- Faculty Table -->
+                <!-- Course Table -->
                 <div class="table-container">
                     <div class="table-header">
                         <h2>Course List</h2>
@@ -45,18 +49,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Example Row -->
+                            <?php 
+                                $i=1;
+                                foreach($listCourse as $course){
+                            ?>
                             <tr>
-                                <td>1</td>
-                                <td>F001</td>
-                                <td>BE Comp</td>
-                                <td>8</td>
-                                <td>40</td>
+                                <td><?php echo $i?></td>
+                                <td><?php echo $course['course_id']?></td>
+                                <td><?php echo $course['course_name']?></td>
+                                <td><?php echo $course['total_semester']?></td>
+                                <td><?php echo $course['total_subject']?></td>
                                 <td>
                                     <button class="edit-btn" onclick="window.location.href='./updateFaculty.php'">Edit</button>
                                     <button class="delete-btn">Delete</button>
                                 </td>
                             </tr>
+                            <?php $i++;}?>
                         </tbody>
                     </table>
                 </div>
@@ -79,18 +87,22 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <!-- Example Row -->
+                            <?php 
+                            $i=1;
+                            foreach($subjects as $subject){ 
+                            ?>
                             <tr>
-                                <td>1</td>
-                                <td>S001</td>
-                                <td>Data Structures</td>
-                                <td>3</td>
-                                <td>BE Comp</td>
+                                <td><?php echo $i ?></td>
+                                <td><?php echo $subject['subject_id'] ?></td>
+                                <td><?php echo $subject['subject_name'] ?></td>
+                                <td><?php echo $subject['semester'] ?></td>
+                                <td><?php echo $subject['course_id'] ?></td>
                                 <td>
                                     <button class="edit-btn" onclick="window.location.href='./updateSubject.php'">Edit</button>
                                     <button class="delete-btn">Delete</button>
                                 </td>
                             </tr>
+                            <?php $i++;}?>
                         </tbody>
                     </table>
                 </div>
