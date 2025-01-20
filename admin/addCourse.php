@@ -4,6 +4,17 @@
      if(!isset($_SESSION['username']) && !isset($_SESSION['is_admin'])){
          header("Location:".BASE_PATH."/admin");
      }
+
+     if(isset($_POST['submit'])){
+        require '../classes/courseCRUD.php';
+        $createCourse=new courseCRUD();
+        $created=$createCourse->createCourse($_POST);
+        if($created){
+            header("Location:".BASE_PATH."/admin/course.php");
+        }else{
+            echo("<script>alert('Course not created')</script>");
+        }
+     }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -33,14 +44,14 @@
                     <!-- Faculty Form Section -->
                     <div class="faculty-form">
                         <h2>Add Course</h2>
-                        <form id="facultyForm">
+                        <form id="facultyForm" action="" method="POST">
                             <div class="form-group">
                                 <label for="faculty-id">Course ID</label>
-                                <input type="text" id="faculty-id" name="faculty-id" required />
+                                <input type="text" id="faculty-id" name="course-id" required />
                             </div>
                             <div class="form-group">
                                 <label for="faculty-name">Course Name</label>
-                                <input type="text" id="faculty-name" name="faculty-name" required />
+                                <input type="text" id="faculty-name" name="course-name" required />
                             </div>
                             <div class="form-group">
                                 <label for="total-semester">Total Semester</label>
@@ -50,7 +61,7 @@
                                 <label for="total-subject">Total Subject</label>
                                 <input type="number" id="total-subject" name="total-subject" required />
                             </div>
-                            <button type="submit" class="btn-primary">Add Course</button>
+                            <button type="submit" name ="submit" class="btn-primary">Add Course</button>
                         </form>
                     </div>
                 </div>

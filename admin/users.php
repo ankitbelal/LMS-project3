@@ -4,10 +4,9 @@
      if(!isset($_SESSION['username']) && !isset($_SESSION['is_admin'])){
          header("Location:".BASE_PATH."/admin");
      }
-
+    
      require '../classes/User.php';
-     $getInfo= new User();
-
+     $getInfo= new User();  
      $listUser=$getInfo->list();
 ?>
 <!DOCTYPE html>
