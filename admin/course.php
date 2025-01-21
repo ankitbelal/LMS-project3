@@ -17,8 +17,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard - Faculty</title>
     <!--STYLESHEET-->
-    <link rel="stylesheet" href="./css/faculty.css" />
-
+    <link rel="stylesheet" href="./css/course.css" />
+    <script src="./htmx.js"></script>
     <!--MATERIAL  CDN -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 </head>
@@ -48,7 +48,7 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody-1">
                             <?php 
                                 $i=1;
                                 foreach($listCourse as $course){
@@ -60,8 +60,10 @@
                                 <td><?php echo $course['total_semester']?></td>
                                 <td><?php echo $course['total_subject']?></td>
                                 <td>
+                                <div class="button-container">
                                     <button class="edit-btn" onclick="window.location.href='./updateCourse.php?id=<?php echo $course['course_id'];?>'">Edit</button>
-                                    <button class="delete-btn">Delete</button>
+                                    <button class="delete-btn" hx-delete="deleteCourse.php?id=<?php echo $course['course_id'];?>" hx-target="#tbody-1" hx-swap="outerHTML"  hx-confirm="Are you sure you want to delete this row?">Delete</button>
+                                </div>
                                 </td>
                             </tr>
                             <?php $i++;}?>
@@ -86,7 +88,7 @@
                                 <th>Actions</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbody-2">
                             <?php 
                             $i=1;
                             foreach($subjects as $subject){ 
@@ -98,8 +100,10 @@
                                 <td><?php echo $subject['semester'] ?></td>
                                 <td><?php echo $subject['course_id'] ?></td>
                                 <td>
+                                <div class="button-container">
                                     <button class="edit-btn" onclick="window.location.href='./updateSubject.php?id=<?php echo $subject['subject_id'];?>'">Edit</button>
-                                    <button class="delete-btn">Delete</button>
+                                    <button class="delete-btn" hx-delete="deleteSubject.php?id=<?php echo $subject['subject_id'];?>" hx-target="#tbody-2" hx-swap="outerHTML"  hx-confirm="Are you sure you want to delete this row?">Delete</button>
+                                </div>
                                 </td>
                             </tr>
                             <?php $i++;}?>

@@ -156,6 +156,7 @@ b{
     color:var(--color-warning);
 }
 
+/*===============Sidebar=================*/         
 
 aside{
     height:100vh;
@@ -183,7 +184,7 @@ aside .close{
 }
 
 
-/*===============Sidebar=================*/
+
 aside .sidebar{
     
     display: flex;
@@ -254,7 +255,12 @@ aside .sidebar .message-count{
     border-radius: var(--border-radius-1);
 }
 
-
+/* Button container to keep buttons horizontal */
+.button-container {
+    display: flex; /* Use flexbox */
+    gap: 0.5rem; /* Add gap between buttons */
+    align-items: center; /* Center buttons vertically */
+}
 /*=================Main=================*/
 
 main{
@@ -407,6 +413,23 @@ table tr:hover {
     background: var(--color-light);
 }
 
+/* table headers */
+/* Table header with Flexbox */
+.table-header {
+    display: flex; /* Use Flexbox */
+    justify-content: space-between; /* Space between heading and button */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 1rem; /* Add some spacing below the header */
+}
+
+/* Ensure the Add Material button stays on the right */
+.table-header .add-btn {
+    margin-left: auto; /* Push the button to the right */
+}
+
+/* Optional: Reduce button size on smaller screens */
+
+
 .edit-btn,
 .delete-btn {
     padding: 0.5rem 1rem;
@@ -433,7 +456,7 @@ table tr:hover {
 }
 
 .delete-btn:hover {
-    background: var(--color-danger-variant);
+    background: rgba(255, 0, 0, 0.616);
 }
 
 
@@ -478,6 +501,16 @@ table tr:hover {
         width:100%;
         grid-template-columns: 1fr;
     }
+    .button-container{
+        padding: 0.4rem 0.8rem; /* Reduce padding */
+        font-size: 0.8rem; /* Reduce font size */
+    }
+
+    .table-header .add-btn {
+        padding: 0.5rem 0.8rem; /* Reduce padding */
+        font-size: 0.9rem; /* Reduce font size */
+    }
+
     aside{
         position:fixed;
         left:-100%;

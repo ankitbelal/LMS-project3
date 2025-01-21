@@ -28,7 +28,8 @@
     <title>Admin Dashboard - Faculty</title>
     <!--STYLESHEET-->
     <link rel="stylesheet" href="./css/addSubject.css" />
-    <script src="https://unpkg.com/htmx.org"></script>
+    <!-- <script src="https://unpkg.com/htmx.org"></script> -->
+    <script src="./htmx.js"></script>
     <!--MATERIAL  CDN -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 </head>
@@ -57,11 +58,11 @@
                                 <input type="text" id="subject-name" name="subject-name" required />
                             </div>
                             <div class="form-group">
-                                <label for="faculty">Course</label>
+                                <label for="course-id">Course</label>
                                 <select id="course-id" name="course-id" required hx-get="getSemester.php"
                                 hx-target="#semester" hx-trigger="change, load">
                                     <?php foreach($courseinfo as $id){?>
-                                    <option>
+                                    <option value="<?php echo $id['course_id'];?>">
                                         <?php echo $id['course_id'];?>
                                     </option>
                                     <?php };?>

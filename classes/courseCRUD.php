@@ -101,6 +101,32 @@
             }
         }
 
+        public function deleteRow($id){
+            $result=$this->conn->prepare("delete from course where course_id=:id");
+            $result->bindParam(':id',$id);
+            if($result->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
         
+        public function deleteSubject($id){
+            $result=$this->conn->prepare("delete from subject where subject_id=:id");
+            $result->bindParam(':id',$id);
+            if($result->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+        //get subjects by semester 
+        public function getSubjectsBySemester($course_id, $semester){
+            $result=$this->conn->prepare("select * from subject where course_id=:course_id and semester=:semester");
+            $result->bindParam(':course_id',$course_id);
+            $result->bindParam(':semester',$semester);
+            $result->execute();
+            return $result->fetchAll();
+        }
     }
 ?>

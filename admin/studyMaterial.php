@@ -13,8 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
     <!--STYLESHEET-->
-    <link rel="stylesheet" href="./css/studyMaterial.css" />
-
+    <link rel="stylesheet" href="./css/course.css" />
     <!--MATERIAL  CDN -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 </head>
@@ -28,16 +27,12 @@
 
             <!--MAIN SECTION-->
             <main>
-                <div class="admin-study-material-container">
-                    <!-- Admin Controls -->
-                    <div class="admin-controls">
-                        <button class="btn primary-btn add-material-btn" onclick="window.location.href='./addMaterial.php'">Add Material</button>
-                    </div>
-
                     <!-- Study Material Table -->
-                    <div class="study-material-table-container">
-                        <h2>Study Materials</h2>
-                        <div class="table-wrapper">
+                    <div class="table-container">
+                        <div class="table-header">
+                        <h2>Study Materails</h2>
+                        <button class="add-btn" onclick="window.location.href='./addMaterial.php'">Add Material</button>
+                    </div>
                             <table>
                                 <thead>
                                     <tr>
@@ -54,27 +49,30 @@
                                         <td>Data Structures Notes</td>
                                         <td>Notes</td>
                                         <td>BE comp</td>
-                                        <td>third</td>
+                                        <td>thirdasdasdasdasdasdasdasdasdadasdasd/td>
                                         <td>
-                                            <button class="btn edit-btn" data-id="1" onclick="window.location.href='./updateMaterial.php'">Edit</button>
-                                            <button class="btn danger-btn delete-btn">Delete</button>
+                                        <div class="button-container">
+                                                <button class="edit-btn" data-id="1" onclick="window.location.href='./updateMaterial.php'">Edit</button>
+                                                <button class="delete-btn">Delete</button>
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td>Discrete Mathematics Syllabus</td>
                                         <td>Syllabus</td>
                                         <td>BCA</td>
-                                        <td>fourth</td>
+                                        <td>fourthdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</td>
                                         <td>
-                                            <button class="btn edit-btn" data-id="2" onclick="window.location.href='./updateMaterial.php'">Edit</button>
-                                            <button class="btn danger-btn delete-btn">Delete</button>
+                                        <div class="button-container">
+                                                <button class="edit-btn" data-id="1" onclick="window.location.href='./updateMaterial.php'">Edit</button>
+                                                <button class="delete-btn">Delete</button>
+                                            </div>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
                     </div>
-                </div>
+                
             </main>
         </div>
     </div>

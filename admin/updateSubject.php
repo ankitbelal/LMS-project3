@@ -28,7 +28,8 @@
     <title>Admin Dashboard - Faculty</title>
     <!--STYLESHEET-->
     <link rel="stylesheet" href="./css/addSubject.css" />
-    <script src="https://unpkg.com/htmx.org"></script>
+    <!-- <script src="https://unpkg.com/htmx.org"></script> -->
+    <script src="./htmx.js"></script>
     <!--MATERIAL  CDN -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 </head>
