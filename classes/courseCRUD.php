@@ -41,6 +41,13 @@
             return $result->fetchAll();
         }
 
+        public function getCourseByID($data){
+            $result=$this->conn->prepare("select * from course where course_id=:id");
+            $result->bindParam(':id',$data);
+            $result->execute();
+            return $result->fetch();
+        }
+
         public function addSubject($data){
             $result=$this->conn->prepare("insert into subject (subject_id,subject_name,semester,course_id) values(:subject_id,:subject_name,:semester,:course_id)");
             $result->bindParam(':subject_id',$data['subject-id']);
@@ -54,10 +61,45 @@
             }
         }
 
+        public function getSubjectById($data){
+            $result=$this->conn->prepare("select * from subject where subject_id=:id");
+            $result->bindParam(':id',$data);
+            $result->execute();
+            return $result->fetch();
+        }
+
         public function getSubject(){
             $result=$this->conn->prepare("select * from subject");
             $result->execute();
             return $result->fetchAll();
+        }
+
+        public function updateCourse($data,$id){
+            $result=$this->conn->prepare("update course set course_name=:name,total_semester=:totalSem,total_subject=:totalSub where course_id=:id");
+           
+            $result->bindParam(':name',$data['course-name']);
+            $result->bindParam(':totalSem',$data['total-semester']);
+            $result->bindParam(':totalSub',$data['total-subject']);
+            $result->bindParam(':id',$id);
+            if($result->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        public function updateSubject($data,$id){
+            $result=$this->conn->prepare("update subject set subject_name=:name,semester=:sem,course_id=:id where subject_id=:id");
+           
+            $result->bindParam(':name',$data['subject-name']);
+            $result->bindParam(':totalSem',$data['semester']);
+            $result->bindParam(':totalSub',$data['course-id']);
+            $result->bindParam(':id',$id);
+            if($result->execute()){
+                return true;
+            }else{
+                return false;
+            }
         }
 
         
