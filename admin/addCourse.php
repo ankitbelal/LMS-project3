@@ -4,6 +4,17 @@
      if(!isset($_SESSION['username']) && !isset($_SESSION['is_admin'])){
          header("Location:".BASE_PATH."/admin");
      }
+
+     if(isset($_POST['submit'])){
+        require '../classes/courseCRUD.php';
+        $createCourse=new courseCRUD();
+        $created=$createCourse->createCourse($_POST);
+        if($created){
+            header("Location:".BASE_PATH."/admin/course.php");
+        }else{
+            echo("<script>alert('Course not created')</script>");
+        }
+     }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +24,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard - Faculty</title>
     <!--STYLESHEET-->
-    <link rel="stylesheet" href="./css/addSubject.css" />
+    <link rel="stylesheet" href="./css/addFaculty.css" />
 
     <!--MATERIAL  CDN -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
@@ -30,31 +41,27 @@
             <main>
                 <!-- Faculty and Subject Forms Container -->
                 <div class="forms-container">
-                    <!-- Subject Form Section -->
-                    <div class="subject-form">
-                        <h2>Update Subject info </h2>
-                        <form id="subjectForm">
+                    <!-- Faculty Form Section -->
+                    <div class="faculty-form">
+                        <h2>Add Course</h2>
+                        <form id="facultyForm" action="" method="POST">
                             <div class="form-group">
-                                <label for="subject-id">Subject ID</label>
-                                <input type="text" id="subject-id" name="subject-id" required />
+                                <label for="faculty-id">Course ID</label>
+                                <input type="text" id="faculty-id" name="course-id" required />
                             </div>
                             <div class="form-group">
-                                <label for="subject-name">Subject Name</label>
-                                <input type="text" id="subject-name" name="subject-name" required />
+                                <label for="faculty-name">Course Name</label>
+                                <input type="text" id="faculty-name" name="course-name" required />
                             </div>
                             <div class="form-group">
-                                <label for="semester">Semester</label>
-                                <input type="number" id="semester" name="semester" required />
+                                <label for="total-semester">Total Semester</label>
+                                <input type="number" id="total-semester" name="total-semester" required />
                             </div>
                             <div class="form-group">
-                                <label for="faculty">Faculty</label>
-                                <select id="faculty" name="faculty">
-                                    <option value="BE Comp">BE Comp</option>
-                                    <option value="BE IT">BE IT</option>
-                                    <option value="BE Mech">BE Mech</option>
-                                </select>
+                                <label for="total-subject">Total Subject</label>
+                                <input type="number" id="total-subject" name="total-subject" required />
                             </div>
-                            <button type="submit" class="btn-primary">update</button>
+                            <button type="submit" name ="submit" class="btn-primary">Add Course</button>
                         </form>
                     </div>
                 </div>
@@ -62,7 +69,6 @@
         </div>
     </div>
     <script src="./index.js"></script>
-   
 </body>
 
 </html>

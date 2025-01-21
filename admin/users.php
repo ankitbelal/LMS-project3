@@ -1,6 +1,16 @@
+<?php
+     require_once('../configs/config.php');
+     session_start();
+     if(!isset($_SESSION['username']) && !isset($_SESSION['is_admin'])){
+         header("Location:".BASE_PATH."/admin");
+     }
+    
+     require '../classes/User.php';
+     $getInfo= new User();  
+     $listUser=$getInfo->list();
+?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,32 +29,7 @@
         <?php include_once('includes/sidebar.php'); ?>
         <div class="main-section">
             <!-- Right section at the top -->
-            <div class="right">
-                <div class="top">
-                    <!-- Menu button, theme toggler, and profile on the right -->
-                    <div class="right-elements">
-                        <button id="menu-btn">
-                            <span class="material-icons-sharp">menu</span>
-                        </button>
-                        <div class="theme-toggler">
-                            <span class="material-icons-sharp active">light_mode</span>
-                            <span class="material-icons-sharp">dark_mode</span>
-                        </div>
-                        <div class="profile">
-                            <div class="info">
-                                <p>Hey, <b>Daniel</b></p>
-                                <small class="text-muted">Admin</small>
-                            </div>
-                            <div class="profile-photo">
-                                <span class="material-icons-sharp">
-                                    account_circle
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <?php include_once('includes/right.php'); ?>
             <!--MAIN SECTION-->
             <main>
                 <!-- Search and Filter Section -->
@@ -63,6 +48,7 @@
                     <table>
                         <thead>
                             <tr>
+                                <th>SN</th>
                                 <th>Name</th>
                                 <th>Username</th>
                                 <th>Email</th>
@@ -75,35 +61,26 @@
                         </thead>
                         <tbody>
                             <!-- Placeholder rows -->
-                            <tr>
-                                <td>John Doe</td>
-                                <td>j@ohndoe</td>
-                                <td>johndoe@example.com</td>
-                                <td>1234567890</td>
-                                <td>123 Main Street</td>
-                                <td>Admin</td>
-                                <td>2021-09-01</td>
-                                <td>
-                                    <a href="./updateUser.php">Edit</a>
+                             <?php
+                             $i=1;
+                             foreach($listUser as $list){
+                            ?>
+                                <tr>
+                                    <td><?php echo $i;?></td>
+                                    <td><?php echo $list['name'];?></td>
+                                    <td><?php echo $list['username'];?></td>
+                                    <td><?php echo $list['email'];?></td>
+                                    <td><?php echo $list['contact'];?></td>
+                                    <td><?php echo $list['address'];?></td>
+                                    <td><?php echo $list['role'];?></td>
+                                    <td><?php echo $list['created_at'];?></td>
+                                    <td>
+                                    <a href="./updateUser.php?id=<?php echo htmlspecialchars($list['username']);?>">Edit</a>
                                     |
-                                    <a href="#">Delete</a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>John Doe</td>
-                                <td>@johndoe</td>
-                                <td>johndoe@example.com</td>
-                                <td>1234567890</td>
-                                <td>123 Main Street</td>
-                                <td>Admin</td>
-                                <td>2021-09-01</td>
-                                <td>
-                                    <a href="./updateUser.php">Edit</a>
-                                    |
-                                    <a href="#">Delete</a>
-                                </td>
-                            </tr>
+                                    <a href="./deleteUser.php?id=<?php echo $list['username'];?>" onclick="return confirm('Are you sure to delete this record?');">Delete</a>
+                                    </td>
+                                </tr>    
+                             <?php $i++;}?>
                         </tbody>
                     </table>
                 </div>
@@ -111,6 +88,62 @@
         </div>
     </div>
     <script src="./index.js"></script>
+    <script>
+        // Debounce function
+    function debounce(func, wait) {
+        let timeout;
+        return function() {
+            const context = this;
+            const args = arguments;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+}
+
+// Variables
+const searchInput = document.getElementById('search');
+const filterSelect = document.getElementById('filter');
+const tbody = document.querySelector('.user-table tbody');
+
+// Function to fetch and display data
+function fetchData() {
+    const searchTerm = searchInput.value;
+    const filterValue = filterSelect.value;
+
+    fetch('./searchUsers.php?term=' + encodeURIComponent(searchTerm) + '&filter=' + encodeURIComponent(filterValue))
+        .then(response => response.json())
+        .then(data => {
+            tbody.innerHTML = '';
+            if (data.length > 0) {
+                data.forEach(function(user, index) {
+                    var row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${index + 1}</td>
+                        <td>${user.name}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <td>${user.contact}</td>
+                        <td>${user.address}</td>
+                        <td>${user.role}</td>
+                        <td>${user.created_at}</td>
+                        <td>
+                            <a href="./updateUser.php?id=${encodeURIComponent(user.username)}">Edit</a>
+                            |
+                            <a href="./deleteUser.php?id=${encodeURIComponent(user.username)}" onclick="return confirm('Are you sure to delete this record?');">Delete</a>
+                        </td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } else {
+                tbody.innerHTML = '<tr><td colspan="9">No results found.</td></tr>';
+            }
+        });
+}
+
+// Event listeners with debounce
+searchInput.addEventListener('input', debounce(fetchData, 300));
+filterSelect.addEventListener('change', fetchData);
+    </script>
 </body>
 
 </html>

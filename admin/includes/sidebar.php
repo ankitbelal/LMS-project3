@@ -19,9 +19,9 @@
                     <span class="material-icons-sharp">library_books</span>
                     <h3>Study Materials</h3>
                 </a>
-                <a href="./faculty.php">
+                <a href="./course.php">
                     <span class="material-icons-sharp">library_books</span>
-                    <h3>Faculty</h3>
+                    <h3>Courses</h3>
                 </a>
                 <a href=""><span class="material-icons-sharp">mail_outline</span>
                     <h3>Messages</h3>
