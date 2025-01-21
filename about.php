@@ -62,7 +62,7 @@
                         <a href="https://www.facebook.com/yubistona?mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook"></i></a>
                         <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
                         <a href="https://www.linkedin.com/in/yubraj-dhungana-2b63982a4?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.github.com/yubiStona" target="_blank"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
 
