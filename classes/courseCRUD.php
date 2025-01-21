@@ -89,12 +89,11 @@
         }
 
         public function updateSubject($data,$id){
-            $result=$this->conn->prepare("update subject set subject_name=:name,semester=:sem,course_id=:id where subject_id=:id");
-           
+            $result=$this->conn->prepare("update subject set subject_name=:name,semester=:sem,course_id=:id where subject_id=:subject_id");
             $result->bindParam(':name',$data['subject-name']);
-            $result->bindParam(':totalSem',$data['semester']);
-            $result->bindParam(':totalSub',$data['course-id']);
-            $result->bindParam(':id',$id);
+            $result->bindParam(':sem',$data['semester']);
+            $result->bindParam(':id',$data['course-id']);
+            $result->bindParam(':subject_id',$id);
             if($result->execute()){
                 return true;
             }else{

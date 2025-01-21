@@ -11,7 +11,7 @@
      $courseinfo=$info->getCourseId();
     
      if(isset($_POST['submit'])){
-        $updated=$info->updateSubject($_POST,$course_id);
+        $updated=$info->updateSubject($_POST,$subject_id);
         if($updated){
             header("Location:".BASE_PATH."/admin/course.php");
         }else{
@@ -54,18 +54,16 @@
                             </div>
                             <div class="form-group">
                                 <label for="faculty">Course</label>
-                                <select id="faculty" name="course-id" hx-get="./getSemester.php" hx-target="#semester" hx-trigger="change" rquired>
+                                <select id="faculty" name="course-id" hx-get="./getSemester.php" hx-target="#semester" hx-trigger="change, load" rquired>
                                 <?php foreach($courseinfo as $id){?>
-                                    <option>
-                                        <?php echo $id['course_id'];?>
-                                    </option>
+                                    <option value="<?php echo $id['course_id'];?>" <?php echo ($id['course_id']==$listData['course_id'])?'selected':'';?>><?php echo $id['course_id'];?></option>
                                     <?php };?>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <label for="semester">Semester</label>
                                 <select id="semester" name="semester" required>
-                                    <!-- Options will be populated dynamically -->
+                                   
                                 </select>
                             </div>
                             <button type="submit" name="submit" class="btn-primary">update</button>

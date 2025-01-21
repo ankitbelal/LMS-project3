@@ -59,7 +59,7 @@
                             <div class="form-group">
                                 <label for="faculty">Course</label>
                                 <select id="course-id" name="course-id" required hx-get="getSemester.php"
-                                hx-target="#semester" hx-trigger="change">
+                                hx-target="#semester" hx-trigger="change, load">
                                     <?php foreach($courseinfo as $id){?>
                                     <option>
                                         <?php echo $id['course_id'];?>
