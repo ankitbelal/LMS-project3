@@ -1,9 +1,25 @@
 <?php 
      require_once('../configs/config.php');
+     require_once('../classes/courseCRUD.php');
+     $info= new courseCRUD();
      session_start();
      if(!isset($_SESSION['username']) && !isset($_SESSION['is_admin'])){
          header("Location:".BASE_PATH."/admin");
      }
+     
+     $course_id=$_GET['id'];
+     $listData=$info->getCourseByID($course_id);
+    
+    if(isset($_POST['submit'])){
+        $updated=$info->updateCourse($_POST,$course_id);
+        if($updated){
+            header("Location:".BASE_PATH."/admin/course.php");
+        }else{
+            echo "<script>alert('course not updated')</script>";
+        }
+    }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,25 +48,21 @@
                 <div class="forms-container">
                     <!-- Faculty Form Section -->
                     <div class="faculty-form">
-                        <h2>Update Faculty Info</h2>
-                        <form id="facultyForm">
+                        <h2>Update Course Info</h2>
+                        <form id="facultyForm" action="" method="POST">
                             <div class="form-group">
-                                <label for="faculty-id">Faculty ID</label>
-                                <input type="text" id="faculty-id" name="faculty-id" required />
-                            </div>
-                            <div class="form-group">
-                                <label for="faculty-name">Faculty Name</label>
-                                <input type="text" id="faculty-name" name="faculty-name" required />
+                                <label for="faculty-name">Course Name</label>
+                                <input type="text" id="faculty-name" name="course-name" value="<?php echo $listData['course_name'];?>" required />
                             </div>
                             <div class="form-group">
                                 <label for="total-semester">Total Semester</label>
-                                <input type="number" id="total-semester" name="total-semester" required />
+                                <input type="number" id="total-semester" name="total-semester" value="<?php echo $listData['total_semester'];?>" required />
                             </div>
                             <div class="form-group">
                                 <label for="total-subject">Total Subject</label>
-                                <input type="number" id="total-subject" name="total-subject" required />
+                                <input type="number" id="total-subject" name="total-subject" value="<?php echo $listData['total_subject'];?>" required />
                             </div>
-                            <button type="submit" class="btn-primary">Update</button>
+                            <button type="submit" name="submit" class="btn-primary">Update</button>
                         </form>
                     </div>
                 </div>

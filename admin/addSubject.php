@@ -57,7 +57,7 @@
                                 <input type="text" id="subject-name" name="subject-name" required />
                             </div>
                             <div class="form-group">
-                                <label for="faculty">Courses</label>
+                                <label for="faculty">Course</label>
                                 <select id="course-id" name="course-id" required hx-get="getSemester.php"
                                 hx-target="#semester" hx-trigger="change">
                                     <?php foreach($courseinfo as $id){?>
