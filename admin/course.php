@@ -60,7 +60,7 @@
                                 <td><?php echo $course['total_semester']?></td>
                                 <td><?php echo $course['total_subject']?></td>
                                 <td>
-                                    <button class="edit-btn" onclick="window.location.href='./updateFaculty.php'">Edit</button>
+                                    <button class="edit-btn" onclick="window.location.href='./updateCourse.php?id=<?php echo $course['course_id'];?>'">Edit</button>
                                     <button class="delete-btn">Delete</button>
                                 </td>
                             </tr>
@@ -98,7 +98,7 @@
                                 <td><?php echo $subject['semester'] ?></td>
                                 <td><?php echo $subject['course_id'] ?></td>
                                 <td>
-                                    <button class="edit-btn" onclick="window.location.href='./updateSubject.php'">Edit</button>
+                                    <button class="edit-btn" onclick="window.location.href='./updateSubject.php?id=<?php echo $subject['subject_id'];?>'">Edit</button>
                                     <button class="delete-btn">Delete</button>
                                 </td>
                             </tr>
