@@ -303,6 +303,81 @@ main {
     border-radius: var(--border-radius-2);
 }
 
+/* File input styling */
+.add-material-form .input-field input[type="file"] {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--color-light);
+    border-radius: var(--border-radius-2);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    color: var(--color-dark);
+    background: var(--color-white);
+    cursor: pointer;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* File input focus state */
+.add-material-form .input-field input[type="file"]:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(115, 128, 236, 0.2); /* Match input focus style */
+}
+
+/* File input hover state */
+.add-material-form .input-field input[type="file"]:hover {
+    border-color: var(--color-primary-variant);
+}
+
+/* Hide the default file input button */
+.add-material-form .input-field input[type="file"]::-webkit-file-upload-button {
+    visibility: hidden;
+}
+
+/* Custom file input button */
+.add-material-form .input-field input[type="file"]::before {
+    content: 'Choose File';
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--color-primary);
+    color: var(--color-white);
+    border-radius: var(--border-radius-1);
+    cursor: pointer;
+    transition:  0.3s ease;
+}
+
+/* Custom file input button hover state */
+.add-material-form .input-field input[type="file"]:hover::before {
+    background: var(--color-primary-variant);
+}
+
+/* Textarea styling */
+.add-material-form .input-field textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--color-light);
+    border-radius: var(--border-radius-2);
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.88rem;
+    color: var(--color-dark);
+    background: var(--color-white);
+    resize: vertical; /* Allow vertical resizing */
+    min-height: 100px; /* Minimum height */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Textarea focus state */
+.add-material-form .input-field textarea:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(115, 128, 236, 0.2); /* Match input focus style */
+}
+
+/* Textarea hover state */
+.add-material-form .input-field textarea:hover {
+    border-color: var(--color-primary-variant);
+}
+
 /*=================RIGHT================*/
 .right {
     margin-top: 1.4rem;
@@ -381,6 +456,28 @@ main {
     width: 2.2rem;
     height: 2.2rem;
     overflow: hidden;
+}
+
+.error-messages {
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    border: 1px solid var(--color-danger);
+    border-radius: var(--border-radius-2);
+    background-color: #ffebee;
+    color: var(--color-danger);
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.error-messages.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Hidden class for initial state */
+.hidden {
+    display: none;
 }
 
 /*=================MEDIA QUERY=================*/

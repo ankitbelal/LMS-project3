@@ -8,7 +8,7 @@
 
      $course=new courseCRUD();
      $courseinfo=$course->getCourseId();
-?>
+?>  
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,8 +34,8 @@
             <main>
                 <div class="admin-study-material-container">
                     <!-- Add Material Form -->
-                    <div class="add-material-form-container hidden">
-                        <form class="add-material-form" action="saveMaterial.php" method="POST" enctype="multipart/form-data">
+                    <div class="add-material-form-container">
+                        <form class="add-material-form" action="saveMaterials.php" method="POST" enctype="multipart/form-data">
                             <h2 id="form-heading">Add Study Material</h2>
                             <div class="input-field">
                                 <label for="course-id">Course</label>
@@ -55,13 +55,13 @@
                             </div>
                             <div class="input-field">
                             <label for="subject">Subject</label>
-                                <select id="subject">
-
+                                <select id="subject" name="subject-id">
+                                                
                                 </select>
                             </div>
                             <div class="input-field">
                                 <label for="material-type">Type</label>
-                                <select id="material-type">
+                                <select id="material-type" name="material-type">
                                     <option value="Notes">Notes</option>
                                     <option value="Old Questions">Old Questions</option>
                                     <option value="Syllabus">Syllabus</option>
@@ -69,7 +69,11 @@
                             </div>                       
                             <div class="input-field">
                                 <label for="upload-file">Upload File</label>
-                                <input type="file" id="upload-file" name="materialFile" required />
+                                <input type="file" id="upload-file" name="file" required />
+                            </div>
+                            <div class="input-field">
+                                <label for="file-desc">File Description</label>
+                                <textarea id="file-desc" name="file-desc" placeholder="Enter a description........" rows="3"></textarea>
                             </div>
                             <button type="submit" class="btn primary-btn" id="form-submit-btn">
                                 Add
@@ -82,6 +86,11 @@
     </div>
 <script src="./index.js"></script>
 <script>
+
+    document.getElementById('file-desc').addEventListener('input',function(){
+        this.style.height = 'auto';
+        this.style.height = (this.scrollHeight) + 'px';
+    })
     function clearSubjects() {
         document.getElementById('subject').innerHTML = '';
     }   

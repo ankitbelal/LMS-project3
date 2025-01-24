@@ -1,5 +1,5 @@
 <?php
-    require_once('../configs/Database.php');
+    require_once('../configs/Database.php'); // Ensure this is require_once
     class courseCRUD{
         public $course_id='';
         public $course_name='';

@@ -1,3 +1,14 @@
+<?php
+// Start the session only if it is not already active
+
+
+
+// Check if the user is logged in
+$isLoggedIn = isset($_SESSION['is_user']) && $_SESSION['is_user'];
+
+// Get the username if logged in, otherwise set it to 'Login'
+$username = $isLoggedIn && isset($_SESSION['username']) ? $_SESSION['username'] : 'Login';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +18,50 @@
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Responsive Navbar</title>
+    <style>
+        /* Additional styles for the dropdown */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Style for the user icon and login label */
+        .user-icon {
+            margin-right: -70px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .user-icon img {
+            width: 24px;
+            height: 24px;
+            filter: invert(100%); /* Black icon */
+        }
+
+        .login-label {
+            font-size: 12px;
+            margin-top: 5px;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -45,12 +100,18 @@
             <button onclick="window.location.href='services.php'"><i class="fas fa-concierge-bell"></i><span>Services</span></button>
             <button onclick="window.location.href='Contact.php'"><i class="fas fa-envelope"></i><span>Contact</span></button>
             <div class="user-container">
-                <button class="user-icon" onclick="window.location.href='#'">
-                    <div class="user-icon-circle">
-                        <i class="fas fa-user"></i>
-                    </div>
-                </button>
-                <span class="user-status" id="user-status">Not Signed In</span>
+                <div class="user-icon" id="userIcon">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon">
+                    <span class="login-label" id="loginLabel"><?php echo htmlspecialchars($username); ?></span>
+                </div>
+                <!-- Dropdown Menu (Only render if logged in) -->
+                <?php if ($isLoggedIn): ?>
+                <div class="dropdown-menu" id="dropdownMenu">
+                    <a href="#">My Profile</a>
+                    <a href="#">Settings</a>
+                    <a href="#" id="logoutButton">Logout</a>
+                </div>
+                <?php endif; ?>
             </div>
         </nav>
     </div>
@@ -60,7 +121,13 @@
     const mobileMenu = document.getElementById('mobile-menu');
     const navWrapper = document.querySelector('.nav-wrapper');
     const closeBtn = document.getElementById('close-btn');
-    const userStatus = document.getElementById('user-status');
+    const userIcon = document.getElementById('userIcon');
+    const loginLabel = document.getElementById('loginLabel');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const logoutButton = document.getElementById('logoutButton');
+
+    // Check if the user is logged in (using PHP session variable)
+    const isLoggedIn = <?php echo $isLoggedIn ? 'true' : 'false'; ?>;
 
     // Toggle navigation bar on mobile menu click
     mobileMenu.addEventListener('click', () => {
@@ -79,15 +146,31 @@
         }
     });
 
-    // Simulate login status (replace with actual login logic)
-    const isLoggedIn = true; // Change to false if the user is not logged in
-    if (isLoggedIn) {
-        userStatus.innerHTML = "Status: Active<span class='tick-mark'>✓</span>";
-        userStatus.style.color = "#28a745"; // Green color for active status
-    } else {
-        userStatus.textContent = "Not Signed In";
-        userStatus.style.color = "#333333"; // Black color for not signed in
+    // Handle user icon click
+    userIcon.addEventListener('click', () => {
+        if (isLoggedIn) {
+            // Toggle dropdown menu if logged in
+            dropdownMenu.style.display = dropdownMenu.style.display === 'block' ? 'none' : 'block';
+        } else {
+            // Redirect to login.php if not logged in
+            window.location.href = 'login.php';
+        }
+    });
+
+    // Handle logout (only if logged in)
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            // Redirect to logout.php to handle logout logic
+            window.location.href = 'logout.php';
+        });
     }
+
+    // Close dropdown when clicking outside
+    window.addEventListener('click', (e) => {
+        if (dropdownMenu && !e.target.closest('.user-container')) {
+            dropdownMenu.style.display = 'none';
+        }
+    });
 </script>
 </body>
 </html>

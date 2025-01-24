@@ -465,6 +465,41 @@ table tr:hover {
     margin: 0;
 }
 
+/*css for modal*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: var(--color-white);
+    margin: 15% auto;
+    padding: 1rem;
+    border-radius: var(--border-radius-1);
+    width: 50%;
+    max-width: 600px;
+    position: relative;
+}
+
+/* Style for the "Read More" link */
+.read-more {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.read-more:hover {
+    text-decoration: underline;
+}
+
 
 /*=================MEDIA QUERY=================*/
 @media screen and (max-width: 1200px){

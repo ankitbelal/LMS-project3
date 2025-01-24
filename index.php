@@ -19,61 +19,49 @@
         <section class="content-section">
             <h1 id="animated-heading">AnyNotes</h1>
             <p id="animated-text"></p>
+            <h2 id="available-courses-heading">Available Courses</h2> <!-- New heading -->
 
             <!-- Faculties Section -->
             <div class="faculties-container">
-                <div class="faculty-card">
-                    <i class="fas fa-briefcase"></i>
-                    <h3>BBA (Bachelor of Business Administration)</h3>
-                    <p>Explore courses in Business Administration, Finance, Marketing, and Management.</p>
-                </div>
-                <div class="faculty-card">
-                    <i class="fas fa-laptop-code"></i>
-                    <h3>BCA (Bachelor of Computer Applications)</h3>
-                    <p>Learn programming, software development, and computer applications.</p>
-                </div>
-                <div class="faculty-card">
-                    <i class="fas fa-laptop"></i>
-                    <h3>Computer Engineering</h3>
-                    <p>Study computer systems, software engineering, and hardware design.</p>
-                </div>
-                <div class="faculty-card">
-                    <i class="fas fa-building"></i>
-                    <h3>Civil Engineering</h3>
-                    <p>Explore structural design, construction, and infrastructure development.</p>
-                </div>
-                <div class="faculty-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>MBA (Master of Business Administration)</h3>
-                    <p>Advanced studies in business strategy, leadership, and management.</p>
-                </div>
-                <div class="faculty-card">
-                    <i class="fas fa-flask"></i>
-                    <h3>Electrical Engineering</h3>
-                    <p>Learn about electrical systems, circuits, and power generation.</p>
-                </div>
+                <?php
+                // Include the Front class
+                include_once('classes/front.php');
+                $front = new Front();
+
+                // Fetch all courses from the database
+                $courses = $front->getAllCourses();
+
+                // Define an array of icons for the courses
+                $icons = [
+                    'fas fa-briefcase', // BBA
+                    'fas fa-laptop-code', // BCA
+                    'fas fa-laptop', // Computer Engineering
+                    'fas fa-building', // Civil Engineering
+                    'fas fa-chart-line', // MBA
+                    'fas fa-flask', // Electrical Engineering
+                    // Add more icons as needed
+                ];
+
+                // Iterate over the courses and generate the cards
+                foreach ($courses as $index => $course) {
+                    $courseName = $course['course_name']; // Get course name
+                     // Get course description
+                    $icon = $icons[$index % count($icons)]; // Cycle through the icons array
+
+                    echo '<div class="faculty-card">';
+                    echo '<i class="' . $icon . '"></i>';
+                    echo '<h3>' . $courseName . '</h3>';
+                    echo '<p>' . 'Find Notes, Syllabuses, Course Codes, Old Question paper as well as
+                    other reference material for the '.$courseName . '</p>';
+                    echo '</div>';
+                }
+                ?>
             </div>
         </section>
     </main>
 
     <!-- Footer -->
-    <footer>
-        <!-- Social Section -->
-        <div class="social-section">
-            <h3>Follow Us</h3>
-            <div class="social-links">
-                <a href="" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-                <a href="" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
-                <a href="" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            </div>
-        </div>
-
-        <!-- Copyright Section -->
-        <div class="copyright-section">
-            <p>&copy; 2025 AnyNotes. All rights reserved.</p>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
 
     <!-- JavaScript for Animation -->
     <script>

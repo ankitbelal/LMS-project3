@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Old Question Papers</title>
+    <title>Syllabuses</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="./css/nav.css"> <!-- Link to your navigation CSS file -->
     <style>
-        /* Additional styles for the old question papers page */
+        /* Additional styles for the syllabuses page */
         .container {
             padding: 20px;
             max-width: 1200px; /* Limit container width for better readability */
@@ -57,14 +57,14 @@
             cursor: not-allowed;
         }
 
-        .papers-container {
+        .syllabuses-container {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
             justify-content: center; /* Center-align cards */
         }
 
-        .paper-card {
+        .syllabus-card {
             background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 10px;
@@ -78,7 +78,7 @@
             align-items: center; /* Center-align content vertically */
         }
 
-        .paper-card:hover {
+        .syllabus-card:hover {
             transform: translateY(-10px); /* Lift effect on hover */
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
         }
@@ -92,19 +92,19 @@
             margin-bottom: 10px;
         }
 
-        .paper-card h3 {
+        .syllabus-card h3 {
             margin-top: 0;
             color: #007BFF; /* Blue heading */
             font-size: 1.5rem; /* Larger font size for title */
         }
 
-        .paper-card p {
+        .syllabus-card p {
             margin: 10px 0;
             color: #555; /* Dark gray text */
             font-size: 1rem; /* Standard font size for description */
         }
 
-        .paper-card button {
+        .syllabus-card button {
             padding: 10px 20px;
             background-color: #007BFF;
             color: #fff;
@@ -116,11 +116,11 @@
             margin: 5px; /* Add margin between buttons */
         }
 
-        .paper-card button:hover {
+        .syllabus-card button:hover {
             background-color: #0056b3;
         }
 
-        .paper-card a.download-button {
+        .syllabus-card a.download-button {
             padding: 10px 20px;
             background-color: #28a745; /* Green color for download button */
             color: #fff;
@@ -133,7 +133,7 @@
             margin: 5px; /* Add margin between buttons */
         }
 
-        .paper-card a.download-button:hover {
+        .syllabus-card a.download-button:hover {
             background-color: #218838; /* Darker green on hover */
         }
 
@@ -148,13 +148,13 @@
                 width: 100%; /* Full width on small screens */
             }
 
-            .paper-card {
+            .syllabus-card {
                 width: calc(50% - 20px); /* Two cards per row on medium screens */
             }
         }
 
         @media (max-width: 480px) {
-            .paper-card {
+            .syllabus-card {
                 width: 100%; /* Full width on small screens */
             }
         }
@@ -192,16 +192,16 @@
     $selectedCourse = $_POST['course'] ?? null;
     $selectedSemester = $_POST['semester'] ?? null;
 
-    // Fetch old question papers based on the selected course and semester
-    $questionPapers = $front->getQuestionPapers($selectedCourse, $selectedSemester);
+    // Fetch syllabuses based on the selected course and semester
+    $syllabuses = $front->getSyllabuses($selectedCourse, $selectedSemester);
 
     // Base URL for your website
-    $baseUrl = BASE_PATH."/uploads"; // Replace with your actual domain
+    $baseUrl = BASE_PATH."/"; // Replace with your actual domain
     ?>
 
     <div class="container">
         <!-- Heading above the selection part -->
-        <h1 class="selection-heading">Old Question Papers</h1>
+        <h1 class="selection-heading">Syllabuses</h1>
 
         <!-- Form Container with Dropdowns -->
         <div class="form-container">
@@ -233,32 +233,32 @@
 
         <!-- Label below the selection part -->
         <p class="selection-label">
-            Question Papers for: 
+            Syllabuses for: 
             <span id="selected-course"><?php echo $selectedCourse ? htmlspecialchars($selectedCourse) : 'All Courses'; ?></span> - 
             <span id="selected-semester"><?php echo $selectedSemester ? 'Semester ' . htmlspecialchars($selectedSemester) : 'All Semesters'; ?></span>
         </p>
 
-        <div class="papers-container">
+        <div class="syllabuses-container">
             <?php
-            if (!empty($questionPapers)) {
-                foreach ($questionPapers as $paper) {
+            if (!empty($syllabuses)) {
+                foreach ($syllabuses as $syllabus) {
                     // Construct the full URL for the file
-                    $fileUrl = $baseUrl . $paper['file_path'];
+                    $fileUrl = $baseUrl . $syllabus['file_name'];
 
                     // Use Google Docs Viewer for PDF preview
                     // $pdfPreviewUrl = 'https://docs.google.com/viewer?url=' . urlencode($fileUrl) . '&embedded=true';
-                    echo '<div class="paper-card">';
+                    echo '<div class="syllabus-card">';
                     echo '<div class="pdf-preview">';
                     echo '<iframe src="' . $fileUrl . '" width="100%" height="200px" style="border: none;"></iframe>';
                     echo '</div>';
-                    echo '<h3>' . htmlspecialchars($paper['subject_name']) . '</h3>';
-                    echo '<p>' . htmlspecialchars($paper['file_desc']) . '</p>';
+                    echo '<h3>' . htmlspecialchars($syllabus['subject_name']) . '</h3>';
+                    echo '<p>' . htmlspecialchars($syllabus['file_desc']) . '</p>';
                     echo '<button onclick="window.open(\'' . htmlspecialchars($fileUrl) . '\', \'_blank\')">Open Full View</button>';
                     echo '<a href="' . htmlspecialchars($fileUrl) . '" class="download-button" download>Download</a>';
                     echo '</div>';
                 }
             } else {
-                echo '<p>No question papers found.</p>';
+                echo '<p>No syllabuses found.</p>';
             }
             ?>
         </div>

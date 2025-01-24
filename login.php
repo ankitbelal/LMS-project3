@@ -1,167 +1,316 @@
+
+<?php
+// Start the session only if it is not already active
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}// Start the session
+
+
+ // Clear the username from the session
+
+unset($_SESSION['email']); // Clear the email from the session
+// Rest of your existing code...
+
+require_once './configs/Database.php';
+$db = new Database();
+$conn = $db->getConnection();
+
+if ($_POST) {
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
+
+     $result=$conn->prepare("select * from tbl_users where email=:email and password=:password");
+    $result->bindParam(':email', $email);
+    $result->bindParam(':password', $password);
+    $result->execute();
+
+    $data = $result->fetch(PDO::FETCH_ASSOC);
+
+    if ($result->rowCount() > 0) {
+        if ($data['role'] == 'user') {
+            $_SESSION['username'] = $data['name'];
+            $_SESSION['is_user'] = true;
+            $_SESSION['success'] = "Logged in successfully";
+            header("Location: login.php"); // Redirect back to show the success message
+            exit();
+        }
+        else{
+            $_SESSION['error'] = "Invalid credentials";
+            header("Location: login.php"); // Redirect back to the login page
+            exit();
+        }
+    } else {
+        $_SESSION['error'] = "Invalid credentials";
+        header("Location: login.php"); // Redirect back to the login page
+        exit();
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>Login Page</title>
-    <link rel="stylesheet" href="./css/nav.css">
-    <link rel="stylesheet" href="./css/login.css">
+    <style>
+        /* CSS Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: linear-gradient(135deg,rgb(85, 126, 202),rgb(215, 220, 229)); /* Gradient blue background */
+            background-size: cover;
+            background-position: center;
+            user-select: none;
+        }
+
+        .wrapper {
+            width: 90%;
+            
+            max-width: 450px; /* Increased wrapper size */
+            background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+            border: 2px solid rgba(255, 255, 255, 0.2); /* Light border */
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+            color: #000;
+            border-radius: 15px; /* Rounded corners */
+            padding: 30px; /* Increased padding */
+            margin: 50px auto 20px;
+            
+        }
+
+        .wrapper h2 {
+            font-size: 32px; /* Larger font size */
+            text-align: center;
+            color: #1e3c72; /* Dark blue text */
+            margin-bottom: 20px;
+        }
+
+        .input-box {
+            position: relative;
+            width: 100%; /* Full width */
+            margin: 25px auto; /* Increased margin */
+        }
+
+        .input-box input {
+            width: 100%;
+            height: 50px;
+            background: transparent;
+            border: none;
+            outline: none;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+            font-size: 16px;
+            color: #000;
+            padding: 10px 30px 10px 0;
+        }
+
+        .input-box input:focus {
+            border-bottom-color: #1e3c72; /* Dark blue border on focus */
+        }
+
+        .input-box .input-label {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 16px;
+            color: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .input-box input:focus ~ .input-label,
+        .input-box input:not(:placeholder-shown) ~ .input-label {
+            top: 0;
+            font-size: 12px;
+            color: #1e3c72; /* Dark blue label color */
+        }
+
+        .input-box .icon {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+            color: rgba(0, 0, 0, 0.5);
+            pointer-events: none;
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%; /* Full width */
+            margin: 20px auto 15px; /* Adjusted margin */
+            font-size: 14px;
+        }
+
+        .remember-forgot label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: #1e3c72; /* Dark blue text */
+        }
+
+        .remember-forgot a {
+            color: #1e3c72; /* Dark blue link color */
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            width: 100%; /* Full width */
+            height: 50px; /* Slightly taller button */
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Gradient blue button */
+            border: none;
+            outline: none;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            font-size: 16px;
+            color: #fff; /* White text */
+            font-weight: 600;
+            display: block;
+            margin: 20px auto;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #2a5298, #1e3c72); /* Reverse gradient on hover */
+        }
+
+        .signup-link {
+            text-align: center;
+            margin-top: 15px; /* Adjusted margin */
+            font-size: 14px;
+        }
+
+        .signup-link a {
+            color: #1e3c72; /* Dark blue link color */
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Message styling */
+        .message {
+            color: white; /* White text for better contrast */
+            text-align: center;
+            margin-bottom: 15px;
+            padding: 10px; /* Add padding for better appearance */
+            border-radius: 5px; /* Rounded corners */
+            display: none; /* Initially hidden */
+            margin-top: 10px;
+        }
+
+        /* Error message background color */
+        .message.error {
+            background-color: #ff4d4d; /* Red background for errors */
+        }
+
+        /* Success message background color */
+        .message.success {
+            background-color: #4CAF50; /* Green background for success */
+        }
+
+        @media (max-width: 768px) {
+            .wrapper {
+                padding: 20px; /* Adjusted padding for smaller screens */
+            }
+
+            .wrapper h2 {
+                font-size: 28px; /* Adjusted font size */
+            }
+
+            .input-box input {
+                font-size: 14px;
+            }
+
+            .input-box .input-label {
+                font-size: 14px;
+            }
+
+            .btn {
+                font-size: 14px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wrapper {
+                width: 95%; /* Adjusted width for smaller screens */
+            }
+
+            .wrapper h2 {
+                font-size: 24px; /* Adjusted font size */
+            }
+
+            .input-box input {
+                padding: 8px 25px 8px 0;
+            }
+
+            .input-box .input-label {
+                font-size: 12px;
+            }
+
+            .input-box .icon {
+                font-size: 18px;
+            }
+        }
+    </style>
 </head>
 <body>
-<?php include 'navbar.php'; ?>
+    <?php include('navbar.php'); ?>
+   
     <div class="wrapper">
-        <!-- Message Box -->
-        <div class="message-box" id="message-box"></div>
-
         <!-- Login Form -->
         <div class="formbox login active">
             <h2>Login</h2>
-            <!-- Error/Success Message -->
-            <div class="message-box" id="login-message-box"></div>
-            <form action="#" id="login-form">
+            <!-- Single message div for both error and success messages -->
+            <div class="message" id="message">
+                <?php if (isset($_SESSION['error'])): ?>
+                    <?php echo $_SESSION['error']; ?>
+                    <?php unset($_SESSION['error']); ?>
+                <?php elseif (isset($_SESSION['success'])): ?>
+                    <?php echo $_SESSION['success']; ?>
+                    <?php unset($_SESSION['success']); ?>
+                <?php endif; ?>
+            </div>
+            <form action="" method="POST">
                 <div class="input-box">
-                    <input type="email" id="login-email" required placeholder=" ">
+                    <input type="email" id="login-email" name="email" required placeholder="">
                     <label for="login-email" class="input-label">Email</label>
                     <span class="icon"><ion-icon name="mail"></ion-icon></span>
                 </div>
                 <div class="input-box">
-                    <input type="password" id="login-password" required placeholder=" ">
+                    <input type="password" id="login-password" name="password" required placeholder="">
                     <label for="login-password" class="input-label">Password</label>
                     <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
                 </div>
                 <div class="remember-forgot">
-                    <label><input type="checkbox"> Remember me</label>
-                    <a href="#" id="forgot-password-link">Forgot Password?</a>
+                    <label>
+                        <input type="checkbox" name="remember"> Remember me
+                    </label>
+                    <a href="forgot.php">Forgot Password?</a>
                 </div>
                 <button type="submit" class="btn">Login</button>
-                <div class="login-register">
-                    <p>Don't have an account? <a href="#" id="register-link">Sign up</a></p>
-                </div>
-            </form>
-        </div>
-
-        <!-- Forgot Password Form -->
-        <div class="formbox forgot-password">
-            <h2>Forgot Password</h2>
-            <p class="otp-instruction">Enter the registered email</p>
-            <form action="#" id="forgot-password-form">
-                <div class="input-box">
-                    <input type="email" id="forgot-email" required placeholder=" ">
-                    <label for="forgot-email" class="input-label">Email</label>
-                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                </div>
-                <!-- Error message for unregistered email -->
-                <div class="message-box" id="forgot-password-message-box"></div>
-                <button type="submit" class="btn">Send OTP</button>
-                <div class="login-register">
-                    <p>Remember your password? <a href="#" id="login-link-2">Login</a></p>
-                </div>
-            </form>
-        </div>
-
-        <!-- Register Form -->
-        <div class="formbox register">
-            <h2>Register</h2>
-            <form action="#" id="register-form">
-                <div class="input-box">
-                    <input type="text" id="firstname" required placeholder=" ">
-                    <label for="firstname" class="input-label">First Name</label>
-                    <span class="icon"><ion-icon name="person"></ion-icon></span>
-                </div>
-                <div class="input-box">
-                    <input type="text" id="lastname" required placeholder=" ">
-                    <label for="lastname" class="input-label">Last Name</label>
-                    <span class="icon"><ion-icon name="person"></ion-icon></span>
-                </div>
-                <div class="input-box">
-                    <input type="email" id="register-email" required placeholder=" ">
-                    <label for="register-email" class="input-label">Email</label>
-                    <span class="icon"><ion-icon name="mail"></ion-icon></span>
-                </div>
-                <div class="input-box">
-                    <input type="tel" id="contact" required placeholder=" ">
-                    <label for="contact" class="input-label">Contact</label>
-                    <span class="icon"><ion-icon name="call"></ion-icon></span>
-                </div>
-                <div class="input-box">
-                    <input type="text" id="address" required placeholder=" ">
-                    <label for="address" class="input-label">Address</label>
-                    <span class="icon"><ion-icon name="home"></ion-icon></span>
-                </div>
-                <div class="input-box">
-                    <input type="password" id="register-password" required placeholder=" ">
-                    <label for="register-password" class="input-label">Password</label>
-                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                    <div class="password-error" id="password-error">
-                        Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character.
-                    </div>
-                </div>
-                <div class="input-box">
-                    <input type="password" id="confirm-password" required placeholder=" ">
-                    <label for="confirm-password" class="input-label">Confirm Password</label>
-                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                </div>
-                <div class="terms">
-                    <input type="checkbox" id="terms" required>
-                    <label for="terms">I agree to the <a href="#">terms and conditions</a></label>
-                </div>
-                <!-- Message Box for Registration Form -->
-                <div class="message-box" id="register-message-box"></div>
-                <button type="submit" class="btn">Register</button>
-                <div class="login-register">
-                    <p>Already have an account? <a href="#" id="login-link-3">Login</a></p>
-                </div>
-            </form>
-        </div>
-
-        <!-- OTP Verification Form -->
-        <div class="formbox otp-verification">
-            <h2>OTP Verification</h2>
-            
-            <p class="otp-instruction">We sent the code to you via email</p>
-            <p class="otp-instruction">Enter that 6-digit code to verify</p>
-            <form action="#" id="otp-form">
-                <div class="otp-boxes">
-                    <input type="text" maxlength="1" required>
-                    <input type="text" maxlength="1" required>
-                    <input type="text" maxlength="1" required>
-                    <input type="text" maxlength="1" required>
-                    <input type="text" maxlength="1" required>
-                    <input type="text" maxlength="1" required>
-                </div>
-                <button type="submit" class="btn">Verify OTP</button>
-                <div class="change-email">
-                    <button type="button" id="change-email-button">Change Email</button>
-                </div>
-                <div class="resend-otp">
-                    <p>Didn't receive the OTP? <a href="#">Resend OTP</a></p>
-                </div>
-            </form>
-        </div>
-
-        <!-- Reset Password Form -->
-        <div class="formbox reset-password">
-            <h2>Reset Password</h2>
-            <form action="#" id="reset-password-form">
-                <div class="input-box">
-                    <input type="password" id="new-password" required placeholder=" ">
-                    <label for="new-password" class="input-label">New Password</label>
-                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                    <div class="password-error" id="new-password-error">
-                        Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character.
-                    </div>
-                </div>
-                <div class="input-box">
-                    <input type="password" id="confirm-new-password" required placeholder=" ">
-                    <label for="confirm-new-password" class="input-label">Confirm New Password</label>
-                    <span class="icon"><ion-icon name="lock-closed"></ion-icon></span>
-                </div>
-                <div class="error-label" id="reset-error-label">
-                    Passwords do not match. Please try again.
-                </div>
-                <button type="submit" class="btn">Reset Password</button>
-                <div class="login-register">
-                    <p>Remember your password? <a href="#" id="login-link-4">Login</a></p>
+                <div class="signup-link">
+                    <p>Don't have an account? <a href="register.php">Sign up</a></p>
                 </div>
             </form>
         </div>
@@ -170,303 +319,52 @@
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script>
-        // JavaScript to handle form toggling and validation
+        // JavaScript to handle error and success messages
+        document.addEventListener('DOMContentLoaded', function() {
+            var messageDiv = document.getElementById('message');
+            var loginForm = document.querySelector('form');
 
-        const loginForm = document.querySelector('.formbox.login');
-        const forgotPasswordForm = document.querySelector('.formbox.forgot-password');
-        const registerForm = document.querySelector('.formbox.register');
-        const otpForm = document.querySelector('.formbox.otp-verification');
-        const resetPasswordForm = document.querySelector('.formbox.reset-password');
-
-        const forgotPasswordLink = document.getElementById('forgot-password-link');
-        const registerLink = document.getElementById('register-link');
-        const loginLink2 = document.getElementById('login-link-2'); // Login link in forgot password form
-        const loginLink3 = document.getElementById('login-link-3'); // Login link in register form
-        const loginLink4 = document.getElementById('login-link-4'); // Login link in reset password form
-        const changeEmailButton = document.getElementById('change-email-button'); // Change Email button in OTP form
-
-        const forgotPasswordFormElement = document.getElementById('forgot-password-form');
-        const registerFormElement = document.getElementById('register-form');
-        const otpFormElement = document.getElementById('otp-form');
-        const resetPasswordFormElement = document.getElementById('reset-password-form');
-        const resetErrorLabel = document.getElementById('reset-error-label');
-        const newPasswordError = document.getElementById('new-password-error');
-
-        // Variable to track the previous form and OTP source
-        let previousForm = null;
-        let otpSource = null; // 'forgot' or 'register'
-
-        // Function to show a specific form and hide others
-        function showForm(form) {
-            loginForm.classList.remove('active');
-            forgotPasswordForm.classList.remove('active');
-            registerForm.classList.remove('active');
-            otpForm.classList.remove('active');
-            resetPasswordForm.classList.remove('active');
-            form.classList.add('active');
-        }
-
-        // Function to show messages in the message box
-        function showMessage(message, type, messageBoxId = 'message-box') {
-            const messageBox = document.getElementById(messageBoxId);
-            messageBox.textContent = message;
-            messageBox.className = `message-box ${type}`; // Add success or error class
-            messageBox.style.display = 'block'; // Show the message box
-
-            // Hide the message box after 3 seconds
-            setTimeout(() => {
-                messageBox.style.display = 'none';
-            }, 3000);
-        }
-
-        // Function to handle OTP input
-        function handleOTPInput() {
-            const otpInputs = document.querySelectorAll('.otp-boxes input');
-
-            otpInputs.forEach((input, index) => {
-                // Restrict input to numbers only
-                input.addEventListener('input', (e) => {
-                    const value = e.target.value;
-                    if (!/^\d*$/.test(value)) {
-                        e.target.value = value.replace(/\D/g, ''); // Remove non-numeric characters
-                    }
-
-                    // Move to the next input if a digit is entered
-                    if (value.length === 1 && index < otpInputs.length - 1) {
-                        otpInputs[index + 1].focus();
-                    }
-                });
-
-                // Move to the previous input on backspace
-                input.addEventListener('keydown', (e) => {
-                    if (e.key === 'Backspace' && index > 0 && e.target.value === '') {
-                        otpInputs[index - 1].focus();
-                    }
-                });
-            });
-        }
-
-        // Call the function to handle OTP input
-        handleOTPInput();
-
-        // Event listeners for toggling forms
-        forgotPasswordLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            previousForm = forgotPasswordForm; // Set previous form
-            otpSource = 'forgot'; // Set OTP source to 'forgot'
-            showForm(forgotPasswordForm);
-        });
-
-        registerLink.addEventListener('click', (e) => {
-            e.preventDefault();
-            previousForm = registerForm; // Set previous form
-            otpSource = 'register'; // Set OTP source to 'register'
-            showForm(registerForm);
-        });
-
-        loginLink2.addEventListener('click', (e) => {
-            e.preventDefault();
-            showForm(loginForm);
-        });
-
-        loginLink3.addEventListener('click', (e) => {
-            e.preventDefault();
-            showForm(loginForm);
-        });
-
-        loginLink4.addEventListener('click', (e) => {
-            e.preventDefault();
-            showForm(loginForm);
-        });
-
-        // Change Email Button in OTP Form
-        changeEmailButton.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (previousForm) {
-                showForm(previousForm); // Go back to the previous form
-            } else {
-                showForm(loginForm); // Default to login form if no previous form is set
-            }
-        });
-
-        // Forgot Password Form Submission
-        forgotPasswordFormElement.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent page reload
-
-            const email = document.getElementById('forgot-email').value;
-
-            // Simple email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showMessage('Please enter a valid email address.', 'error', 'forgot-password-message-box');
-                return;
-            }
-
-            // Simulate checking if the email is registered
-            const registeredEmails = ["test@example.com", "user@example.com"]; // Example registered emails
-            if (!registeredEmails.includes(email)) {
-                showMessage('This email is not registered.', 'error', 'forgot-password-message-box');
-                return;
-            }
-
-            // Simulate sending OTP (replace with actual OTP sending logic)
-            showMessage('OTP sent to your email successfully!', 'success', 'forgot-password-message-box');
-            otpSource = 'forgot'; // Set OTP source to 'forgot'
-            showForm(otpForm); // Show OTP form after sending OTP
-        });
-
-        // Register Form Submission
-        registerFormElement.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const email = document.getElementById('register-email').value;
-            const password = document.getElementById('register-password').value;
-            const confirmPassword = document.getElementById('confirm-password').value;
-            const contact = document.getElementById('contact').value;
-
-            // Simple email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(email)) {
-                showMessage('Please enter a valid email address.', 'error', 'register-message-box');
-                return;
-            }
-
-            // Contact validation: Ensure it contains only numbers and is not empty
-            const contactRegex = /^\d+$/; // Matches only digits
-            if (!contactRegex.test(contact)) {
-                showMessage('Contact number must contain only numbers.', 'error', 'register-message-box');
-                return;
-            }
-
-            // Password validation
-            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-            if (!passwordRegex.test(password)) {
-                document.getElementById('password-error').style.display = 'block';
-                showMessage('Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character.', 'error', 'register-message-box');
-                return;
-            } else {
-                document.getElementById('password-error').style.display = 'none';
-            }
-
-            // Confirm password validation
-            if (password !== confirmPassword) {
-                showMessage('Passwords do not match.', 'error', 'register-message-box');
-                return;
-            }
-
-            // If validation passes, show success message and redirect to OTP form
-            showMessage('Verify your email', 'success', 'register-message-box');
-            otpSource = 'register'; // Set OTP source to 'register'
-
-            // Simulate a delay before redirecting to OTP form
-            setTimeout(() => {
-                showForm(otpForm);
-            }, 2000); // Redirect after 2 seconds
-        });
-
-        // OTP Form Submission
-        otpFormElement.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent page reload
-            // Show success message after entering OTP
-            showMessage('OTP sent to your email successfully!', 'success');
-            // Get the OTP values from the input boxes
-            const otpInputs = document.querySelectorAll('.otp-boxes input');
-            let enteredOTP = '';
-            otpInputs.forEach(input => {
-                enteredOTP += input.value; // Concatenate the OTP digits
-            });
-
-            // Simulate the correct OTP (replace with actual OTP verification logic)
-            const correctOTP = '123456'; // Example correct OTP
-
-            if (enteredOTP === correctOTP) {
-                // If OTP is correct
-                if (otpSource === 'forgot') {
-                    showMessage('Email verified successfully!', 'success');
-                    showForm(resetPasswordForm); // Show reset password form after OTP verification
-                } else if (otpSource === 'register') {
-                    showMessage('Registered successfully!', 'success');
-                    // Simulate a delay before redirecting to the login form
-                    setTimeout(() => {
-                        showForm(loginForm);
-                    }, 2000); // Redirect after 2 seconds
+            // Check if the message div contains any content
+            if (messageDiv && messageDiv.textContent.trim() !== '') {
+                // Determine if it's an error or success message
+                if (messageDiv.textContent.includes('Invalid')) {
+                    messageDiv.classList.add('error'); // Add error class for red background
+                } else {
+                    messageDiv.classList.add('success'); // Add success class for green background
                 }
-            } else {
-                // If OTP is incorrect
-                showMessage('Wrong OTP, verification unsuccessful.', 'error');
+
+                // Show the message div
+                messageDiv.style.display = 'block';
+
+                // Hide the message after 5 seconds
+                setTimeout(function() {
+                    messageDiv.style.display = 'none';
+                }, 5000); // 5 seconds
+
+                // Redirect to index.php if it's a success message
+                if (messageDiv.classList.contains('success')) {
+                    setTimeout(function() {
+                        window.location.href = 'index.php'; // Redirect to index.php
+                    }, 1000); // 1 second
+                }
             }
 
-            
+            // Reset form fields after submission
+            if (loginForm) {
+                loginForm.addEventListener('submit', function() {
+                    setTimeout(function() {
+                        loginForm.reset(); // Reset the form fields
+                    }, 0);
+                });
+            }
+
+            // Reset form fields when leaving the page
+            window.onbeforeunload = function() {
+                if (loginForm) {
+                    loginForm.reset(); // Reset the form fields
+                }
+            };
         });
-
-        // Reset Password Form Submission
-        resetPasswordFormElement.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            const newPassword = document.getElementById('new-password').value;
-            const confirmNewPassword = document.getElementById('confirm-new-password').value;
-
-            // Password validation
-            const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-            if (!passwordRegex.test(newPassword)) {
-                newPasswordError.style.display = 'block';
-                showMessage('Password must be at least 8 characters long and contain at least one uppercase letter, one number, and one special character.', 'error');
-                return;
-            } else {
-                newPasswordError.style.display = 'none';
-            }
-
-            // Confirm password validation
-            if (newPassword !== confirmNewPassword) {
-                resetErrorLabel.style.display = 'block';
-                showMessage('Passwords do not match. Please try again.', 'error');
-                return;
-            }
-
-            resetErrorLabel.style.display = 'none';
-            showMessage('Password reset successful!', 'success');
-            showForm(loginForm); // Redirect to login after reset
-        });
-
-        // Login Form Submission
-        const loginFormElement = document.getElementById('login-form');
-        const loginMessageBox = document.getElementById('login-message-box');
-
-        loginFormElement.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent page reload
-
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-
-            // Simulate login validation (replace with actual validation logic)
-            const validEmail = "test@example.com"; // Example valid email
-            const validPassword = "password123"; // Example valid password
-
-            if (email === validEmail && password === validPassword) {
-                // If login is successful
-                showLoginMessage('Login successful! Redirecting...', 'success');
-
-                // Simulate a delay before redirecting (e.g., to a dashboard)
-                setTimeout(() => {
-                    window.location.href = "dashboard.html"; // Replace with your redirect URL
-                }, 2000); // Redirect after 2 seconds
-            } else {
-                // If login fails
-                showLoginMessage('Invalid credentials. Please try again.', 'error');
-            }
-        });
-
-        // Function to show login messages
-        function showLoginMessage(message, type) {
-            loginMessageBox.textContent = message;
-            loginMessageBox.className = `message-box ${type}`; // Add success or error class
-            loginMessageBox.style.display = 'block'; // Show the message box
-
-            // Hide the message box after 3 seconds (optional)
-            setTimeout(() => {
-                loginMessageBox.style.display = 'none';
-            }, 3000);
-        }
     </script>
 </body>
 </html>

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notes</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/index.css"> <!-- Link to your main CSS file -->
     <link rel="stylesheet" href="./css/nav.css"> <!-- Link to your navigation CSS file -->
     <style>
         /* Additional styles for the notes page */
@@ -22,7 +21,7 @@
             margin-bottom: 20px;
             display: flex;
             align-items: center; /* Center-align form elements horizontally */
-            gap: 10px; /* Space between dropdowns and button */
+            gap: 10px; /* Space between dropdowns */
             justify-content: center; /* Center-align the entire form container */
         }
 
@@ -52,20 +51,10 @@
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect */
         }
 
-        .form-container button {
-            padding: 10px 20px;
-            background-color: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 5px; /* Square corners */
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-            width: 200px; /* Match width with dropdowns */
-        }
-
-        .form-container button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
+        .form-container select:disabled {
+            background-color: #e9ecef;
+            border-color: #ced4da;
+            cursor: not-allowed;
         }
 
         .notes-container {
@@ -94,6 +83,15 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
         }
 
+        .pdf-preview {
+            width: 100%;
+            height: 200px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
         .note-card h3 {
             margin-top: 0;
             color: #007BFF; /* Blue heading */
@@ -106,35 +104,47 @@
             font-size: 1rem; /* Standard font size for description */
         }
 
-        .note-card a {
-            color: #007BFF;
-            text-decoration: none;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 10px;
-            transition: color 0.3s ease;
+        .note-card button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+            margin: 5px; /* Add margin between buttons */
         }
 
-        .note-card a:hover {
-            color: #0056b3; /* Darker blue on hover */
-            text-decoration: underline;
+        .note-card button:hover {
+            background-color: #0056b3;
         }
 
-        .note-card .icon {
-            font-size: 2rem; /* Larger icon size */
-            color: #007BFF; /* Blue icon color */
-            margin-bottom: 10px;
+        .note-card a.download-button {
+            padding: 10px 20px;
+            background-color: #28a745; /* Green color for download button */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            text-decoration: none; /* Remove underline */
+            transition: background-color 0.3s ease;
+            margin: 5px; /* Add margin between buttons */
+        }
+
+        .note-card a.download-button:hover {
+            background-color: #218838; /* Darker green on hover */
         }
 
         /* Responsive Design */
         @media (max-width: 768px) {
             .form-container {
-                flex-direction: column; /* Stack dropdowns and button vertically on small screens */
+                flex-direction: column; /* Stack dropdowns vertically on small screens */
                 align-items: center; /* Center-align vertically */
             }
 
-            .form-container select,
-            .form-container button {
+            .form-container select {
                 width: 100%; /* Full width on small screens */
             }
 
@@ -169,162 +179,91 @@
     <?php include 'navbar.php'; ?>
     <?php include 'subnav.php'; ?>
 
+    <?php
+    
+    // Include the Front class and create an instance
+    include_once('classes/front.php');
+    $front = new Front();
+
+    // Fetch all course IDs from the database
+    $courses = $front->getCourseId();
+
+    // Get selected course and semester from the POST data
+    $selectedCourse = $_POST['course'] ?? null;
+    $selectedSemester = $_POST['semester'] ?? null;
+
+    // Fetch study material based on the selected course and semester
+    $studyMaterial = $front->getNotes($selectedCourse, $selectedSemester);
+
+    // Base URL for your website
+    $baseUrl = "http://localhost/LMS/uploads/"; // Replace with your actual domain
+    ?>
+
     <div class="container">
         <!-- Heading above the selection part -->
         <h1 class="selection-heading">Notes</h1>
 
+        <!-- Form Container with Dropdowns -->
         <div class="form-container">
-            <select name="course" required>
-                <option value="" disabled selected>Select Course</option>
-                <option value="bba">BBA</option>
-                <option value="bca">BCA</option>
-                <option value="computer_engineering">Computer Engineering</option>
-                <option value="mba">MBA</option>
-                <option value="mca">MCA</option>
-            </select>
-            <select name="semester" required>
-                <option value="" disabled selected>Select Semester</option>
-                <option value="semester1">Semester 1</option>
-                <option value="semester2">Semester 2</option>
-                <option value="semester3">Semester 3</option>
-                <option value="semester4">Semester 4</option>
-                <option value="semester5">Semester 5</option>
-                <option value="semester6">Semester 6</option>
-                <option value="semester7">Semester 7</option>
-                <option value="semester8">Semester 8</option>
-            </select>
-            <button type="submit">Show Notes</button>
+            <form method="POST" action="">
+                <select name="course" id="course" required onchange="this.form.submit()">
+                    <option value="" disabled selected>Select Course</option>
+                    <?php
+                    // Dynamically populate the course dropdown with course IDs
+                    foreach ($courses as $course) {
+                        $selected = ($selectedCourse == $course['course_id']) ? 'selected' : '';
+                        echo '<option value="' . htmlspecialchars($course['course_id']) . '" ' . $selected . '>' . htmlspecialchars($course['course_id']) . '</option>';
+                    }
+                    ?>
+                </select>
+                <select name="semester" id="semester" required onchange="this.form.submit()" <?php echo !$selectedCourse ? 'disabled' : ''; ?>>
+                    <option value="" disabled selected>Select Semester</option>
+                    <?php
+                    if ($selectedCourse) {
+                        $totalSemesters = $front->getSemestersByCourse($selectedCourse);
+                        for ($i = 1; $i <= $totalSemesters; $i++) {
+                            $selected = ($selectedSemester == $i) ? 'selected' : '';
+                            echo '<option value="' . $i . '" ' . $selected . '>Semester ' . $i . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </form>
         </div>
 
         <!-- Label below the selection part -->
-        <p class="selection-label">Notes for BCA.</p>
+        <p class="selection-label">
+            Notes for: 
+            <span id="selected-course"><?php echo $selectedCourse ? htmlspecialchars($selectedCourse) : 'All Courses'; ?></span> - 
+            <span id="selected-semester"><?php echo $selectedSemester ? 'Semester ' . htmlspecialchars($selectedSemester) : 'All Semesters'; ?></span>
+        </p>
 
         <div class="notes-container">
             <?php
-            // Simulated data for notes with random subject names
-            $notes = [
-                'bba' => [
-                    'semester1' => [
-                        ['title' => 'Business Communication', 'description' => 'Effective communication in business environments.', 'link' => '#'],
-                        ['title' => 'Financial Accounting', 'description' => 'Basics of financial accounting and reporting.', 'link' => '#'],
-                        ['title' => 'Principles of Management', 'description' => 'Fundamentals of management theories.', 'link' => '#'],
-                        ['title' => 'Business Mathematics', 'description' => 'Mathematical concepts for business applications.', 'link' => '#']
-                    ],
-                    'semester2' => [
-                        ['title' => 'Marketing Management', 'description' => 'Principles and practices of marketing.', 'link' => '#'],
-                        ['title' => 'Organizational Behavior', 'description' => 'Understanding human behavior in organizations.', 'link' => '#'],
-                        ['title' => 'Business Law', 'description' => 'Legal aspects of business operations.', 'link' => '#'],
-                        ['title' => 'Economics for Managers', 'description' => 'Economic theories for managerial decision-making.', 'link' => '#']
-                    ]
-                ],
-                'bca' => [
-                    'semester1' => [
-                        ['title' => 'Programming in C', 'description' => 'Introduction to C programming language.', 'link' => '#'],
-                        ['title' => 'Discrete Mathematics', 'description' => 'Mathematical structures used in computer science.', 'link' => '#'],
-                        ['title' => 'Computer Fundamentals', 'description' => 'Basics of computer systems and architecture.', 'link' => '#'],
-                        ['title' => 'Digital Electronics', 'description' => 'Fundamentals of digital circuits.', 'link' => '#']
-                    ],
-                    'semester2' => [
-                        ['title' => 'Data Structures', 'description' => 'Fundamental data structures and algorithms.', 'link' => '#'],
-                        ['title' => 'Database Systems', 'description' => 'Introduction to database management systems.', 'link' => '#'],
-                        ['title' => 'Object-Oriented Programming', 'description' => 'Concepts of OOP using C++.', 'link' => '#'],
-                        ['title' => 'Operating Systems', 'description' => 'Basics of operating system concepts.', 'link' => '#']
-                    ]
-                ],
-                'computer_engineering' => [
-                    'semester1' => [
-                        ['title' => 'Engineering Mathematics', 'description' => 'Mathematical concepts for engineering.', 'link' => '#'],
-                        ['title' => 'Basic Electronics', 'description' => 'Fundamentals of electronic circuits.', 'link' => '#'],
-                        ['title' => 'Engineering Physics', 'description' => 'Physics principles for engineers.', 'link' => '#'],
-                        ['title' => 'Engineering Drawing', 'description' => 'Basics of technical drawing.', 'link' => '#']
-                    ],
-                    'semester2' => [
-                        ['title' => 'Digital Logic Design', 'description' => 'Design and analysis of digital circuits.', 'link' => '#'],
-                        ['title' => 'Data Structures', 'description' => 'Algorithms and data structures.', 'link' => '#'],
-                        ['title' => 'Computer Organization', 'description' => 'Basics of computer architecture.', 'link' => '#'],
-                        ['title' => 'Programming in Python', 'description' => 'Introduction to Python programming.', 'link' => '#']
-                    ]
-                ],
-                'mba' => [
-                    'semester1' => [
-                        ['title' => 'Managerial Economics', 'description' => 'Economic theories for managerial decision-making.', 'link' => '#'],
-                        ['title' => 'Financial Management', 'description' => 'Principles of financial management.', 'link' => '#'],
-                        ['title' => 'Marketing Management', 'description' => 'Strategies for marketing products.', 'link' => '#'],
-                        ['title' => 'Human Resource Management', 'description' => 'Managing human resources in organizations.', 'link' => '#']
-                    ],
-                    'semester2' => [
-                        ['title' => 'Strategic Management', 'description' => 'Formulation and implementation of business strategies.', 'link' => '#'],
-                        ['title' => 'Marketing Research', 'description' => 'Techniques for conducting marketing research.', 'link' => '#'],
-                        ['title' => 'Operations Management', 'description' => 'Managing production and operations.', 'link' => '#'],
-                        ['title' => 'Business Analytics', 'description' => 'Using data for business decision-making.', 'link' => '#']
-                    ]
-                ],
-                'mca' => [
-                    'semester1' => [
-                        ['title' => 'Advanced Java Programming', 'description' => 'Object-oriented programming in Java.', 'link' => '#'],
-                        ['title' => 'Operating Systems', 'description' => 'Concepts and design of operating systems.', 'link' => '#'],
-                        ['title' => 'Database Management Systems', 'description' => 'Design and management of databases.', 'link' => '#'],
-                        ['title' => 'Software Engineering', 'description' => 'Principles of software development.', 'link' => '#']
-                    ],
-                    'semester2' => [
-                        ['title' => 'Cloud Computing', 'description' => 'Basics of cloud computing and services.', 'link' => '#'],
-                        ['title' => 'Web Technologies', 'description' => 'Building web applications using HTML, CSS, and JavaScript.', 'link' => '#'],
-                        ['title' => 'Machine Learning', 'description' => 'Introduction to machine learning algorithms.', 'link' => '#'],
-                        ['title' => 'Network Security', 'description' => 'Fundamentals of securing computer networks.', 'link' => '#']
-                    ]
-                ]
-            ];
+            if (!empty($studyMaterial)) {
+                foreach ($studyMaterial as $material) {
+                    // Construct the full URL for the file
+                    $fileUrl = $baseUrl . $material['file_path'];
 
-            // Default notes to display if no course/semester is selected
-            $defaultNotes = [
-                ['title' => 'Welcome to AnyNotes!', 'description' => 'Select a course and semester to view notes.', 'link' => '#'],
-                ['title' => 'Explore Our Resources', 'description' => 'Find notes, old questions, and more.', 'link' => '#'],
-                ['title' => 'Get Started', 'description' => 'Choose a course and semester to begin.', 'link' => '#'],
-                ['title' => 'Need Help?', 'description' => 'Contact us for any assistance.', 'link' => '#']
-            ];
-
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $course = $_POST['course'];
-                $semester = $_POST['semester'];
-
-                if (isset($notes[$course][$semester])) {
-                    $displayNotes = $notes[$course][$semester];
-                } else {
-                    $displayNotes = $defaultNotes;
+                    // Use Google Docs Viewer for PDF preview
+                    // $pdfPreviewUrl = 'https://docs.google.com/viewer?url=' . urlencode($fileUrl) . '&embedded=true';
+                    echo '<div class="note-card">';
+                    echo '<div class="pdf-preview">';
+                    echo '<iframe src="' . $fileUrl . '" width="100%" height="200px" style="border: none;"></iframe>';
+                    echo '</div>';
+                    echo '<h3>' . htmlspecialchars($material['subject_name']) . '</h3>';
+                    echo '<p>' . htmlspecialchars($material['file_desc']) . '</p>';
+                    echo '<button onclick="window.open(\'' . htmlspecialchars($fileUrl) . '\', \'_blank\')">Open Full View</button>';
+                    echo '<a href="' . htmlspecialchars($fileUrl) . '" class="download-button" download>Download</a>';
+                    echo '</div>';
                 }
             } else {
-                $displayNotes = $defaultNotes;
-            }
-
-            foreach ($displayNotes as $note) {
-                echo '<div class="note-card">';
-                echo '<div class="icon"><i class="fas fa-book"></i></div>'; // Icon for the card
-                echo '<h3>' . htmlspecialchars($note['title']) . '</h3>';
-                echo '<p>' . htmlspecialchars($note['description']) . '</p>';
-                echo '<a href="' . htmlspecialchars($note['link']) . '">View Note</a>';
-                echo '</div>';
+                echo '<p>No notes found.</p>';
             }
             ?>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <!-- Social Section -->
-        <div class="social-section">
-            <h3>Follow Us</h3>
-            <div class="social-links">
-                <a href="" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-                <a href="" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
-                <a href="" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            </div>
-        </div>
-
-        <!-- Copyright Section -->
-        <div class="copyright-section">
-            <p>&copy; 2025 AnyNotes. All rights reserved.</p>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
 </body>
 </html>

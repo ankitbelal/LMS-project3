@@ -1,9 +1,14 @@
 <?php 
      require_once('../configs/config.php');
+     require_once('../classes/materialCRUD.php');
      session_start();
      if(!isset($_SESSION['username']) && !isset($_SESSION['is_admin'])){
          header("Location:".BASE_PATH."/admin");
      }
+
+    $material=new materialCRUD();
+    $materialinfo=$material->getMaterials();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -14,6 +19,7 @@
     <title>Admin Dashboard</title>
     <!--STYLESHEET-->
     <link rel="stylesheet" href="./css/course.css" />
+    <script src="./htmx.js"></script>
     <!--MATERIAL  CDN -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 </head>
@@ -30,45 +36,50 @@
                     <!-- Study Material Table -->
                     <div class="table-container">
                         <div class="table-header">
-                        <h2>Study Materails</h2>
+                        <h2>Study Materials</h2>
                         <button class="add-btn" onclick="window.location.href='./addMaterial.php'">Add Material</button>
                     </div>
                             <table>
                                 <thead>
                                     <tr>
                                         <th>Title</th>
-                                        <th>Type</th>
-                                        <th>Faculty</th>
                                         <th>Semester</th>
+                                        <th>Subject</th>
+                                        <th>Type</th>
+                                        <th>Description</th>
+                                        <th>File Name</th>
+                                        <th>Uploaded At</th>
                                         <th>Edit | Delete</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <!-- Example Data (Dynamically Populated in PHP) -->
+                                    <?php
+                                    $i=1;
+                                    foreach($materialinfo as $material){
+                                    ?>
                                     <tr>
-                                        <td>Data Structures Notes</td>
-                                        <td>Notes</td>
-                                        <td>BE comp</td>
-                                        <td>thirdasdasdasdasdasdasdasdasdadasdasd/td>
-                                        <td>
-                                        <div class="button-container">
-                                                <button class="edit-btn" data-id="1" onclick="window.location.href='./updateMaterial.php'">Edit</button>
-                                                <button class="delete-btn">Delete</button>
-                                            </div>
+                                        <td><?php echo htmlspecialchars($material['course_id']);?></td>
+                                        <td><?php echo htmlspecialchars($material['semester']);?></td>
+                                        <td><?php echo htmlspecialchars($material['subject_name']);?></td>
+                                        <td><?php echo htmlspecialchars($material['material_type']);?></td>
+                                        <td class="description">
+                                            <?php
+                                            $description = htmlspecialchars($material['file_desc']);
+                                            $preview = strlen($description) > 20 ? substr($description, 0, 20) . '...' : $description;
+                                            echo $preview;
+                                            ?>
+                                            <a href="#" class="read-more" data-full-description="<?php echo htmlspecialchars($material['file_desc']); ?>">Read More</a>
                                         </td>
-                                    </tr>
-                                    <tr>
-                                        <td>Discrete Mathematics Syllabus</td>
-                                        <td>Syllabus</td>
-                                        <td>BCA</td>
-                                        <td>fourthdasdasdasdasdasdasdasdasdasdasdasdasdasdasd</td>
+                                        <td><?php echo htmlspecialchars($material['file_name']);?></td>
+                                        <td><?php echo htmlspecialchars($material['uploaded_at']);?></td>
                                         <td>
-                                        <div class="button-container">
-                                                <button class="edit-btn" data-id="1" onclick="window.location.href='./updateMaterial.php'">Edit</button>
-                                                <button class="delete-btn">Delete</button>
-                                            </div>
-                                        </td>
+                                    <div class="button-container">
+                                        <button class="edit-btn" onclick="window.location.href='./updateMaterial.php?id=<?php echo $material['material_id'];?>&courseId=<?php echo $material['course_id'];?>'">Edit</button>
+                                        <button class="delete-btn" hx-delete="" hx-target="#tbody-1" hx-swap="outerHTML"  hx-confirm="Are you sure you want to delete this row?">Delete</button>
+                                    </div>
+                                </td>
                                     </tr>
+                                    <?php $i++;}?>    
                                 </tbody>
                             </table>
                     </div>
@@ -76,7 +87,38 @@
             </main>
         </div>
     </div>
+    <div id="descriptionModal" class="modal">
+    <div class="modal-content">
+        <p id="modalDescription"></p>
+    </div>
+</div>
     <script src="./index.js"></script>
+    <script>
+       
+    document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('descriptionModal');
+        const modalDescription = document.getElementById('modalDescription');
+        
+
+        // Open modal when "Read More" is clicked
+        document.querySelectorAll('.read-more').forEach(link => {   
+            link.addEventListener('click', (event) => {
+                event.preventDefault(); // Prevent default link behavior
+                const fullDescription = link.getAttribute('data-full-description');
+                modalDescription.textContent = fullDescription;
+                modal.style.display = 'block';
+            });
+        });
+
+        // Close modal when clicking outside the modal
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+
+    </script>
 </body>
 
 </html>

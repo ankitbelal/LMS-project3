@@ -62,7 +62,7 @@
                         <a href="https://www.facebook.com/yubistona?mibextid=ZbWKwL" target="_blank"><i class="fab fa-facebook"></i></a>
                         <a href="" target="_blank"><i class="fab fa-twitter"></i></a>
                         <a href="https://www.linkedin.com/in/yubraj-dhungana-2b63982a4?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://www.github.com/yubiStona" target="_blank"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
 
@@ -103,22 +103,6 @@
     </div>
 
     <!-- Footer Section (Copied from index.php) -->
-    <footer>
-        <!-- Social Section -->
-        <div class="social-section">
-            <h3>Follow Us</h3>
-            <div class="social-links">
-                <a href="" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-                <a href="" target="_blank"><i class="fab fa-twitter"></i> Twitter</a>
-                <a href="" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-            </div>
-        </div>
-
-        <!-- Copyright Section -->
-        <div class="copyright-section">
-            <p>&copy; 2025 AnyNotes. All rights reserved.</p>
-        </div>
-    </footer>
+    <?php include 'footer.php'; ?>
 </body>
 </html>
