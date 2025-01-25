@@ -23,9 +23,15 @@
                     <span class="material-icons-sharp">library_books</span>
                     <h3>Courses</h3>
                 </a>
-                <a href=""><span class="material-icons-sharp">mail_outline</span>
+                <a href="./contribute.php">
+                   <span><i class="fas fa-hand-holding-heart"></i></span> 
+                    <h3>Contribution</h3>
+                </a>
+                <a href="./messages.php"><span class="material-icons-sharp">mail_outline</span>
                     <h3>Messages</h3>
-                    <span class="message-count">36</span>
+                    <?php if(isset($newCount) && $newCount > 0): ?>
+                    <span class="message-count"><?php echo $newCount; ?></span>
+                    <?php endif; ?>
                 </a>
 
                 <a href=""><span class="material-icons-sharp">report_gmailerrorred</span>

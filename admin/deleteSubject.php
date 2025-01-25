@@ -39,5 +39,11 @@
             echo "</td>";
             $i++;
         }
+        echo "</tbody>";
+    }else{
+        // Return an error response
+    http_response_code(500); // Internal Server Error
+    echo "Failed to delete the course.";
+    exit();
     }
 ?>

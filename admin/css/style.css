@@ -488,6 +488,61 @@ main .recents a{
     overflow:hidden;
 }
 
+/*stylin for the messages/contact us page in admin*/
+/* Messages Page Specific Styles */
+.recents .controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.refresh-btn {
+  background: var(--color-primary);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.no-messages {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-info-dark);
+}
+
+.no-messages .material-icons-sharp {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.status-filter {
+  padding: 0.5rem;
+  border-radius: var(--border-radius-1);
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.actions a, .actions button {
+  color: var(--color-info-dark);
+  transition: color 0.3s ease;
+}
+
+.actions a:hover, .actions button:hover {
+  color: var(--color-primary);
+}
+
+/* Status Colors */
+.primary { color: var(--color-primary); }
+.warning { color: var(--color-warning); }
+.success { color: var(--color-success); }
+.danger { color: var(--color-danger); }
 
 
 

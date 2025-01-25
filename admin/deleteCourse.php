@@ -9,6 +9,8 @@ if (!isset($_SESSION['username']) || !isset($_SESSION['is_admin'])) {
     exit();
 }
 
+
+
 // Get the course ID from the query parameter
 if (!isset($_GET['id'])) {
     http_response_code(400); // Bad Request
@@ -21,7 +23,6 @@ if (!isset($_GET['id'])) {
 // Perform the deletion
 $courseCRUD = new courseCRUD();
 $deleted = $courseCRUD->deleteRow($id);
-
 if ($deleted) {
     //fetch updated rows
     $listCourse = $courseCRUD->list();
@@ -39,6 +40,7 @@ if ($deleted) {
         echo "<button class='edit-btn' onclick=\"window.location.href='./updateCourse.php?id=" . htmlspecialchars($course['course_id']) . "'\">Edit</button>";
         echo "<button class='delete-btn' hx-delete='deleteCourse.php?id=" . htmlspecialchars($course['course_id']) . "' hx-target='#tbody-1' hx-swap='outerHTML' hx-confirm='Are you sure you want to delete this row?'>Delete</button>";
         echo "</td>";
+        echo "</tr>";
         $i++;
     }
     echo "</tbody>";

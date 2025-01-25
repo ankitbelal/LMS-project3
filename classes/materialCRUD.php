@@ -94,5 +94,15 @@
 
         }
 
+        //delete materials form deletematerials.php
+        public function deleteMaterial($id){
+            $result=$this->conn->prepare("DELETE from study_material where material_id=:id");
+            $result->bindParam(":id",$id);
+            if($result->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

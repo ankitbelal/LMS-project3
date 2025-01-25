@@ -384,7 +384,7 @@ main{
     padding: var(--card-padding);
     overflow-x: auto; /* Enable horizontal scrolling */
     /*new added css*/
-    /* width:100%; */
+    width:100%;
     -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */ 
 }
 
@@ -395,10 +395,11 @@ main{
 }
 
 table {
-    width: 100%;/*previous 100% */
-    border-collapse: collapse;
-    min-width: 600px; /*nsure the table has a minimum width previous 600px */
-    margin: 0;
+    width: auto;/*previous 100% */
+    border-collapse: separate;/*initial collapse*/
+    min-width: 1000px; /* Ensure the table has a minimum width previous 600px */
+    margin: 0;/*new added*/
+    border-spacing: 0.08rem;
 
 }
 /* Optional: Better scrollbar styling (for WebKit browsers) new css to check */
@@ -407,7 +408,7 @@ table {
     background-color: var(--color-light);
 }
 
-.table-container::-webkit-scrollbar-thumb { 
+.table-container::-webkit-scrollbar-thumb {
     background: var(--color-primary);
     border-radius: 4px;
 }
@@ -419,10 +420,12 @@ table td {
     border-bottom: 1px solid var(--color-light);
     /*new css*/
     white-space: nowrap;/*keep content in single line*/
-    min-width: 120px;          /* Minimum column width */
+    min-width: 100px;          /* Minimum column width */
     max-width: 300px;          /* Maximum column width */
     overflow: hidden;          /* Hide overflow content */
     text-overflow: ellipsis;   /* Show ellipsis (...) for overflow */
+    padding: 0.6rem 0.8rem;  /* Reduce from original 1rem padding */
+    font-size: 0.85rem;       /* Slightly smaller font size */
 
 }
 

@@ -10,6 +10,7 @@
         exit();
     }
     $materialCRUD= new materialCRUD();
+    $errors=[];
     if($_SERVER["REQUEST_METHOD"]=="POST"){
         $subId=$_POST['subject-id'];
         $course_id=$_POST['course-id'];
@@ -17,7 +18,8 @@
 
         // Validate subject name exists
         if (!$subject_name) {
-            die("<script>alert('Invalid subject'); window.history.back();</script>");
+            $errors[]="Invalid Subject";
+            // die("<script>alert('Invalid subject'); window.history.back();</script>");
          }
         //handle file upload    
         if(
@@ -34,15 +36,13 @@
              // 2. Validate PDF extension
             $originalName = $_FILES['file']['name'];
             $extension = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
-            if ($extension !== 'pdf') {
-                die("<script>alert('Only PDF files allowed'); window.history.back();</script>");
-            }
-
              // 3. Validate MIME type (not just extension)
             $finfo = new finfo(FILEINFO_MIME_TYPE);
             $mime = $finfo->file($_FILES['file']['tmp_name']);
+            
             if ($mime !== 'application/pdf') {
-                die("<script>alert('Invalid file type - PDF required'); window.history.back();</script>");
+                $errors[]="Invalid file type -PDF required";
+                // die("<script>alert('Invalid file type - PDF required'); window.history.back();</script>");
             }
 
                  // 4. Generate final filename
@@ -51,7 +51,14 @@
 
             // 5. Check for existing file
             if (file_exists($newFilePath)) {
-                die("<script>alert('File already exists for this subject'); window.history.back();</script>");
+                $errors[]="File already exists for this subject";
+                // die("<script>alert('File already exists for this subject'); window.history.back();</script>");
+            }
+
+            if(!empty($errors)){
+                $_SESSION['form_errors']=$errors;
+                die("<script> window.history.back();</script>");
+                
             }
 
             //6. move the uploaded files
@@ -59,15 +66,20 @@
                 $created=$materialCRUD->saveMaterials($_POST,$newFileName);
                 if($created){
                     header("Location:".BASE_PATH."/admin/studyMaterial.php");
-                    exit();
+                    
                 }else{
-                    echo"<script>alert('Failed to save material');</script>";
+                    $_SESSION['form_errors']=["Failed to save datas"];
+                    die("<script> window.history.back();</script>");
+                    
                 }
             }else{
-                echo"<script>alert('Failed to upload file');</script>";
+                $_SESSION['form_errors']=["failed to upload file"];
+                die("<script> window.history.back();</script>");
+            
             }   
         }else{
-            echo"<script>alert('No file uploaded or file upload error');</script>";
+            $_SESSION['form_errors']=["No file uploaded or file uploaded error"];
+            die("<script> window.history.back();</script>");
         }
     }
 

@@ -8,6 +8,9 @@
 
      $course=new courseCRUD();
      $courseinfo=$course->getCourseId();
+      // Display errors from session (if any)
+    $errors = isset($_SESSION['form_errors']) ? $_SESSION['form_errors'] : [];
+    unset($_SESSION['form_errors']);
 ?>  
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +40,15 @@
                     <div class="add-material-form-container">
                         <form class="add-material-form" action="saveMaterials.php" method="POST" enctype="multipart/form-data">
                             <h2 id="form-heading">Add Study Material</h2>
+                            <!-- Error messages container -->
+                             <?php if(!empty($errors)): ?>
+                                <div id="form-messages" class="error-messages visible">
+                                    <?php foreach ($errors as $error): ?>
+                                        <p><?php echo $error; ?></p>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
+                                
                             <div class="input-field">
                                 <label for="course-id">Course</label>
                                 <select id="course-id" name="course-id" hx-get="getSemester.php" hx-target="#semester" hx-trigger="change,load" required onchange="clearSubjects()">
@@ -50,18 +62,21 @@
                             <div class="input-field">
                                 <label for="semester">Semester</label>
                                 <select id="semester" name="semester" required hx-get="getSubject.php" hx-target="#subject" hx-trigger="change,load" hx-include="[name='course-id']"> <!-- Include course_id in the request -->
+                                <option value="">--Select Semester--</option>
                                      
                                 </select>
                             </div>
                             <div class="input-field">
                             <label for="subject">Subject</label>
                                 <select id="subject" name="subject-id">
+                                <option value="">--Select Subject--</option>
                                                 
                                 </select>
                             </div>
                             <div class="input-field">
                                 <label for="material-type">Type</label>
-                                <select id="material-type" name="material-type">
+                                <select id="material-type" name="material-type" required>
+                                    <option value="">--Select Note Type--</option>
                                     <option value="Notes">Notes</option>
                                     <option value="Old Questions">Old Questions</option>
                                     <option value="Syllabus">Syllabus</option>
@@ -91,9 +106,20 @@
         this.style.height = 'auto';
         this.style.height = (this.scrollHeight) + 'px';
     })
-    function clearSubjects() {
-        document.getElementById('subject').innerHTML = '';
-    }   
+    // function clearSubjects() {
+    //     document.getElementById('subject').innerHTML = '';
+    // }   
+
+    document.addEventListener('DOMContentLoaded', function(){
+        const errorContainer = document.getElementById('form-messages');
+            if (errorContainer) {
+                setTimeout(() => {
+                    errorContainer.classList.remove('visible');
+                    errorContainer.classList.add('hidden');
+                }, 3000);
+            }
+    });
+        
 </script>
 </body>
 

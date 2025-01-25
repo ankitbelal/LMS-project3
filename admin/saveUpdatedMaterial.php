@@ -44,7 +44,7 @@
                 $_SESSION['form_errors']=$errors;
                 header("Location: updateMaterial.php?id=" . $_POST['material_id'] . "&courseId=" . $_POST['course-id']);
                 exit();
-            }
+            }   
 
             // Proceed if no errors
 

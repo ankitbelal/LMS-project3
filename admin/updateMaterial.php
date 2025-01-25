@@ -49,14 +49,14 @@
                             <h2 id="form-heading">Update Study Material</h2>
                             <input type="hidden" name="material_id" value="<?php echo $materials['material_id']; ?>">
                             <!-- Error messages container -->
-                            <!-- Error messages container -->
-            <?php if (!empty($errors)): ?>
-                <div id="form-messages" class="error-messages visible">
-                    <?php foreach ($errors as $error): ?>
-                        <p><?php echo $error; ?></p>
-                    <?php endforeach; ?>
-                </div>
-            <?php endif; ?>
+                            
+                            <?php if (!empty($errors)): ?>
+                                <div id="form-messages" class="error-messages visible">
+                                    <?php foreach ($errors as $error): ?>
+                                        <p><?php echo $error; ?></p>
+                                    <?php endforeach; ?>
+                                </div>
+                            <?php endif; ?>
 
                             <div class="input-field">
                                 <label for="course-id">Course</label>
@@ -81,6 +81,7 @@
                             <div class="input-field">
                                 <label for="subject">Subject</label>
                                 <select id="subject" name="subject-id" required>
+                                    <option value="">--Select Subject--</option>
                                     <?php foreach($subjects as $subject){?>
                                         <option value="<?php echo $subject['subject_id'];?>" <?php if($subject['subject_id']==$materials['subject_id']){echo 'selected';}?>><?php echo $subject['subject_name'];?></option>
                                     <?php };?>

@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="./css/course.css" />
     <script src="./htmx.js"></script>
     <!--MATERIAL  CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Sharp" />
 </head>
 
@@ -52,7 +53,7 @@
                                         <th>Edit | Delete</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="tbody-1">
                                     <?php
                                     $i=1;
                                     foreach($materialinfo as $material){
@@ -75,7 +76,7 @@
                                         <td>
                                     <div class="button-container">
                                         <button class="edit-btn" onclick="window.location.href='./updateMaterial.php?id=<?php echo $material['material_id'];?>&courseId=<?php echo $material['course_id'];?>'">Edit</button>
-                                        <button class="delete-btn" hx-delete="" hx-target="#tbody-1" hx-swap="outerHTML"  hx-confirm="Are you sure you want to delete this row?">Delete</button>
+                                        <button class="delete-btn" hx-delete="deleteMaterials.php?id=<?php echo $material['material_id'];?>" hx-target="#tbody-1" hx-swap="outerHTML"  hx-confirm="Are you sure you want to delete this row?">Delete</button>
                                     </div>
                                 </td>
                                     </tr>

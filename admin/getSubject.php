@@ -6,7 +6,7 @@
     
     $courseCRUD = new courseCRUD();
     $subjects = $courseCRUD->getSubjectsBySemester($course_id, $semester);
-
+    echo "<option value=''>--Select Subject--</option>";
     foreach ($subjects as $subject) {
         echo "<option value='{$subject['subject_id']}'>{$subject['subject_name']}</option>";
     }

@@ -11,6 +11,7 @@
     if ($semester) {
         $total_semester = $semester['total_semester'];
         // Generate the semester options as HTML
+        echo"<option value=''>--Select Semester--</option>";
         for ($i = 1; $i <= $total_semester; $i++) {
             echo "<option value='$i'>Semester $i</option>";
         }
