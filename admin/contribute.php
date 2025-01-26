@@ -38,7 +38,7 @@
                         <div class="table-header">
                         <h2>Contribution content</h2>
                         <div>
-                        <select id="statusFilter" class="filter-dropdown">
+                        <select id="statusFilter" class="filter-dropdown" hx-get="filterContribution.php?id">
                         <option value="all">All</option>
                         <option value="pending">Pending</option>
                         <option value="approved">Approved</option>
@@ -80,9 +80,9 @@
                                        </td>
                                        <!--Action column-->
                                        <td>
-                                        <div class="button-container">
+                                        <div class="button-container">  
                                             <?php if($list['status']=='pending'){?>
-                                                <button class="approve-btn" data-id="<?php echo $list['id']; ?>">Approve</button>
+                                                <button class="approve-btn" data-id="<?php echo $list['id']; ?>" hx-get="./filterContribution.php?id='<?php echo $list['id'];?>'&status='approved'&subject_id='<?php echo $list['subject_id'];?>'" hx-target="#tbody-1" hx-swap="outerHTML">Approve</button>
                                                 <button class="reject-btn" data-id="<?php echo $list['id']; ?>">Reject</button>
                                             <?php }else{ ?>
                                                 <button class="delete-btn" data-id="<?php echo $list['id']; ?>">Delete</button>
@@ -144,59 +144,6 @@ document.getElementById('statusFilter').addEventListener('change', function() {
             row.style.display = 'none';
         }
     });
-});
-
-// Handle approval/rejection
-document.addEventListener('click', async (e) => {
-    if(e.target.classList.contains('approve-btn')) {
-        const id = e.target.dataset.id;
-        const row = e.target.closest('tr');
-        
-        try {
-            const response = await fetch(`approve.php?id=${id}`);
-            if(response.ok) {
-                // Update status display
-                row.querySelector('.status-badge').textContent = 'Approved';
-                row.querySelector('.status-badge').classList.replace('pending', 'approved');
-                row.dataset.status = 'approved';
-                
-                // Update action buttons
-                row.querySelector('.button-container').innerHTML = `
-                    <button class="delete-btn" data-id="${id}">Delete</button>
-                `;
-            }
-        } catch(error) {
-            console.error('Error:', error);
-        }
-    }
-    
-    if(e.target.classList.contains('reject-btn')) {
-        const id = e.target.dataset.id;
-        const row = e.target.closest('tr');
-        
-        try {
-            const response = await fetch(`reject.php?id=${id}`);
-            if(response.ok) {
-                row.remove();
-            }
-        } catch(error) {
-            console.error('Error:', error);
-        }
-    }
-    
-    if(e.target.classList.contains('delete-btn')) {
-        const id = e.target.dataset.id;
-        const row = e.target.closest('tr');
-        
-        try {
-            const response = await fetch(`delete.php?id=${id}`);
-            if(response.ok) {
-                row.remove();
-            }
-        } catch(error) {
-            console.error('Error:', error);
-        }
-    }
 });
 </script>
 </body>

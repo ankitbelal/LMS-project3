@@ -484,6 +484,18 @@ table tr:hover {
     background: rgba(255, 0, 0, 0.616);
 }
 
+table .button-container{
+    display: flex;
+    flex-direction: row;
+}
+/* Button size adjustments */
+.approve-btn,
+.reject-btn,
+.delete-btn {
+    padding: 0.3rem 0.6rem !important; /* Smaller padding */
+    font-size: 0.8rem !important; /* Smaller text */
+    white-space: nowrap; /* Prevent text wrapping */
+}
 
 .forms-container input[type="number"]::-webkit-inner-spin-button,forms-container input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
@@ -574,11 +586,6 @@ table tr:hover {
     cursor: pointer;
 }
 
-.button-container {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-}
 
 /*=================MEDIA QUERY=================*/
 @media screen and (max-width: 1200px){

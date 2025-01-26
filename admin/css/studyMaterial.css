@@ -1,399 +1,326 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-/*--------------Root Variables-----------------*/
-:root {
-    --color-primary: #7380ec;
-    --color-danger: #ff7782;
-    --color-success: #41f1b6;
-    --color-warning: #ffbb55;
-    --color-white: #fff;
-    --color-info-dark: #7d8da1;
-    --color-info-light: #dce1eb;
-    --color-dark: #363949;
-    --color-light: rgba(132, 139, 200, 0.18);
-    --color-primary-variant: #111e88;
-    --color-dark-variant: #677483;
-    --color-background: #f6f6f9;
+/*--------------Root Vairables-----------------*/
+:root{
+    --color-primary:#7380ec;
+    --color-danger:#ff7782;
+    --color-success:#41f1b6;
+    --color-warning:#ffbb55;
+    --color-white:#fff;
+    --color-info-dark:#7d8da1;
+    --color-info-light:#dce1eb;
+    --color-dark:#363949;
+    --color-light: rgba(132,139,200,0.18);
+    --color-primary-variant:#111e88;
+    --color-dark-variant:#677483;
+    --color-background:#f6f6f9;
 
-    --card-border-radius: 2rem;
-    --border-radius-1: 0.4rem;
-    --border-radius-2: 0.8rem;
-    --border-radius-3: 1.2rem;
+
+    --card-border-radius:2rem;
+    --border-radius-1:0.4rem;
+    --border-radius-2:0.8rem;
+    --border-radius-3:1.2rem;
 
     --card-padding: 1.8rem;
-    --padding-1: 1.2rem;
+    --padding-1:1.2rem;
 
-    --box-shadow: 0 2rem 3rem var(--color-light);
+    --box-shadow:0 2rem 3rem var(--color-light);
 }
 
 /*-----------------Dark Theme variables-----------------*/
-.dark-theme-variables {
-    --color-background: #181a1e;
-    --color-white: #202528;
-    --color-dark: #edeffd;
-    --color-dark-variant: #a3bdcc;
-    --color-light: rgba(0, 0, 0, 0.4);
-    --box-shadow: 0 2rem 3rem var(--color-light);
-}
+.dark-theme-variables{
+    --color-background:#181a1e;
+    --color-white:#202528;
+    --color-dark:#edeffd;
+    --color-dark-variant:#a3bdcc;
+    --color-light:rgba(0,0,0,0.4);
+    --box-shadow:0 2rem 3rem var(var(--color-light));
 
-* {
-    margin: 0;
-    padding: 0;
-    outline: 0;
+}
+*{
+    margin:0;
+    padding:0;
+    outline:0;
     appearance: none;
-    border: 0;
+    border:0;
     text-decoration: none;
     list-style: none;
     box-sizing: border-box;
 }
 
-body {
-    width: 100vw;
-    height: 100vh;
-    font-family: poppins, sans-serif;
+body{
+    width:100vw;
+    height:100vh;
+    font-family:poppins,sans-serif;
     font-size: 0.88rem;
-    background: var(--color-background);
+    background:var(--color-background);
     user-select: none;
-    overflow-x: hidden;
+    overflow-x:hidden;
     color: var(--color-dark);
+
 }
 
-.container {
-    display: grid;
-    width: 96%;
+.container{
+    display:grid;
+    width:96%;
     margin: 0 auto;
-    gap: 1.8rem;
+    gap:1.8rem;
     grid-template-columns: 14rem auto;
+    /* height: 100vh; */
     overflow: hidden;
 }
 
-.main-section {
+.main-section{
     display: flex;
     flex-direction: column;
     gap: 1.8rem;
     height: 100vh;
-    overflow-y: auto;
-    scrollbar-width: none;
-    scroll-behavior: smooth;
+    overflow-y:auto;/* Make main-section scrollable */
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    scroll-behavior: smooth; /* Add smooth scrolling */
 }
 
 /* Hide scrollbar for Chrome, Safari, and Edge */
 .main-section::-webkit-scrollbar {
     display: none;
+}   
+
+a{
+    color:var(--color-dark);
+
 }
 
-a {
-    color: var(--color-dark);
-}
-
-img {
-    display: block;
+img{
+    display:block;
     width: 100%;
 }
 
-h1 {
+h1{
     font-weight: 800;
     font-size: 1.5rem;
 }
 
-h2 {
-    font-size: 1.2rem;
+h2{
+    font-size:1.2rem;
 }
 
-h3 {
-    font-size: 0.87rem;
+h3{
+    font-size:0.87rem;
 }
 
-h4 {
-    font-size: 0.7rem;
+h4{
+    font-size:0.7rem;
 }
 
-h5 {
-    font-size: 0.65rem;
+h5{
+    font-size:0.65rem;
 }
 
-small {
-    font-size: 0.65rem;
+small{
+    font-size:0.65rem;
 }
 
-.profile-photo {
-    width: 2.8rem;
+.profile-photo{
+    width:2.8rem;
     height: 2.8rem;
-    border-radius: 50%;
-    overflow: hidden;
+    border-radius:50%;
+    overflow:hidden;
 }
 
-.text-muted {
-    color: var(--color-info-dark);
+.text-muted{
+    color:var(--color-info-dark);
+
 }
 
-p {
-    color: var(--color-dark-variant);
+p{
+    color:var(--color-dark-variant);
 }
 
-b {
-    color: var(--color-dark);
+b{
+    color:var(--color-dark);
 }
 
-.primary {
-    color: var(--color-primary);
+.primary{
+    color:var(--color-primary);
 }
 
-.danger {
-    color: var(--color-danger);
+.danger{
+    color:var(--color-danger);
 }
 
-.success {
-    color: var(--color-success);
+.success{
+    color:var(--color-success);
 }
 
-.warning {
-    color: var(--color-warning);
+.warning{
+    color:var(--color-warning);
 }
 
-aside {
-    height: 100vh;
+/*===============Sidebar=================*/         
+
+aside{
+    height:100vh;
 }
 
-aside .top {
+aside .top{
+    display:flex;
+    /* background: white; */
+    align-items:center;
+    justify-content:space-between ;
+    margin-top:1.4rem;
+}
+
+aside .logo{
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 1.4rem;
+    gap:0.8rem;
 }
 
-aside .logo {
-    display: flex;
-    gap: 0.8rem;
+aside .logo img{
+    width:2rem;
+    height:2rem;
 }
-
-aside .logo img {
-    width: 2rem;
-    height: 2rem;
-}
-
-aside .close {
+aside .close{
     display: none;
 }
 
-/*===============Sidebar=================*/
-aside .sidebar {
+
+
+aside .sidebar{
+    
     display: flex;
     flex-direction: column;
     height: 86vh;
     position: relative;
-    top: 3rem;
+    top:3rem;
 }
 
-aside h3 {
+aside h3{
     font-weight: 500;
 }
 
-aside .sidebar a {
-    display: flex;
-    color: var(--color-info-dark);
-    margin-left: 1.5rem;
-    gap: 1rem;
+aside .sidebar a{
+    display:flex;
+    color:var(--color-info-dark);
+    margin-left:1.5rem;
+    gap:1rem;
     align-items: center;
     position: relative;
     height: 3rem;
+    transition:all 0.3s ease;
+}
+
+aside .sidebar a span{
+    font-size:1.3rem;
     transition: all 0.3s ease;
 }
 
-aside .sidebar a span {
-    font-size: 1.3rem;
-    transition: all 0.3s ease;
+aside .sidebar a:last-child{
+    position:absolute;
+    bottom:2rem;
+    width:100%;
 }
 
-aside .sidebar a:last-child {
-    position: absolute;
-    bottom: 2rem;
-    width: 100%;
-}
-
-aside .sidebar a.active {
-    background: var(--color-light);
+aside .sidebar a.active{
+    background:var(--color-light);
     color: var(--color-primary);
     margin-left: 0;
 }
 
-aside .sidebar a.active::before {
-    content: '';
-    width: 6px;
+aside .sidebar a.active::before{
+    content:'';
+    width:6px;
     height: 100%;
     background: var(--color-primary);
 }
 
-aside .sidebar a:hover {
-    color: var(--color-primary);
+aside .sidebar a.acitve span{
+    color:var(--color-primary);
+    margin-left: calc(1rem-3px);
 }
 
-aside .sidebar a:hover span {
+aside .sidebar a:hover{
+    color:var(--color-primary);
+
+}
+
+aside .sidebar a:hover span{
     margin-left: 1rem;
 }
 
-aside .sidebar .message-count {
-    background: var(--color-danger);
-    color: var(--color-white);
+aside .sidebar .message-count{
+    background:var(--color-danger);
+    color:var(--color-white);
     padding: 2px 10px;
-    font-size: 11px;
+    font-size:11px;
     border-radius: var(--border-radius-1);
 }
 
+/* Button container to keep buttons horizontal */
+.button-container {
+    display: flex; /* Use flexbox */
+    gap: 0.5rem; /* Add gap between buttons */
+    align-items: center; /* Center buttons vertically */
+}
 /*=================Main=================*/
-main {
-    margin-top: 1.4rem;
+
+main{
+    margin-top:1.4rem;
     margin-left: 1rem;
     width: calc(100% - 1rem);
     grid-row: span 2;
     padding-bottom: 2rem;
-}
 
-/*=================table container styling=================*/
-.admin-study-material-container {
-    padding: var(--card-padding);
-    width: 100%;
-}
-
-.admin-controls {
-    margin-bottom: 2rem;
-    text-align: right;
-}
-
-.add-material-btn {
-    padding: 0.8rem 1.2rem;
-    font-size: 1rem;
-    font-weight: bold;
-    color: var(--color-white);
-    background: var(--color-primary);
-    border: none;
-    cursor: pointer;
-    border-radius: var(--border-radius-2);
-}
-
-.study-material-table-container {
-    margin-top: 1.5rem;
-}
-
-.study-material-table-container h2 {
-    margin-bottom: 1rem;
-    margin-left: 1.4rem;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    background: var(--color-white);
-    box-shadow: var(--box-shadow);
-    border-radius: var(--card-border-radius);
-    overflow: hidden;
-}
-
-thead th {
-    background: var(--color-primary);
-    color: var(--color-white);
-    text-align: left;
-    padding: 1rem;
-}
-
-tbody tr {
-    border-bottom: 1px solid var(--color-light);
-}
-
-tbody td {
-    padding: 0.8rem 1rem;
 }
 
 
-tbody tr:last-child td {
-    border: none;
-}
 
-/* Buttons for Actions */
-table .btn {
-    margin-right: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-    font-weight: bold;
-    border-radius: var(--border-radius-2);
-    cursor: pointer;
-    transition: background 0.3s ease, color 0.3s ease;
-    border: none;
-}
-
-
-/* Edit Button */
-table .btn.edit-btn {
-    background: var(--color-primary);
-    color: var(--color-white);
-}
-
-table .btn.edit-btn:hover {
-    background: #5c6bc0;
-}
-
-/* Reject Button */
-table .btn.danger-btn {
-    background: var(--color-danger);
-    color: var(--color-white);
-}
-
-table .btn.danger-btn:hover {
-    background: #e74c3c;
-}
-
-/* Delete Button */
-table .btn.delete-btn {
-    background: var(--color-danger);
-    color: var(--color-white);
-}
-
-
-/*=================RIGHT================*/
-.right {
+/*==========================RIGHT================*/
+.right{
     margin-top: 1.4rem;
-    position: sticky;
+    position: sticky; /* Keep the right section fixed at the top */
     top: 0;
-    background: var(--color-background);
-    z-index: 1;
+    background: var(--color-background); /* Match the background color */
+    z-index: 1; /* Ensure it stays above the main content */    
+
+    
 }
 
-.right .top {
+.right .top{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    gap: 1rem;
+    gap:1rem;
 }
 
-.right h1 {
+.right h1{
     font-size: 1.8rem;
     font-weight: 800;
-    margin: 0;
+    margin:0;
     margin-left: 6rem;
 }
-
+/* Right elements (menu button, theme toggler, and profile) */
 .right .right-elements {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 2rem; /* Space between elements */
 }
 
-.right .top button {
+.right .top button{
     display: none;
 }
 
-.right .theme-toggler {
-    background: var(--color-light);
+.right .theme-toggler{
+    background:var(--color-light);
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 1.4rem;
     width: 3.8rem;
     cursor: pointer;
-    border-radius: var(--border-radius-1);
+    border-radius:var(--border-radius-1);
 }
 
-.right .theme-toggler span {
+.right .theme-toggler span{
     font-size: 1rem;
     width: 50%;
     height: 100%;
@@ -402,31 +329,167 @@ table .btn.delete-btn {
     justify-content: center;
 }
 
-.right .theme-toggler span.active {
-    background: var(--color-primary);
+.right .theme-toggler span.active{
+    background:var(--color-primary);
     color: white;
     border-radius: var(--border-radius-1);
 }
 
-.right .top .profile {
+.right .top .profile{
     display: flex;
     gap: 1rem;
-    text-align: right;
+    text-align:right;
     align-items: center;
+   
 }
 
-.right .profile .info p {
-    margin: 0;
+.right .profile .info p{
+    margin:0;
 }
 
-.right .profile .info small {
-    color: var(--color-info-dark);
+.right .profile .info small{
+    color:var(--color-info-dark);
 }
 
-.right .profile-photo {
+.right .profile-photo{
     width: 2.2rem;
-    height: 2.2rem;
-    overflow: hidden;
+    height:2.2rem;
+    overflow:hidden;
+}
+
+.table-container .table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+.table-container .table-header button {
+    padding: 0.5rem 0.4rem;
+    border-radius: var(--border-radius-2);
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    cursor: pointer;
+    font-size: 0.88rem;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+/* Table Container with Scroll */
+.table-container {
+    margin-bottom: 2rem;
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    padding: var(--card-padding);
+    overflow-x: auto; /* Enable horizontal scrolling */
+    /*new added css*/
+    /* width:100%; */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */ 
+}
+
+.table-container h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--color-dark);
+}
+
+table {
+    width: 100%;/*previous 100% */
+    border-collapse: separate;
+    min-width: 600px; /*nsure the table has a minimum width previous 600px */
+    margin: 0;
+
+}
+/* Optional: Better scrollbar styling (for WebKit browsers) new css to check */
+.table-container::-webkit-scrollbar {
+    height: 8px;
+    background-color: var(--color-light);
+}
+
+.table-container::-webkit-scrollbar-thumb { 
+    background: var(--color-primary);
+    border-radius: 4px;
+}
+
+table th,
+table td {
+  
+    text-align: left;
+    border-bottom: 1px solid var(--color-light);
+    /*new css*/
+    white-space: nowrap;/*keep content in single line*/
+    min-width: 100px;          /* Minimum column width */
+    max-width: 300px;          /* Maximum column width */
+    overflow: hidden;          /* Hide overflow content */
+    text-overflow: ellipsis;   /* Show ellipsis (...) for overflow */
+
+}
+
+table td{
+    padding: 0.5rem;
+}
+
+table th {
+    background: var(--color-light);
+    color: var(--color-dark);
+    padding: 1rem;
+}
+
+table tr:hover {
+    background: var(--color-light);
+}
+
+/* table headers */
+/* Table header with Flexbox */
+.table-header {
+    display: flex; /* Use Flexbox */
+    justify-content: space-between; /* Space between heading and button */
+    align-items: center; /* Center items vertically */
+    margin-bottom: 1rem; /* Add some spacing below the header */
+}
+
+/* Ensure the Add Material button stays on the right */
+.table-header .add-btn {
+    margin-left: auto; /* Push the button to the right */
+}
+
+/* Optional: Reduce button size on smaller screens */
+
+
+.edit-btn,
+.delete-btn {
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-1);
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.3s ease;
+}
+
+.edit-btn {
+    background: var(--color-primary);
+    color: var(--color-white);
+}
+
+.delete-btn {
+    background: var(--color-danger);
+    color: var(--color-white);
+    margin-left: 0.5rem;
+}
+
+.edit-btn:hover {
+    background: var(--color-primary-variant);
+}
+
+.delete-btn:hover {
+    background: rgba(255, 0, 0, 0.616);
+}
+
+
+.forms-container input[type="number"]::-webkit-inner-spin-button,forms-container input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
 /*css for modal*/
@@ -447,136 +510,167 @@ table .btn.delete-btn {
     padding: 1rem;
     border-radius: var(--border-radius-1);
     width: 50%;
-    max-width: 600px;
+    max-width: 100%;  
+    position: relative;
 }
 
-.close {
-    color: var(--color-dark);
-    float: right;
-    font-size: 1.5rem;
-    font-weight: bold;
+/* Style for the "Read More" link */
+.read-more {
+    color: var(--color-primary);
+    text-decoration: none;
+    font-size: 0.8rem;
+    margin-left: 5px;
     cursor: pointer;
 }
 
-.close:hover {
-    color: var(--color-danger);
+.read-more:hover {
+    text-decoration: underline;
+}
+
+
+/*=================MEDIA QUERY=================*/
+@media screen and (max-width: 1200px){
+  
+.container{
+    width: 94%;
+    grid-template-columns: 7rem auto;
+}
+    aside .logo h2{
+        display: none;
+    }
+
+    aside .sidebar h3{
+        display:none;
+    }
+     aside .sidebar a{
+        width:5.6rem;
+     }
+
+     aside .sidebar a:last-child{
+        position: relative;
+        margin-top: 1rem;
+     }
+
+     main .insights{
+        grid-template-columns:1fr;
+        gap: 0;
+     }
 }
 
 /*=================MEDIA QUERY=================*/
-@media screen and (max-width: 768px) {
-    .container {
-        width: 100%;
+@media screen and (max-width:768px) { 
+    .container{
+        width:100%;
         grid-template-columns: 1fr;
     }
+    .button-container{
+        padding: 0.4rem 0.8rem; /* Reduce padding */
+        font-size: 0.8rem; /* Reduce font size */
+    }
 
-    aside {
-        position: fixed;
-        left: -100%;
-        background: var(--color-white);
-        width: 18rem;
-        z-index: 3;
-        box-shadow: 1rem 3rem 4rem var(--color-light);
-        height: 100vh;
-        padding-right: var(--card-padding);
+    .table-header .add-btn {
+        padding: 0.5rem 0.8rem; /* Reduce padding */
+        font-size: 0.9rem; /* Reduce font size */
+    }
+
+    aside{
+        position:fixed;
+        left:-100%;
+        background:var(--color-white);
+        width:18rem;
+        z-index:3;
+        box-shadow:1rem 3rem 4rem var(--color-light);
+        height:100vh;
+        padding-right:var(--card-padding);
         display: none;
         animation: showMenu 400ms ease forwards;
     }
 
-    @keyframes showMenu {
-        to {
-            left: 0;
+    @keyframes showMenu{
+        to{
+            left:0;
         }
     }
-
-    aside .logo {
+    aside .logo{
         margin-left: 1rem;
     }
 
-    aside .logo h2 {
+    aside .logo h2{
         display: inline;
     }
 
-    aside .sidebar h3 {
-        display: inline;
+    aside .sidebar h3{
+        display:inline;
     }
 
-    aside .sidebar a {
-        width: 100%;
-        height: 3.4rem;
+    aside .sidebar a{
+        width:100%;
+        height:3.4rem;
     }
 
-    aside .sidebar a:last-child {
-        position: absolute;
-        bottom: 5rem;
+    aside .sidebar a:last-child{
+        bottom:5rem;
+        position:absolute;
     }
 
-    aside .close {
-        display: inline-block;
-        cursor: pointer;
+    aside .close{
+        display:inline-block;
+        cursor:pointer;
     }
 
-    main {
-        margin-top: 8rem;
-        padding: 0 1rem;
+    main{
+        margin-top:8rem;
+        padding:0 1rem;
     }
 
-    .study-material-table-container {
-        overflow-x: auto;
+    main .recents{
+        position:relative;
+        margin:3rem 0 0 0;
+        width:100%;
+    }
+    main .recent-orders table{
+        width:100%;
     }
 
-    table {
-        width: 100%;
-        min-width: 600px;
+    .right{
+        width:94%;
+        margin:0 auto 4rem;
     }
 
-    .add-material-form-container {
-        padding: 1rem;
-    }
-
-    .add-material-form .input-field input,
-    .add-material-form .input-field select {
-        width: 100%;
-    }
-
-    .right {
-        width: 94%;
-        margin: 0 auto 4rem;
-    }
-
-    .right .top {
-        position: fixed;
+    .right .top{
+        position:fixed;
         top: 0;
-        left: 0;
-        align-items: center;
-        padding: 0 0.8rem;
-        background: var(--color-white);
+        left:0;
+        align-items:center;
+        padding:0 0.8rem;
+        background:var(--color-white);
         height: 4.6rem;
         width: 100%;
-        margin: 0;
-        z-index: 2;
+        margin:0;
+        z-index:2;
         box-shadow: 0 1rem 1rem var(--color-light);
     }
 
-    .right .top .theme-toggler {
-        width: 4.4rem;
-        position: absolute;
+    .right .top .theme-toggler{
+        width:4.4rem;
+        position:absolute;
         left: 66%;
     }
 
-    .right .profile .info {
-        display: none;
+    .right .profile .info{
+       display: none;
     }
 
-    .right .top button {
+    .right .top button{
         display: inline-block;
-        background: transparent;
+        background:transparent;
         cursor: pointer;
-        color: var(--color-dark);
+        color:var(--color-dark);
         position: absolute;
-        left: 1rem;
+        left:1rem;
     }
 
-    .right .top button span {
-        font-size: 2rem;
+    .right .top button span{
+        font-size:2rem;
     }
 }
