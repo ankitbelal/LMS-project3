@@ -1,4 +1,7 @@
 <?php
+
+    include_once("../../configs/Database.php");
+
     require_once('../configs/Database.php');
     class User{
         public $first_name='';
@@ -73,4 +76,5 @@
             }
         }
     }
+
 ?>

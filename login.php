@@ -1,5 +1,6 @@
 
 <?php
+
 // Start the session only if it is not already active
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -11,6 +12,8 @@ if (session_status() === PHP_SESSION_NONE) {
 unset($_SESSION['email']); // Clear the email from the session
 // Rest of your existing code...
 
+
+session_start();
 require_once './configs/Database.php';
 $db = new Database();
 $conn = $db->getConnection();
@@ -28,17 +31,23 @@ if ($_POST) {
 
     if ($result->rowCount() > 0) {
         if ($data['role'] == 'user') {
+
             $_SESSION['username'] = $data['name'];
+
+            $_SESSION['username'] = $username;
+
             $_SESSION['is_user'] = true;
             $_SESSION['success'] = "Logged in successfully";
             header("Location: login.php"); // Redirect back to show the success message
             exit();
         }
+ 
         else{
             $_SESSION['error'] = "Invalid credentials";
             header("Location: login.php"); // Redirect back to the login page
             exit();
         }
+
     } else {
         $_SESSION['error'] = "Invalid credentials";
         header("Location: login.php"); // Redirect back to the login page

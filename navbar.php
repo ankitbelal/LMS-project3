@@ -102,16 +102,24 @@ $username = $isLoggedIn && isset($_SESSION['username']) ? $_SESSION['username'] 
             <div class="user-container">
                 <div class="user-icon" id="userIcon">
                     <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="User Icon">
+
                     <span class="login-label" id="loginLabel"><?php echo htmlspecialchars($username); ?></span>
                 </div>
                 <!-- Dropdown Menu (Only render if logged in) -->
                 <?php if ($isLoggedIn): ?>
+
+                    <span class="login-label" id="loginLabel">Login</span>
+                </div>
+                <!-- Dropdown Menu -->
+
                 <div class="dropdown-menu" id="dropdownMenu">
                     <a href="#">My Profile</a>
                     <a href="#">Settings</a>
                     <a href="#" id="logoutButton">Logout</a>
                 </div>
+
                 <?php endif; ?>
+
             </div>
         </nav>
     </div>
@@ -126,8 +134,13 @@ $username = $isLoggedIn && isset($_SESSION['username']) ? $_SESSION['username'] 
     const dropdownMenu = document.getElementById('dropdownMenu');
     const logoutButton = document.getElementById('logoutButton');
 
+
     // Check if the user is logged in (using PHP session variable)
     const isLoggedIn = <?php echo $isLoggedIn ? 'true' : 'false'; ?>;
+
+    // Simulate login state (replace with actual session check in PHP)
+    let isLoggedIn = true;
+
 
     // Toggle navigation bar on mobile menu click
     mobileMenu.addEventListener('click', () => {
@@ -157,6 +170,7 @@ $username = $isLoggedIn && isset($_SESSION['username']) ? $_SESSION['username'] 
         }
     });
 
+
     // Handle logout (only if logged in)
     if (logoutButton) {
         logoutButton.addEventListener('click', () => {
@@ -168,6 +182,21 @@ $username = $isLoggedIn && isset($_SESSION['username']) ? $_SESSION['username'] 
     // Close dropdown when clicking outside
     window.addEventListener('click', (e) => {
         if (dropdownMenu && !e.target.closest('.user-container')) {
+
+    // Handle logout
+    logoutButton.addEventListener('click', () => {
+        // Simulate logout (replace with actual logout logic in PHP)
+        isLoggedIn = false;
+        loginLabel.textContent = "Login";
+        dropdownMenu.style.display = 'none';
+        // Redirect to login.php after logout
+        window.location.href = 'login.php';
+    });
+
+    // Close dropdown when clicking outside
+    window.addEventListener('click', (e) => {
+        if (!e.target.closest('.user-container')) {
+
             dropdownMenu.style.display = 'none';
         }
     });
