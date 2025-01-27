@@ -1,8 +1,12 @@
 <?php
+session_start();
 // Start the session only if it is not already active
-
-
-require 'classes/front.php';
+if ((time() - $_SESSION['from_login']) > 300) { // 300 seconds = 5 minutes
+    unset($_SESSION['from_login']); // Clear the session variable
+    header("Location: login.php");
+    exit();
+}
+require_once 'classes/front.php';
 $front = new Front();
 
 if (isset($_POST['verify'])) {
@@ -10,11 +14,12 @@ if (isset($_POST['verify'])) {
 
     if ($front->verifyOTP($userOTP)) {
         $_SESSION['success'] = 'OTP verified successfully!';
-        header('Location: fotp.php'); // Redirect to login page on success
+        $_SESSION['otp_verified'] = true;
+        header('Location: Fotp.php'); // Redirect to login page on success
         exit();
     } else {
         $_SESSION['error'] = 'Invalid OTP. Please try again.';
-        header('Location: fotp.php');
+        header('Location: Fotp.php');
         exit();
     }
 }
@@ -36,7 +41,7 @@ if (isset($_GET['resend'])) {
         $_SESSION['error'] = "Failed to resend OTP: " . $e->getMessage();
     }
 
-    header("Location: fotp.php");
+    header("Location: Fotp.php");
     exit();
 }
 ?>
@@ -68,6 +73,7 @@ if (isset($_GET['resend'])) {
         }
 
         .wrapper {
+            top: 50%;
             width: 90%;
             max-width: 450px; /* Increased wrapper size */
             background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
@@ -220,7 +226,7 @@ if (isset($_GET['resend'])) {
 
         <p class="otp-instruction">We sent the code to you via email</p>
         <p class="otp-instruction">Enter that 5-digit code to verify</p>
-        <form action="fotp.php" method="POST">
+        <form action="Fotp.php" method="POST">
             <div class="otp-boxes">
                 <input type="text" name="otp1" maxlength="1" required>
                 <input type="text" name="otp2" maxlength="1" required>
@@ -233,7 +239,7 @@ if (isset($_GET['resend'])) {
                 <a href="forgot.php">Change Email</a>
             </div>
             <div class="resend-otp">
-                <p>Didn't receive the OTP? <a href="fotp.php?resend=true">Resend OTP</a></p>
+                <p>Didn't receive the OTP? <a href="Fotp.php?resend=true">Resend OTP</a></p>
             </div>
             <div class="additional-links">
                 <a href="login.php">Back to Login</a>
@@ -266,6 +272,7 @@ if (isset($_GET['resend'])) {
                 // Redirect to reset.php if it's a success message
                 if (messageDiv.classList.contains('success')) {
                     setTimeout(function() {
+                    
                         window.location.href = 'reset.php'; // Redirect to reset.php
                     }, 1000); // 1 second
                 }

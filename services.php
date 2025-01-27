@@ -1,3 +1,4 @@
+<?php include 'navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,7 +13,7 @@
 </head>
 <body>
     <!-- Include the navigation bar -->
-    <?php include 'navbar.php'; ?>
+
 
     <!-- Main Content -->
     <main>

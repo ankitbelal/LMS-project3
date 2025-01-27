@@ -1,8 +1,18 @@
 <?php
+session_start();
+// unset($_SESSION['from_forgot']); // Clear the session variable
+unset($_SESSION['otp_verified']); // Clear the session variable
+
+// Check if the session is still valid (e.g., within 5 minutes)
+if ((time() - $_SESSION['from_login']) > 300) { // 300 seconds = 5 minutes
+    unset($_SESSION['from_login']); // Clear the session variable
+    header("Location: login.php");
+    exit();
+}
 // Start the session only if it is not already active
 
 if (isset($_POST['send_otp'])) {
-    require 'classes/front.php'; // Ensure this path is correct
+    require_once 'classes/front.php'; // Ensure this path is correct
     $front = new Front();
 
     $email = $_POST['email'];
@@ -16,6 +26,8 @@ if (isset($_POST['send_otp'])) {
             $front->sendOTP($email);
             $_SESSION['success'] = "OTP sent to your email.";
             $_SESSION['email'] = $email; // Store email in session for OTP verification
+            $_SESSION['from_forgot'] = true;
+
             header("Location: forgot.php"); // Redirect to OTP verification page
             exit();
         } catch (Exception $e) {
@@ -63,7 +75,7 @@ if (isset($_POST['send_otp'])) {
             color: #000;
             border-radius: 15px; /* Rounded corners */
             padding: 30px; /* Increased padding */
-            margin: 50px auto 20px;
+            margin: 10% auto 20px;
         }
 
         .wrapper h2 {
@@ -245,7 +257,7 @@ if (isset($_POST['send_otp'])) {
             <p class="otp-instruction">Enter the registered email</p>
             <form action="forgot.php" method="POST">
                 <div class="input-box">
-                    <input type="email" id="forgot-email" name="email" placeholder=" " value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>">
+                    <input type="email" id="forgot-email" name="email" placeholder=" " value="<?php echo isset($_SESSION['email']) ? $_SESSION['email'] : ''; ?>" required>
                     <label for="forgot-email" class="input-label">Email</label>
                     <span class="icon"><ion-icon name="mail"></ion-icon></span>
                 </div>

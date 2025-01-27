@@ -1,3 +1,5 @@
+
+<?php include 'navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -186,7 +188,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <?php include 'navbar.php'; ?>
+ 
 
     <div class="container">
         <h1>Contact Us</h1>

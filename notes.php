@@ -1,3 +1,4 @@
+<?php include 'navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
         .container {
             padding: 20px;
             max-width: 1200px; /* Limit container width for better readability */
-            margin: 0 auto; /* Center the container */
+            margin: 40px auto; /* Center the container */
             display: flex;
             flex-direction: column;
             align-items: center; /* Center-align everything inside the container */
@@ -58,6 +59,7 @@
         }
 
         .notes-container {
+            margin-top: 20px;
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
@@ -81,6 +83,7 @@
         .note-card:hover {
             transform: translateY(-10px); /* Lift effect on hover */
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
+            background: linear-gradient(135deg, rgb(85, 126, 202), rgb(215, 220, 229));
         }
 
         .pdf-preview {
@@ -139,13 +142,22 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .container {
+           
+           
+            margin: 50% auto; /* Center the container */
+         
+            align-items: center; /* Center-align everything inside the container */
+        }
             .form-container {
                 flex-direction: column; /* Stack dropdowns vertically on small screens */
                 align-items: center; /* Center-align vertically */
             }
 
             .form-container select {
+
                 width: 100%; /* Full width on small screens */
+                
             }
 
             .note-card {
@@ -176,7 +188,7 @@
     </style>
 </head>
 <body>
-    <?php include 'navbar.php'; ?>
+
     <?php include 'subnav.php'; ?>
 
     <?php
@@ -196,7 +208,7 @@
     $studyMaterial = $front->getNotes($selectedCourse, $selectedSemester);
 
     // Base URL for your website
-    $baseUrl = "http://localhost/LMS/uploads/"; // Replace with your actual domain
+    $baseUrl = "http://localhost:8080/uploads/"; // Replace with your actual domain
     ?>
 
     <div class="container">
@@ -243,13 +255,13 @@
             if (!empty($studyMaterial)) {
                 foreach ($studyMaterial as $material) {
                     // Construct the full URL for the file
-                    $fileUrl = $baseUrl . $material['file_path'];
+                    $fileUrl = $baseUrl . $material['file_name'];
 
-                    // Use Google Docs Viewer for PDF preview
+                    // // Use Google Docs Viewer for PDF preview
                     // $pdfPreviewUrl = 'https://docs.google.com/viewer?url=' . urlencode($fileUrl) . '&embedded=true';
                     echo '<div class="note-card">';
                     echo '<div class="pdf-preview">';
-                    echo '<iframe src="' . $fileUrl . '" width="100%" height="200px" style="border: none;"></iframe>';
+                    echo '<iframe src="' .$fileUrl . '" width="100%" height="200px" style="border: none;"></iframe>';
                     echo '</div>';
                     echo '<h3>' . htmlspecialchars($material['subject_name']) . '</h3>';
                     echo '<p>' . htmlspecialchars($material['file_desc']) . '</p>';

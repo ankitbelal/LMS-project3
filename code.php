@@ -1,3 +1,5 @@
+
+<?php include_once 'navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,9 +13,10 @@
         /* Container for the entire page */
         .container {
             
+            
             padding: 20px;
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 40px auto;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -75,6 +78,7 @@
 
         /* Label for Course and Semester */
         .course-semester-label {
+            
             font-size: 1.2rem;
             margin-top: 20px;
             margin-bottom: 10px;
@@ -142,7 +146,7 @@
     </style>
 </head>
 <body>
-    <?php include 'navbar.php'; ?>
+
     <?php include 'subnav.php'; ?>
 
     <?php

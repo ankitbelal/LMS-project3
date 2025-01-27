@@ -438,6 +438,17 @@ table tr:hover {
     background: var(--color-light);
 }
 
+/*style for the  links*/
+table td a{
+    color:var(--color-primary);
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+table td a:hover {
+    text-decoration: underline;
+    color: var(--color-primary-variant);
+}
 /* table headers */
 /* Table header with Flexbox */
 .table-header {

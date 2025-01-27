@@ -1,9 +1,10 @@
 <?php
   require_once('../classes/User.php');
+  
   session_start();
   $info = new User();
   $username = $_SESSION['username'];
-  $userData = $info->getData($username);
+$userData = $info->getData($username);
 
   // Split full name into first name
   $fullName = $userData['name'];

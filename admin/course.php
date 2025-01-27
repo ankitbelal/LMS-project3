@@ -1,10 +1,19 @@
 <?php 
      require_once('../configs/config.php');
+     require_once('../classes/User.php');
+     require '../classes/courseCRUD.php';
      session_start();
      if(!isset($_SESSION['username']) && !isset($_SESSION['is_admin'])){
          header("Location:".BASE_PATH."/admin");
      }
-     require '../classes/courseCRUD.php';
+     $info = new User();
+    $username = $_SESSION['username'];
+    $userData = $info->getData($username);
+
+    // Split full name into first name
+    $fullName = $userData['name'];
+    $names = explode(' ', $fullName);
+    $firstName = isset($names[0]) ? $names[0] : '';
      $getInfo=new courseCRUD();
      $listCourse=$getInfo->list();
      $subjects=$getInfo->getSubject();
@@ -29,7 +38,30 @@
         <?php include_once('includes/sidebar.php'); ?>
         <div class="main-section">
             <!-- Right section at the top -->
-            <?php include_once('includes/right.php'); ?>
+            <div class="right">
+          <div class="top">
+            <h1>Courses</h1>
+            <!-- Menu button, theme toggler, and profile on the right -->
+            <div class="right-elements">
+              <button id="menu-btn">
+                <span class="material-icons-sharp">menu</span>
+              </button>
+              <div class="theme-toggler">
+                <span class="material-icons-sharp active">light_mode</span>
+                <span class="material-icons-sharp">dark_mode</span>
+              </div>
+              <div class="profile">
+                <div class="info">
+                  <p>Hey, <b><?php echo htmlspecialchars($firstName); ?></b></p>
+                  <small class="text-muted">Admin</small>
+                </div>
+                <div class="profile-photo">
+                  <span class="material-icons-sharp">account_circle</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
             <!--MAIN SECTION-->
             <main>
                 <!-- Course Table -->

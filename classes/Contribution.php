@@ -26,11 +26,13 @@
             }
         }
 
-        //get data that are approved
-        public function getData(){
-            $result=$this->conn->prepare("select * from contribution where status='approved'");
+        //get approved contribution data
+        public function getContributionById($id){
+            $result=$this->conn->prepare("select * from contribution where id=:id");
+            $result->bindParam(":id",$id);
             $result->execute();
-            return $result->fetchAll();
+            return $result->fetch();
         }
+       
     }
 ?>

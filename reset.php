@@ -1,7 +1,13 @@
 <?php
 // Start the session only if it is not already active
+session_start();
 
-
+unset($_SESSION['from_login']); // Clear the session variable
+unset($_SESSION['from_forgot']); // Clear the session variable
+if (!isset($_SESSION['otp_verified'])) {
+    header('Location: login.php');
+    exit();
+}
 // Rest of your existing code...
 include_once('classes/front.php');
 $front = new Front();
@@ -286,6 +292,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
 
                 window.location.href = 'login.php';
+                unset($_SESSION['from_forogt']); 
+unset($_SESSION['from_login']);
+unset($_SESSION['otp_verified']);
                 unset($_SESSION['success']); // Redirect to login page after 1 second
             }, 1000);
         }

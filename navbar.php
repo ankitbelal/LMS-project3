@@ -1,14 +1,24 @@
 <?php
-// Start the session only if it is not already active
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
+// Include the Front class for cookie handling
+require_once 'classes/front.php';
+$front = new Front();
 
-
-// Check if the user is logged in
+// Check if the user is logged in via session or persistent login (cookie)
 $isLoggedIn = isset($_SESSION['is_user']) && $_SESSION['is_user'];
+
+// If not logged in via session, check for persistent login (cookie)
+if (!$isLoggedIn) {
+    $isLoggedIn = $front->validateRememberMeCookie();
+}
 
 // Get the username if logged in, otherwise set it to 'Login'
 $username = $isLoggedIn && isset($_SESSION['username']) ? $_SESSION['username'] : 'Login';
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +27,7 @@ $username = $isLoggedIn && isset($_SESSION['username']) ? $_SESSION['username'] 
     <link rel="stylesheet" href="./css/nav.css">
     <!-- Font Awesome CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>Responsive Navbar</title>
+    <title>AnyNotes</title>
     <style>
         /* Additional styles for the dropdown */
         .dropdown-menu {
@@ -112,6 +122,7 @@ $username = $isLoggedIn && isset($_SESSION['username']) ? $_SESSION['username'] 
                     <a href="#" id="logoutButton">Logout</a>
                 </div>
                 <?php endif; ?>
+           
             </div>
         </nav>
     </div>

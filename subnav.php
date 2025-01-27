@@ -17,8 +17,12 @@
             align-items: center;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             width: 100%; /* Ensure full width */
+            position: fixed;
+            z-index: 400;
         }
-
+        /* .contribute_a{
+            margin-left: 650px;
+        } */
         .sub-nav-items {
             display: flex;
             gap: 15px; /* Reduced gap for small screens */
@@ -69,14 +73,17 @@
         /* Responsive Design for Small Screens */
         @media (max-width: 768px) {
             .sub-navbar {
+                height: auto; /* Auto height for small screens */
                 flex-direction: column; /* Stack items vertically */
                 align-items: flex-start; /* Align items to the left */
             }
 
             .sub-nav-items {
+                margin-top: 20px; /* Add space at the top */
                 flex-direction: column; /* Stack links vertically */
                 gap: 10px; /* Reduce gap between items */
-                padding-left: 0; /* Remove left padding on small screens */
+                padding-left: 10px; /* Remove left padding on small screens */
+                margin-bottom: 10px; /* Add space at the bottom */
             }
         }
     </style>
@@ -88,9 +95,10 @@
             <a href="index.php"><i class="fas fa-book-open"></i> courses</a>
             <a href="notes.php"><i class="fas fa-sticky-note"></i> Notes</a>
             <a href="old.php"><i class="fas fa-book"></i> Old Questions</a>
-            <a href="code.php"><i class="fas fa-code"></i> Course Codes</a>
             <a href="syllabus.php"><i class="fas fa-file-alt"></i> Syllabuses</a>
-            <a href="contribute.php"><i class="fas fa-hand-holding-heart"></i> Contribute</a>
+            <a href="code.php"><i class="fas fa-code"></i> Course Codes</a>
+           
+            <a href="contribution.php" class="contribute_a"><i class="fas fa-hand-holding-heart"></i> Contribute</a>
         </div>
     </div>
 </body>

@@ -3,12 +3,29 @@
 // Start the session only if it is not already active
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
-}// Start the session
+}
+unset($_SESSION['from_forogt']); 
+unset($_SESSION['from_login']);
+unset($_SESSION['otp_verified']);
+unset($_SESSION['from_register']);
+$_SESSION['from_login'] = time (); // Update the session variable
+// Include the Front class for cookie handling
+require_once 'classes/front.php';
+$front = new Front();
 
+// Check if the user is already logged in via session
+if (isset($_SESSION['is_user']) && $_SESSION['is_user']) {
+    header("Location: index.php");
+    exit();
+}
 
- // Clear the username from the session
+// Check for "Remember Me" cookie and validate it
+if ($front->validateRememberMeCookie()) {
+    // If the cookie is valid, redirect to index.php
+    header("Location: index.php");
+    exit();
+}
 
-unset($_SESSION['email']); // Clear the email from the session
 // Rest of your existing code...
 
 require_once './configs/Database.php';
@@ -18,8 +35,9 @@ $conn = $db->getConnection();
 if ($_POST) {
     $email = $_POST['email'];
     $password = md5($_POST['password']);
+    $remember = isset($_POST['remember']) ? true : false;
 
-     $result=$conn->prepare("select * from tbl_users where email=:email and password=:password");
+    $result = $conn->prepare("SELECT * FROM tbl_users WHERE email=:email AND password=:password");
     $result->bindParam(':email', $email);
     $result->bindParam(':password', $password);
     $result->execute();
@@ -28,13 +46,19 @@ if ($_POST) {
 
     if ($result->rowCount() > 0) {
         if ($data['role'] == 'user') {
+            $_SESSION['email'] = $data['email'];
             $_SESSION['username'] = $data['name'];
             $_SESSION['is_user'] = true;
             $_SESSION['success'] = "Logged in successfully";
-            header("Location: login.php"); // Redirect back to show the success message
+
+            // Handle "Remember Me" functionality
+            if ($remember) {
+                $front->setRememberMeCookie($data['email']); // Set the "Remember Me" cookie
+            }
+
+            header("Location:  login.php"); // Redirect to index.php
             exit();
-        }
-        else{
+        } else {
             $_SESSION['error'] = "Invalid credentials";
             header("Location: login.php"); // Redirect back to the login page
             exit();

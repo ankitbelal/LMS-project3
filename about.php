@@ -1,3 +1,5 @@
+
+<?php include_once 'navbar.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +13,7 @@
 </head>
 <body>
     <!-- Include the navigation bar -->
-    <?php include 'navbar.php'; ?>
+   
 
     <!-- About Us Content -->
     <div class="about-content">

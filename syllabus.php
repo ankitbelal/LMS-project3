@@ -1,3 +1,5 @@
+<?php include 'navbar.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +13,7 @@
         .container {
             padding: 20px;
             max-width: 1200px; /* Limit container width for better readability */
-            margin: 0 auto; /* Center the container */
+            margin: 40px auto; /* Center the container */
             display: flex;
             flex-direction: column;
             align-items: center; /* Center-align everything inside the container */
@@ -58,6 +60,9 @@
         }
 
         .syllabuses-container {
+            
+            margin-top: 20px;
+         
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
@@ -79,6 +84,7 @@
         }
 
         .syllabus-card:hover {
+            background: linear-gradient(135deg, rgb(85, 126, 202), rgb(215, 220, 229));
             transform: translateY(-10px); /* Lift effect on hover */
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow on hover */
         }
@@ -139,6 +145,14 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .container {
+           
+           margin: 50% auto; /* Center the container */
+       
+         
+           align-items: center; /* Center-align everything inside the container */
+       }
+           
             .form-container {
                 flex-direction: column; /* Stack dropdowns vertically on small screens */
                 align-items: center; /* Center-align vertically */
@@ -154,6 +168,14 @@
         }
 
         @media (max-width: 480px) {
+            .container {
+           
+           margin: 50% auto; /* Center the container */
+       
+         
+           align-items: center; /* Center-align everything inside the container */
+       }
+           
             .syllabus-card {
                 width: 100%; /* Full width on small screens */
             }
@@ -176,13 +198,12 @@
     </style>
 </head>
 <body>
-    <?php include 'navbar.php'; ?>
+
     <?php include 'subnav.php'; ?>
 
     <?php
     // Include the Front class and create an instance
     include_once('classes/front.php');
-    include_once('./configs/config.php');
     $front = new Front();
 
     // Fetch all course IDs from the database
@@ -196,7 +217,7 @@
     $syllabuses = $front->getSyllabuses($selectedCourse, $selectedSemester);
 
     // Base URL for your website
-    $baseUrl = BASE_PATH."/"; // Replace with your actual domain
+    $baseUrl = "http://localhost:8080/uploads/"; // Replace with your actual domain
     ?>
 
     <div class="container">

@@ -1,7 +1,12 @@
 <?php
 // Start the session only if it is not already active
+session_start();
+if (!isset($_SESSION['from_register'])) {
+    header("Location: login.php");
+    exit();
+}
 
-require 'classes/front.php';
+require_once 'classes/front.php';
 $front = new Front();
 
 if (isset($_POST['verify'])) {
@@ -216,7 +221,6 @@ if (isset($_GET['resend'])) {
     </style>
 </head>
 <body>
-    <?php include 'navbar.php'; ?>
     <div class="wrapper">
         <h2>OTP Verification</h2>
 
@@ -280,6 +284,7 @@ if (isset($_GET['resend'])) {
                 if (messageDiv.textContent.includes("Registered successfully!")) {
                     setTimeout(function() {
                         window.location.href = 'login.php'; // Redirect to login.php
+                        unset($_SESSION['from_login']); // Unset the session variable
                     }, 1000); // 1 second
                 }
             }

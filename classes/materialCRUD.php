@@ -104,5 +104,21 @@
                 return false;
             }
         }
+
+        //insert data from contribution table
+        public function insertMaterial($id,$sem,$sub_id,$type,$desc,$file){
+            $result=$this->conn->prepare("insert into study_material (course_id,semester,subject_id,material_type,file_desc,file_name) values(:id,:sem,:sub_id,:type,:desc,:file)");
+            $result->bindParam(':id',$id);
+            $result->bindParam(':sem',$sem);
+            $result->bindParam(':sub_id',$sub_id);
+            $result->bindParam(':type',$type);
+            $result->bindParam(':desc',$desc);
+            $result->bindParam(':file',$file);
+             if($result->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
     }
 ?>

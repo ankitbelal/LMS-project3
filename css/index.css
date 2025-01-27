@@ -150,7 +150,11 @@ text-align: center;
 
 /* Responsive Design for Small Screens */
 @media (max-width: 768px) {
+    .content-section {
+        margin: 40% auto;
+    }
     .content-section h1 {
+     
         font-size: 2rem; /* Smaller font size for smaller screens */
     }
 
@@ -174,6 +178,10 @@ text-align: center;
 }
 
 @media (max-width: 480px) {
+    .content-section {
+    margin: 40% auto;
+}
+
     .content-section h1 {
         font-size: 1.8rem; /* Even smaller font size for very small screens */
     }

@@ -488,7 +488,7 @@ main .recents a{
     overflow:hidden;
 }
 
-/*stylin for the messages/contact us page in admin*/
+/*stylin for the messages/contact us page in admin*/    
 /* Messages Page Specific Styles */
 .recents .controls {
   display: flex;

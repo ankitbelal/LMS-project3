@@ -34,6 +34,7 @@ header {
     top: 0; /* Stick to the top */
     left: 0; /* Align to the left */
     font-size: 1rem;
+    z-index: 1000;
 }
 
 /* Add padding to the body to prevent content from overlapping the navbar */

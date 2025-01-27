@@ -69,20 +69,20 @@
                                         <td><?php echo htmlspecialchars($list['semester']);?></td>
                                         <td><?php echo htmlspecialchars($list['subject_name']);?></td>
                                         <td><?php echo htmlspecialchars($list['content_type']);?></td>
-                                        <td><?php echo htmlspecialchars($list['file_name']);?></td>
+                                        <td><a href="../uploads/<?php echo htmlspecialchars($list['file_name']);?>" target="_blank"><?php echo htmlspecialchars($list['file_name']);?> </a></td>
                                         <td><?php echo htmlspecialchars($list['description']);?></td>
                                         <td><?php echo htmlspecialchars($list['email']);?></td>
-                                        <td><?php echo htmlspecialchars($list['uploaded_at']);?></td>
+                                        <td><?php echo htmlspecialchars($list['uploaded_at']);?></td>   
                                         <td class="status-cell">
                                         <span class="status-badge <?php echo strtolower($list['status']);?>">
                                         <?php echo htmlspecialchars($list['status']);?>
-                                        </span>    
+                                        </span>     
                                        </td>
                                        <!--Action column-->
                                        <td>
                                         <div class="button-container">  
                                             <?php if($list['status']=='pending'){?>
-                                                <button class="approve-btn" data-id="<?php echo $list['id']; ?>" hx-get="./filterContribution.php?id='<?php echo $list['id'];?>'&status='approved'&subject_id='<?php echo $list['subject_id'];?>'" hx-target="#tbody-1" hx-swap="outerHTML">Approve</button>
+                                                <button class="approve-btn" data-id="<?php echo $list['id']; ?>" hx-get="./filterContribution.php?id=<?php echo $list['id'];?>&status=approved&subject_id=<?php echo $list['subject_id'];?>" hx-target="#tbody-1" hx-swap="outerHTML">Approve</button>  
                                                 <button class="reject-btn" data-id="<?php echo $list['id']; ?>">Reject</button>
                                             <?php }else{ ?>
                                                 <button class="delete-btn" data-id="<?php echo $list['id']; ?>">Delete</button>
