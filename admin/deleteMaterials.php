@@ -63,7 +63,7 @@
             echo "<td>".htmlspecialchars($material['subject_name'])."</td>";
             echo "<td>".htmlspecialchars($material['material_type'])."</td>";
             echo "<td>".htmlspecialchars($material['file_desc'])."</td>";
-            echo "<td>".htmlspecialchars($material['file_name'])."</td>";
+            echo "<td><a href='../uploads/".$material['file_name']."' target='_blank'>".$material['file_name']."</a></td>"; 
             echo "<td>".htmlspecialchars($material['uploaded_at'])."</td>";
             echo"<td>";
             echo "<button class='edit-btn' onclick=\"window.location.href='./updateMaterial.php?id=" . htmlspecialchars($material['material_id']) . "'\">Edit</button>";

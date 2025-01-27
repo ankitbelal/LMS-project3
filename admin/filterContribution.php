@@ -35,7 +35,7 @@
             echo "<td>".$list['semester']."</td>";
             echo "<td>".$list['subject_name']."</td>";
             echo "<td>".$list['content_type']."</td>";
-            echo "<td><a href='../uploads/".$list['file_name']."' target='_blank'>".$list['file_name']."</a></td>";
+            echo "<td><a href='../uploads/".$list['file_name']."' target='_blank'>".$list['file_name']."</a></td>"; 
             echo "<td>".$list['description']."</td>";
             echo "<td>".$list['email']."</td>";
             echo "<td>".$list['uploaded_at']."</td>";
@@ -48,9 +48,10 @@
             echo "<div class='button-container'>";
             if($list['status']=='pending'){
                 echo "<button class='approve-btn' data-id='".$list['id']."' hx-get='./filterContribution.php?id=".$list['id']."&status=approved&subject_id=".$list['subject_id']."' hx-target='#tbody-1' hx-swap='outerHTML'>Approve</button>";
-                echo "<button class='reject-btn' data-id='".$list['id']."'>Reject</button>";
+
+                echo "<button class='reject-btn' data-id='".$list['id']."' hx-get='./deleteContribution.php?id=".$list['id']."' hx-target='#tbody-1' hx-swap='outerHTML'>Reject</button>";
             }else{
-                echo "<button class='delete-btn' data-id='".$list['id']."'>Delete</button>";
+                echo "<button class='delete-btn' data-id='".$list['id']."' hx-get='./deleteContribution.php?id=".$list['id']."' hx-target='#tbody-1' hx-swap='outerHTML'>Delete</button>";
             }
             echo "</div>";
             echo "</td>";

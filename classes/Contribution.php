@@ -33,6 +33,17 @@
             $result->execute();
             return $result->fetch();
         }
+
+        //delete the contribution
+        public function deleteContribution($id){
+            $result=$this->conn->prepare("delete from contribution where id=:id");
+            $result->bindParam(":id",$id);
+            if($result->execute()){
+                return true;
+            }else{
+                return false;
+            }
+        }
        
     }
 ?>

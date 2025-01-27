@@ -102,7 +102,7 @@
                                             ?>
                                             <a href="#" class="read-more" data-full-description="<?php echo htmlspecialchars($material['file_desc']); ?>">Read More</a>
                                         </td>
-                                        <td><?php echo htmlspecialchars($material['file_name']);?></td>
+                                        <td><a href="../uploads/<?php echo htmlspecialchars($material['file_name']);?>" target="_blank"><?php echo htmlspecialchars($material['file_name']);?></a></td>
                                         <td><?php echo htmlspecialchars($material['uploaded_at']);?></td>
                                         <td>
                                     <div class="button-container">

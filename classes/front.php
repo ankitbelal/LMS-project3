@@ -243,7 +243,7 @@ class Front
     // Method to fetch question papers
     public function getQuestionpapers($courseId = null, $semester = null, $limit = 40)
     {
-        $query = "SELECT sm.material_id, sm.course_id, sm.semester, sm.subject_id, sm.file_desc, sm.file_aname, s.subject_name 
+        $query = "SELECT sm.material_id, sm.course_id, sm.semester, sm.subject_id, sm.file_desc, sm.file_name, s.subject_name 
                   FROM study_material sm
                   JOIN subject s ON sm.subject_id = s.subject_id
                   WHERE sm.material_type = 'Old Questions'";

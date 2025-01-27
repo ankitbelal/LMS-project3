@@ -401,6 +401,19 @@ table {
     margin: 0;
 
 }
+
+/*style for the  links*/
+table td a{
+    color:var(--color-primary);
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+table td a:hover {
+    text-decoration: underline;
+    color: var(--color-primary-variant);
+}
+
 /* Optional: Better scrollbar styling (for WebKit browsers) new css to check */
 .table-container::-webkit-scrollbar {
     height: 8px;

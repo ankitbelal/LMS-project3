@@ -7,6 +7,7 @@
      }
 
     $getData=new Contribution();
+    //get data to tabulate the form
     $listInfo=$getData->getContributed();
 ?>
 <!DOCTYPE html>
@@ -83,9 +84,9 @@
                                         <div class="button-container">  
                                             <?php if($list['status']=='pending'){?>
                                                 <button class="approve-btn" data-id="<?php echo $list['id']; ?>" hx-get="./filterContribution.php?id=<?php echo $list['id'];?>&status=approved&subject_id=<?php echo $list['subject_id'];?>" hx-target="#tbody-1" hx-swap="outerHTML">Approve</button>  
-                                                <button class="reject-btn" data-id="<?php echo $list['id']; ?>">Reject</button>
+                                                <button class="reject-btn" data-id="<?php echo $list['id'];?>" hx-get="./deleteContribution.php?id=<?php echo htmlspecialchars($list['id']);?>" hx-target="#tbody-1" hx-swap="outerHTML">Reject</button>
                                             <?php }else{ ?>
-                                                <button class="delete-btn" data-id="<?php echo $list['id']; ?>">Delete</button>
+                                                <button class="delete-btn" data-id="<?php echo $list['id']; ?>" hx-get="./deleteContribution.php?id=<?php echo htmlspecialchars($list['id']);?>" hx-target="#tbody-1" hx-swap="outerHTML">Delete</button>
                                             <?php } ?>
                                         </div>
                                        </td>

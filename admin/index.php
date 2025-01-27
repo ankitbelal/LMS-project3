@@ -24,7 +24,7 @@
             }else{
                 $_SESSION['username']=$username;
                 $_SESSION['is_admin']=false;
-                header("Location:/adminLogin.php");
+                header("Location:/index.php");
             }
         }else{
             echo "<script>alert('Invalid Username or Password');</script>";
